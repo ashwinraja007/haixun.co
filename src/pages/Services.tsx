@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react';
-import { useLocation, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import React, { useEffect } from "react";
+import { useLocation, Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Boxes, Building2 } from "lucide-react"; // only what we use
+import { Boxes, Building2, ArrowRight } from "lucide-react";
+import { getCurrentCountryFromPath } from "@/services/countryDetection";
+
+const BRAND_RED = "#BC0018";
 
 // Scroll to top on route change
 const ScrollToTop: React.FC = () => {
@@ -14,112 +17,22 @@ const ScrollToTop: React.FC = () => {
   return null;
 };
 
-interface Service {
-  id: number;
-  title: string;
-  description: string;
-  icon: React.FC<React.SVGProps<SVGSVGElement>>;
-  image: string;
-  slug: string;
-}
-interface ServiceCardProps extends Service {
-  baseUrl: string;
-}
-
-const ServiceCard: React.FC<ServiceCardProps> = ({
-  title,
-  description,
-  icon: Icon,
-  image,
-  slug,
-  baseUrl
-}) => {
-  // Avoid /services/services
-  const url = slug === 'services' ? baseUrl : `${baseUrl}/${slug}`;
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      viewport={{ once: true }}
-      /* FLEX on md+: equal heights, no white strip */
-      className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group md:flex md:items-stretch"
-    >
-      {/* Image side */}
-      <div className="relative w-full md:w-1/2 min-h-[12rem] md:min-h-[16rem]">
-        <img
-          src={image}
-          alt={title}
-          loading="lazy"
-          className="absolute inset-0 block w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-        />
-      </div>
-
-      {/* Content side */}
-      <div className="w-full md:w-1/2 p-6 flex flex-col justify-center bg-gradient-to-br from-gc-light-gold/10 to-gc-gold/5 bg-stone-200">
-        <div className="bg-blue-200 text-gc-dark-blue p-2 rounded-full inline-block mb-2 w-fit">
-          <Icon className="w-5 h-5" />
-        </div>
-        <h3 className="text-xl font-semibold text-gc-dark-blue mb-3">{title}</h3>
-        <p className="text-gray-600 text-sm mb-4">{description}</p>
-        <Link
-          to={url}
-          className="text-gc-blue font-medium hover:text-gc-dark-blue inline-flex items-center text-sm transition-colors duration-300"
-        >
-          Learn More
-          <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </Link>
-      </div>
-    </motion.div>
-  );
-};
-
 const Services: React.FC = () => {
   const location = useLocation();
-  const pathSegments = location.pathname.split('/').filter(Boolean);
+  const detected = getCurrentCountryFromPath(location.pathname);
+  const currentCountry = detected ?? { code: "SG", name: "Singapore" };
 
-  // Determine baseUrl for links
-  const firstSegment = pathSegments[0] || "";
-  const secondSegment = pathSegments[1] || "";
-  let baseUrl = "/services";
-  if (firstSegment && firstSegment !== "services") {
-    baseUrl = `/${firstSegment}/services`;
-    if (secondSegment === "services") baseUrl = `/${firstSegment}/services`;
-  } else if (firstSegment === "services") {
-    baseUrl = "/services";
-  }
-
-  // ✅ Only two services (LCL & CFS) with exact content + images
-  const allServices: Service[] = [
-    {
-      id: 1,
-      title: "LCL",
-      description:
-        "Amass Freight, Dubai is one of the leading logistics providers in the region providing Less-Than Container load (LCL) for the ultimate convenience of our customers to help in transporting their products to any location required.",
-      icon: Boxes,
-      image: "/lcl1.JPG",
-      slug: "lcl"
-    },
-    {
-      id: 2,
-      title: "CFS",
-      description:
-        "Take full advantage of our state-of-the-art CFS, which is equipped with the latest equipment, technology and staffed by experienced professionals at every level. Our warehouses are designed to handle your cargo efficiently across all regions.",
-      icon: Building2,
-      image: "/container.jpg",
-      slug: "cfs"
-    }
-  ];
+  const getNavLink = (basePath: string) => {
+    if (currentCountry.code === "SG") return basePath;
+    return `/${currentCountry.name.toLowerCase().replace(/\s+/g, "-")}${basePath}`;
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <ScrollToTop />
       <Navigation />
       <main className="flex-grow pt-20">
-        {/* Hero Section */}
+        {/* ===== HERO (KEPT SAME STYLE) ===== */}
         <section className="bg-gradient-to-r from-gc-dark-blue via-gc-blue to-gc-dark-blue text-white relative overflow-hidden">
           <div className="absolute inset-0 z-0">
             <img
@@ -141,20 +54,87 @@ const Services: React.FC = () => {
                 Our Logistics Services
               </h1>
               <div className="w-20 h-1 bg-gc-gold mx-auto mb-6"></div>
-              <p className="text-xl text-blac leading-relaxed">
+              <p className="text-xl text-black leading-relaxed">
                 Comprehensive end-to-end global logistics solutions tailored to your business needs
               </p>
             </motion.div>
           </div>
         </section>
 
-        {/* Services Grid — ONLY TWO CARDS */}
-        <section className="py-20 bg-gradient-to-b from-white to-gc-light-gold/10">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {allServices.map(service => (
-                <ServiceCard key={service.id} {...service} baseUrl={baseUrl} />
-              ))}
+        {/* ===== ALL SERVICES SECTION (ONLY THIS PART CHANGED) ===== */}
+        <section className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2
+              className="text-center text-4xl font-bold mb-14"
+              style={{ color: BRAND_RED }}
+            >
+              Our Core Services
+            </h2>
+
+            <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+              {/* LCL */}
+              <div className="rounded-3xl border border-slate-200 bg-white px-8 py-10 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+                <div>
+                  <div className="w-16 h-16 rounded-full bg-[#F5F5F7] flex items-center justify-center mb-6">
+                    <Boxes className="w-8 h-8" style={{ color: BRAND_RED }} />
+                  </div>
+                  <h3 className="text-xl font-semibold text-slate-900 mb-3">
+                    LCL
+                  </h3>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    Amass Freight, Dubai is one of the leading logistics providers in the
+                    region providing Less-Than Container Load (LCL) for the ultimate
+                    convenience of our customers to help in transporting their products to
+                    any location required.
+                  </p>
+                </div>
+                <Link
+                  to={getNavLink("/services/lcl")}
+                  className="mt-6 inline-flex items-center"
+                >
+                  <span
+                    className="text-xs font-semibold tracking-wide px-4 py-2 rounded-md bg-slate-100 inline-flex items-center gap-2"
+                    style={{ color: BRAND_RED }}
+                  >
+                    READ MORE
+                    <span className="w-5 h-5 rounded-full bg-white flex items-center justify-center">
+                      <ArrowRight className="w-3 h-3" style={{ color: BRAND_RED }} />
+                    </span>
+                  </span>
+                </Link>
+              </div>
+
+              {/* CFS */}
+              <div className="rounded-3xl border border-slate-200 bg-white px-8 py-10 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+                <div>
+                  <div className="w-16 h-16 rounded-full bg-[#F5F5F7] flex items-center justify-center mb-6">
+                    <Building2 className="w-8 h-8" style={{ color: BRAND_RED }} />
+                  </div>
+                  <h3 className="text-xl font-semibold text-slate-900 mb-3">
+                    CFS
+                  </h3>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    Take full advantage of our state-of-the-art CFS, which is equipped
+                    with the latest equipment, technology and staffed by experienced
+                    professionals at every level. Our warehouses are designed to handle
+                    your cargo efficiently across all regions.
+                  </p>
+                </div>
+                <Link
+                  to={getNavLink("/services/cfs")}
+                  className="mt-6 inline-flex items-center"
+                >
+                  <span
+                    className="text-xs font-semibold tracking-wide px-4 py-2 rounded-md bg-slate-100 inline-flex items-center gap-2"
+                    style={{ color: BRAND_RED }}
+                  >
+                    READ MORE
+                    <span className="w-5 h-5 rounded-full bg-white flex items-center justify-center">
+                      <ArrowRight className="w-3 h-3" style={{ color: BRAND_RED }} />
+                    </span>
+                  </span>
+                </Link>
+              </div>
             </div>
           </div>
         </section>
