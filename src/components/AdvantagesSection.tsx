@@ -25,22 +25,19 @@ export default function AdvantagesSection() {
   ];
 
   return (
-    <section className="py-16 bg-white relative overflow-hidden">
-      {/* Optional subtle HX logo background watermark */}
-      <div
-        className="absolute inset-0 opacity-5 bg-center bg-no-repeat bg-contain"
-        style={{
-          backgroundImage: `url('/path-to-your-HX-logo.png')`,
-        }}
-      ></div>
-
+    <section
+      className="py-16 relative overflow-hidden bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage: "url('/counter-bg.webp‎')",
+      }}
+    >
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <ScrollAnimation className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-semibold text-[#9B111E] mb-3">
             {t("advantages.title")}
           </h2>
-          <p className="text-gray-700 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-800 text-lg max-w-2xl mx-auto">
             {t("advantages.subtitle")}
           </p>
         </ScrollAnimation>
