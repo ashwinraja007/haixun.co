@@ -28,11 +28,11 @@ export default function AdvantagesSection() {
     <section
       className="py-16 relative overflow-hidden bg-cover bg-center bg-no-repeat"
       style={{
-        backgroundImage: "url('/counter-bg.webp‎')",
+        backgroundImage: "url('/counter-bg.webp')",
       }}
     >
       <div className="container mx-auto px-4 relative z-10">
-        {/* Section Header */}
+        
         <ScrollAnimation className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-semibold text-[#9B111E] mb-3">
             {t("advantages.title")}
@@ -42,7 +42,6 @@ export default function AdvantagesSection() {
           </p>
         </ScrollAnimation>
 
-        {/* Advantage Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
           {advantages.map((advantage, index) => {
             const Icon = advantage.icon;
