@@ -40,14 +40,22 @@ const AboutUs: React.FC = () => {
       <main className="flex-grow pt-20">
 
         {/* ======================= ABOUT SECTION ======================= */}
-        <section
-          className="py-20 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('/map-pattern.png')" }}
-        >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-24 relative overflow-hidden">
+
+          {/* FULL BACKGROUND IMAGE */}
+          <div
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: "url('/map-pattern.png')" }}
+          />
+
+          {/* WHITE SOFT OVERLAY (same soft look as screenshot) */}
+          <div className="absolute inset-0 bg-white/70 backdrop-blur-[1px]" />
+
+          {/* MAIN CONTENT */}
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
-              {/* LEFT IMAGE – CENTERED & SMALLER */}
+              {/* LEFT IMAGE – SMALLER & CENTERED */}
               <motion.div
                 initial={{ opacity: 0, x: -40 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -63,7 +71,7 @@ const AboutUs: React.FC = () => {
                     aria-hidden="true"
                   />
 
-                  {/* Top icon badge */}
+                  {/* Top icon badge - centered */}
                   <div className="absolute -top-8 left-1/2 -translate-x-1/2 z-20">
                     <div className="w-16 h-16 rounded-full bg-white shadow-xl flex items-center justify-center">
                       <div className="w-11 h-11 rounded-full bg-rose-50 flex items-center justify-center">
@@ -74,7 +82,7 @@ const AboutUs: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Bottom years badge */}
+                  {/* Bottom years badge - centered */}
                   <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 z-20">
                     <div
                       className="px-5 py-2 rounded-2xl text-white shadow-xl text-center"
@@ -97,7 +105,7 @@ const AboutUs: React.FC = () => {
                 </div>
               </motion.div>
 
-              {/* RIGHT TEXT */}
+              {/* RIGHT TEXT CONTENT */}
               <motion.div
                 initial={{ opacity: 0, x: 40 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -158,7 +166,7 @@ const AboutUs: React.FC = () => {
           </div>
         </section>
 
-        {/* ADVANTAGES SECTION */}
+        {/* ======================= ADVANTAGES SECTION ======================= */}
         <AdvantagesSection />
       </main>
 
