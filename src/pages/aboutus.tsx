@@ -8,7 +8,7 @@ import Footer from "@/components/Footer";
 import { getCurrentCountryFromPath } from "@/services/countryDetection";
 
 // IMPORT ADVANTAGES SECTION
-import AdvantagesSection from "@/components/home/AdvantagesSection";
+import AdvantagesSection from "@/components/AdvantagesSection";
 
 const RUBY_RED = "#BC0018";
 
