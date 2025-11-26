@@ -7,6 +7,9 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { getCurrentCountryFromPath } from "@/services/countryDetection";
 
+// IMPORT ADVANTAGES SECTION
+import AdvantagesSection from "@/components/home/AdvantagesSection";
+
 const RUBY_RED = "#BC0018";
 
 const ScrollToTop: React.FC = () => {
@@ -35,7 +38,8 @@ const AboutUs: React.FC = () => {
       <Navigation />
 
       <main className="flex-grow pt-20">
-        {/* ABOUT SECTION */}
+
+        {/* ======================= ABOUT SECTION ======================= */}
         <section className="py-20 bg-slate-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -131,6 +135,10 @@ const AboutUs: React.FC = () => {
             </div>
           </div>
         </section>
+
+        {/* ======================= ADVANTAGES SECTION ADDED HERE ======================= */}
+        <AdvantagesSection />
+
       </main>
 
       <Footer />
