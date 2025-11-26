@@ -46,49 +46,54 @@ const AboutUs: React.FC = () => {
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-              
-              {/* LEFT IMAGE */}
+
+              {/* LEFT IMAGE – CENTERED & SMALLER */}
               <motion.div
                 initial={{ opacity: 0, x: -40 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
-                className="w-full flex justify-center lg:justify-start"
+                className="w-full flex justify-center"
               >
-                <div className="relative w-full max-w-xl">
+                <div className="relative w-[260px] sm:w-[320px] md:w-[380px] mx-auto">
 
+                  {/* Glow behind card */}
                   <div
-                    className="absolute inset-0 rounded-[36px] bg-gradient-to-br from-rose-100/80 via-white to-transparent blur-2xl -z-10"
+                    className="absolute inset-0 rounded-[30px] bg-gradient-to-br from-rose-100/80 via-white to-transparent blur-2xl -z-10"
                     aria-hidden="true"
                   />
 
-                  <div className="absolute -top-8 left-10 z-20">
-                    <div className="w-20 h-20 rounded-full bg-white shadow-xl flex items-center justify-center">
-                      <div className="w-14 h-14 rounded-full bg-rose-50 flex items-center justify-center">
-                        <span className="text-2xl" style={{ color: RUBY_RED }}>
+                  {/* Top icon badge */}
+                  <div className="absolute -top-8 left-1/2 -translate-x-1/2 z-20">
+                    <div className="w-16 h-16 rounded-full bg-white shadow-xl flex items-center justify-center">
+                      <div className="w-11 h-11 rounded-full bg-rose-50 flex items-center justify-center">
+                        <span className="text-xl" style={{ color: RUBY_RED }}>
                           ⛴
                         </span>
                       </div>
                     </div>
                   </div>
 
-                  <div className="absolute -bottom-6 left-10 z-20">
+                  {/* Bottom years badge */}
+                  <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 z-20">
                     <div
-                      className="px-6 py-3 rounded-2xl text-white shadow-xl flex flex-col justify-center"
+                      className="px-5 py-2 rounded-2xl text-white shadow-xl text-center"
                       style={{ backgroundColor: RUBY_RED }}
                     >
-                      <span className="text-2xl font-bold leading-none">9+</span>
-                      <span className="text-xs mt-1 opacity-90">Years of Growth</span>
+                      <span className="text-xl font-bold leading-none block">9+</span>
+                      <span className="text-xs opacity-90 block mt-1">Years of Growth</span>
                     </div>
                   </div>
 
-                  <div className="rounded-[36px] overflow-hidden shadow-[0_24px_70px_rgba(15,23,42,0.18)] bg-slate-100">
+                  {/* Main image */}
+                  <div className="rounded-[30px] overflow-hidden shadow-[0_24px_60px_rgba(15,23,42,0.18)] bg-slate-100">
                     <img
                       src="/Dubai.jpg"
                       alt="Haixun Global operations"
-                      className="w-full h-[360px] md:h-[420px] object-cover"
+                      className="w-full h-[280px] sm:h-[320px] md:h-[350px] object-cover"
                     />
                   </div>
+
                 </div>
               </motion.div>
 
@@ -153,7 +158,7 @@ const AboutUs: React.FC = () => {
           </div>
         </section>
 
-        {/* ADVANTAGES */}
+        {/* ADVANTAGES SECTION */}
         <AdvantagesSection />
       </main>
 
