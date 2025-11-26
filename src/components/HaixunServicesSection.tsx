@@ -39,27 +39,29 @@ export default function HaixunServicesSection() {
 
   return (
     <section
-      className="relative py-20 overflow-hidden"
+      className="relative py-20 overflow-hidden min-h-screen bg-cover bg-center bg-no-repeat"
       style={{
-        background:
-          "radial-gradient(circle at top left, #9B111E 0, #111827 45%, #020617 100%)",
+        backgroundImage: "url('/service-bg02.jpg')",
       }}
     >
       <div className="container mx-auto px-4">
+        
         {/* Section Header */}
         <ScrollAnimation className="text-center mb-16">
           <p className="text-sm font-semibold tracking-[0.25em] uppercase text-red-300 mb-3">
             {t("services.overline", "What We Do")}
           </p>
+
           <h2 className="font-extrabold text-white text-4xl md:text-5xl mb-3 leading-tight">
             {t("services.title")}
           </h2>
+
           <p className="text-lg text-slate-200 max-w-2xl mx-auto">
             {t("services.subtitle")}
           </p>
         </ScrollAnimation>
 
-        {/* Cards – 3 x 3 like the reference */}
+        {/* Service Cards */}
         <div className="grid gap-10 md:grid-cols-2 xl:grid-cols-3">
           {services.map((service, index) => {
             const Icon = service.icon;
@@ -73,7 +75,7 @@ export default function HaixunServicesSection() {
                     transition={{ type: "spring", stiffness: 220, damping: 20 }}
                     className="bg-white rounded-[26px] shadow-[0_18px_50px_rgba(15,23,42,0.35)] overflow-hidden flex flex-col h-full cursor-pointer"
                   >
-                    {/* Top image with floating icon badge */}
+                    {/* Top Image */}
                     <div className="relative">
                       <img
                         src={service.image}
@@ -81,7 +83,8 @@ export default function HaixunServicesSection() {
                         className="w-full h-56 object-cover transition-transform duration-500 hover:scale-105"
                         loading="lazy"
                       />
-                      {/* white overlay icon badge at bottom-left */}
+
+                      {/* Floating Icon Badge */}
                       <div className="absolute left-6 -bottom-7">
                         <div className="w-12 h-12 bg-white rounded-xl shadow-lg flex items-center justify-center">
                           <Icon className="w-5 h-5 text-[#BC0018]" />
@@ -89,22 +92,25 @@ export default function HaixunServicesSection() {
                       </div>
                     </div>
 
-                    {/* Card content */}
+                    {/* Content */}
                     <div className="px-8 pt-12 pb-8 flex-1 flex flex-col justify-between">
                       <div>
                         <h3 className="text-lg font-bold text-slate-900 mb-2">
                           {t(service.titleKey)}
                         </h3>
+
                         <p className="text-sm text-slate-600 leading-relaxed">
                           {t(service.descriptionKey)}
                         </p>
                       </div>
 
+                      {/* Bottom Row */}
                       <div className="mt-8 flex items-end justify-between">
                         <span className="inline-flex items-center text-sm font-semibold text-slate-900 hover:text-[#BC0018]">
                           {t("services.readMore")}
                           <ArrowDownToLine className="w-4 h-4 ml-2" />
                         </span>
+
                         <span className="text-4xl font-semibold text-slate-200">
                           {numberLabel}
                         </span>
