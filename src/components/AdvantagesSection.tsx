@@ -11,26 +11,28 @@ export default function AdvantagesSection() {
       icon: Truck,
       titleKey: "advantages.transportation.title",
       descriptionKey: "advantages.transportation.description",
-      image: "https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?w=800&q=80",
+      image:
+        "https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?w=800&q=80",
     },
     {
       icon: Ship,
       titleKey: "advantages.logistics.title",
       descriptionKey: "advantages.logistics.description",
-      image: "https://images.unsplash.com/photo-1580674285054-bed31e145f59?w=800&q=80",
+      image:
+        "https://images.unsplash.com/photo-1580674285054-bed31e145f59?w=800&q=80",
     },
     {
       icon: Users,
       titleKey: "advantages.team.title",
       descriptionKey: "advantages.team.description",
-      image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80",
+      image:
+        "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80",
     },
   ];
 
   return (
     <section className="py-20 bg-gray-100">
       <div className="container mx-auto px-4">
-        
         {/* SECTION TITLE */}
         <ScrollAnimation className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-[#9B111E] mb-4">
@@ -49,7 +51,6 @@ export default function AdvantagesSection() {
             return (
               <ScrollAnimation key={index} delay={index * 120}>
                 <div className="relative bg-white rounded-none shadow-lg overflow-hidden">
-
                   {/* IMAGE */}
                   <div className="w-full h-64 overflow-hidden">
                     <img
@@ -67,8 +68,7 @@ export default function AdvantagesSection() {
                       boxShadow: "0 8px 20px rgba(155,17,30,0.25)",
                     }}
                     transition={{ duration: 0.3 }}
-                    className="relative border-l-4 border-[#9B111E] 
-                               pl-8 pr-8 pt-8 pb-20 transition-all duration-300"
+                    className="relative border-l-4 border-[#9B111E] pl-8 pr-8 pt-8 pb-20 transition-all duration-300"
                   >
                     <h3 className="text-2xl font-bold text-[#9B111E] mb-4">
                       {t(advantage.titleKey)}
@@ -77,18 +77,21 @@ export default function AdvantagesSection() {
                       {t(advantage.descriptionKey)}
                     </p>
 
-                    <button className="text-[#9B111E] font-semibold text-sm flex items-center gap-2 
-                                       hover:gap-3 transition-all duration-300">
+                    <button
+                      className="text-[#9B111E] font-semibold text-sm flex items-center gap-2 
+                                 hover:gap-3 transition-all duration-300"
+                    >
                       Read More <span className="text-lg">→</span>
                     </button>
                   </motion.div>
 
                   {/* ICON BOX */}
-                  <div className="absolute bottom-0 right-0 w-24 h-24 bg-[#9B111E] 
-                                  flex items-center justify-center">
+                  <div
+                    className="absolute bottom-0 right-0 w-24 h-24 bg-[#9B111E] 
+                               flex items-center justify-center"
+                  >
                     <Icon className="w-12 h-12 text-white" strokeWidth={1.5} />
                   </div>
-
                 </div>
               </ScrollAnimation>
             );
