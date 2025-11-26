@@ -33,18 +33,21 @@ const AboutUs: React.FC = () => {
   };
 
   return (
-    <div className="bg-white text-gray-900 min-h-screen flex flex-col">
+    <div className="text-gray-900 min-h-screen flex flex-col bg-white">
       <ScrollToTop />
       <Navigation />
 
       <main className="flex-grow pt-20">
 
         {/* ======================= ABOUT SECTION ======================= */}
-        <section className="py-20 bg-white">
+        <section
+          className="py-20 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/map-pattern.png')" }}
+        >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               
-              {/* LEFT IMAGE – STYLED LIKE REFERENCE */}
+              {/* LEFT IMAGE */}
               <motion.div
                 initial={{ opacity: 0, x: -40 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -53,28 +56,22 @@ const AboutUs: React.FC = () => {
                 className="w-full flex justify-center lg:justify-start"
               >
                 <div className="relative w-full max-w-xl">
-                  
-                  {/* Glow shadow behind card */}
+
                   <div
                     className="absolute inset-0 rounded-[36px] bg-gradient-to-br from-rose-100/80 via-white to-transparent blur-2xl -z-10"
                     aria-hidden="true"
                   />
 
-                  {/* Top icon badge */}
                   <div className="absolute -top-8 left-10 z-20">
                     <div className="w-20 h-20 rounded-full bg-white shadow-xl flex items-center justify-center">
                       <div className="w-14 h-14 rounded-full bg-rose-50 flex items-center justify-center">
-                        <span
-                          className="text-2xl"
-                          style={{ color: RUBY_RED }}
-                        >
+                        <span className="text-2xl" style={{ color: RUBY_RED }}>
                           ⛴
                         </span>
                       </div>
                     </div>
                   </div>
 
-                  {/* Bottom years badge */}
                   <div className="absolute -bottom-6 left-10 z-20">
                     <div
                       className="px-6 py-3 rounded-2xl text-white shadow-xl flex flex-col justify-center"
@@ -85,7 +82,6 @@ const AboutUs: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Main image card */}
                   <div className="rounded-[36px] overflow-hidden shadow-[0_24px_70px_rgba(15,23,42,0.18)] bg-slate-100">
                     <img
                       src="/Dubai.jpg"
@@ -96,7 +92,7 @@ const AboutUs: React.FC = () => {
                 </div>
               </motion.div>
 
-              {/* RIGHT TEXT – STYLED LIKE REFERENCE */}
+              {/* RIGHT TEXT */}
               <motion.div
                 initial={{ opacity: 0, x: 40 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -157,7 +153,7 @@ const AboutUs: React.FC = () => {
           </div>
         </section>
 
-        {/* ======================= ADVANTAGES SECTION ======================= */}
+        {/* ADVANTAGES */}
         <AdvantagesSection />
       </main>
 
