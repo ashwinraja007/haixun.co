@@ -11,28 +11,32 @@ export default function AdvantagesSection() {
       icon: Truck,
       titleKey: "advantages.transportation.title",
       descriptionKey: "advantages.transportation.description",
+      image: "/lovable-uploads/service1.webp",
     },
     {
       icon: Settings,
       titleKey: "advantages.logistics.title",
       descriptionKey: "advantages.logistics.description",
+      image: "/lovable-uploads/service2.webp",
     },
     {
       icon: Users,
       titleKey: "advantages.team.title",
       descriptionKey: "advantages.team.description",
+      image: "/lovable-uploads/service3.webp",
     },
   ];
 
   return (
     <section
-      className="py-16 relative overflow-hidden bg-cover bg-center bg-no-repeat"
+      className="py-20 relative overflow-hidden bg-cover bg-center bg-no-repeat"
       style={{
         backgroundImage: "url('/about-bg.webp')",
       }}
     >
       <div className="container mx-auto px-4 relative z-10">
-        
+
+        {/* SECTION TITLE */}
         <ScrollAnimation className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-semibold text-[#9B111E] mb-3">
             {t("advantages.title")}
@@ -42,31 +46,59 @@ export default function AdvantagesSection() {
           </p>
         </ScrollAnimation>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+        {/* CARDS */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center">
+
           {advantages.map((advantage, index) => {
             const Icon = advantage.icon;
+
             return (
-              <ScrollAnimation key={index} delay={index * 100}>
+              <ScrollAnimation key={index} delay={index * 120}>
                 <motion.div
-                  whileHover={{ y: -8, scale: 1.03 }}
+                  whileHover={{ y: -10 }}
                   transition={{ duration: 0.3 }}
-                  className="rounded-2xl p-8 w-full max-w-[380px] text-center 
-                             bg-[#9B111E] text-white shadow-md hover:shadow-xl 
-                             transition-all duration-300 border border-[#9B111E]/20"
+                  className="relative max-w-[380px] w-full bg-white rounded-2xl shadow-lg 
+                             hover:shadow-2xl transition-all duration-300 overflow-hidden"
                 >
-                  <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mx-auto mb-6 shadow-inner">
-                    <Icon className="w-8 h-8 text-white" />
+                  {/* TOP IMAGE */}
+                  <div className="w-full h-48 bg-gray-200 overflow-hidden">
+                    <img
+                      src={advantage.image}
+                      alt="service"
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                  <h3 className="text-lg font-bold text-white mb-3">
-                    {t(advantage.titleKey)}
-                  </h3>
-                  <p className="leading-relaxed text-sm text-gray-100">
-                    {t(advantage.descriptionKey)}
-                  </p>
+
+                  {/* CONTENT BLOCK */}
+                  <div className="p-7">
+                    <h3 className="text-lg font-bold text-[#003F48] mb-3">
+                      {t(advantage.titleKey)}
+                    </h3>
+
+                    <p className="text-gray-700 text-sm leading-relaxed mb-6">
+                      {t(advantage.descriptionKey)}
+                    </p>
+
+                    <div className="flex justify-start">
+                      <button className="text-[#003F48] font-semibold text-sm flex items-center gap-2">
+                        Read More
+                        <span className="text-lg">→</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* BOTTOM RIGHT ICON BOX */}
+                  <div
+                    className="absolute bottom-0 right-0 w-16 h-16 bg-[#003F48] 
+                               flex items-center justify-center rounded-tl-xl"
+                  >
+                    <Icon className="w-7 h-7 text-white" />
+                  </div>
                 </motion.div>
               </ScrollAnimation>
             );
           })}
+
         </div>
       </div>
     </section>
