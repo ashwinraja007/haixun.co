@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Truck, Ship, Globe, Users, Award, TrendingUp } from "lucide-react";
+import { Truck, Ship } from "lucide-react";
 import { getCurrentCountryFromPath } from "@/services/countryDetection";
 
 const ScrollToTop = () => {
@@ -20,44 +20,26 @@ const AboutUs = () => {
   const { t } = useTranslation();
   const location = useLocation();
 
-  // Safe fallback (mirrors your first section’s pattern)
   const detected = getCurrentCountryFromPath(location.pathname);
   const currentCountry = detected ?? { code: "SG", name: "Singapore" };
-
-  const isSriLanka = currentCountry.code === "LK";
 
   const getNavLink = (basePath: string) => {
     if (currentCountry.code === "SG") return basePath;
     return `/${currentCountry.name.toLowerCase().replace(/\s+/g, "-")}${basePath}`;
   };
 
-  const stats = [
-    { number: "9+", label: "Years of Growth", icon: TrendingUp },
-    { number: "40+", label: "Dedicated Staff", icon: Users },
-    { number: "100+", label: "Ports Worldwide", icon: Globe },
-    { number: "2000+", label: "Destinations", icon: Award },
-  ];
-
-  const features = [
-    "Global freight forwarding expertise",
-    "Reliable network of agents",
-    "30+ years industry experience",
-    "Dedicated warehouse facilities",
-    "Own fleet of trucks",
-    "Strategic location advantages",
-  ];
-
-  // ======= NEW: image scroller like your first section =======
-  // Place these in /public; reuse your earlier images for consistency
+  // Image scroller (same behaviour, just reused)
   const images = ["/Dubai.jpg", "/jebelali1.png", "/burj-khalifa.jpg"];
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
     if (!images.length) return;
-    const id = setInterval(() => setIndex((i) => (i + 1) % images.length), 4000);
+    const id = setInterval(
+      () => setIndex((i) => (i + 1) % images.length),
+      4000
+    );
     return () => clearInterval(id);
   }, [images.length]);
-  // ===========================================================
 
   return (
     <div className="bg-white text-gray-900 min-h-screen flex flex-col">
@@ -66,7 +48,7 @@ const AboutUs = () => {
       <main className="flex-grow pt-20">
         {/* Hero Section */}
         <section className="py-20 relative overflow-hidden">
-          <div className="absolute inset-0 bg-slate-50"></div>
+          <div className="absolute inset-0 bg-slate-50" />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -76,10 +58,10 @@ const AboutUs = () => {
               className="text-center mb-16"
             >
               <h1 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900">
-                {t('about.title')}
+                About Haixun Global
               </h1>
               <p className="text-xl max-w-3xl mx-auto leading-relaxed text-gray-700">
-                {t('about.subtitle')}
+                30+ Years of Logistics Excellence
               </p>
             </motion.div>
 
@@ -93,26 +75,58 @@ const AboutUs = () => {
                 className="space-y-6"
               >
                 <div className="space-y-4">
-                  <h2 className="text-3xl font-bold mb-4 text-gray-900">{t('about.whoWeAre')}</h2>
+                  <h2 className="text-3xl font-bold mb-4 text-gray-900">
+                    Who We Are
+                  </h2>
+
                   <p className="text-lg leading-relaxed text-gray-700">
-                    {t('about.paragraph1')}
+                    Haixun Global stands on a powerful legacy of over three
+                    decades in the logistics and supply chain industry. With
+                    deep expertise spanning sea freight, land transportation,
+                    air cargo, customs clearance, warehousing, and distribution,
+                    we provide end-to-end logistics solutions designed to
+                    support businesses across diverse sectors.
                   </p>
+
                   <p className="text-lg leading-relaxed text-gray-700">
-                    {t('about.paragraph2')}
+                    Our growth across China, India, Malaysia, the UAE, and other
+                    key regions reflects our commitment to operational
+                    excellence, responsive service, and seamless cross-border
+                    movement. Every shipment is handled with precision,
+                    transparency, and a strong focus on customer satisfaction.
                   </p>
+
                   <p className="text-lg leading-relaxed text-gray-700">
-                    {t('about.paragraph3')}
+                    Haixun Global Shenzhen—established in 2019—represents the
+                    Group’s strong and rapidly expanding presence in China.
+                    Although young as a branch, it draws strength from the
+                    Group’s 30+ years of logistics expertise, global network,
+                    and trusted partnerships.
+                  </p>
+
+                  <p className="text-lg leading-relaxed text-gray-700">
+                    Operating with integrity, reliability, and punctuality,
+                    Haixun Global Shenzhen is dedicated to delivering
+                    customer-focused logistics solutions. Our team specialises
+                    in designing tailored transport plans based on cargo
+                    requirements, route complexities, and delivery timelines.
+                    Whether it is Flat Rack, Open Top, Breakbulk, or traditional
+                    container shipping, we ensure every movement is safe,
+                    compliant, and cost-efficient. With a strong commitment to
+                    safety, on-time delivery, and transparent communication,
+                    Haixun Global continues to be a trusted logistics partner
+                    for businesses operating in the global marketplace.
                   </p>
                 </div>
 
                 <Link to="/contact" className="inline-block pt-4">
                   <Button className="bg-red-600 hover:bg-red-700 text-white">
-                    {t('nav.contact')}
+                    {t("nav.contact")}
                   </Button>
                 </Link>
               </motion.div>
 
-              {/* Image Section: replaced with auto-fading scroller */}
+              {/* Image Section: auto-fading scroller */}
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -131,13 +145,13 @@ const AboutUs = () => {
                       animate={{ opacity: i === index ? 1 : 0 }}
                       transition={{ duration: 0.8 }}
                       onError={(e) => {
-                        (e.currentTarget as HTMLImageElement).style.display = "none";
+                        (e.currentTarget as HTMLImageElement).style.display =
+                          "none";
                       }}
                     />
                   ))}
                 </div>
 
-                {/* Optional badge (kept from your design) */}
                 <div className="absolute -bottom-6 -right-6 p-4 rounded-xl shadow-lg bg-kargon-red">
                   <Ship className="w-8 h-8 text-white" />
                 </div>
@@ -156,7 +170,9 @@ const AboutUs = () => {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl font-bold text-kargon-blue mb-6">Our Core Services</h2>
+              <h2 className="text-4xl font-bold text-kargon-blue mb-6">
+                Our Core Services
+              </h2>
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -172,19 +188,26 @@ const AboutUs = () => {
                   <div className="w-16 h-16 bg-kargon-blue rounded-full flex items-center justify-center mr-4">
                     <Ship className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-kargon-blue">LCL Services</h3>
+                  <h3 className="text-2xl font-bold text-kargon-blue">
+                    LCL Services
+                  </h3>
                 </div>
                 <p className="text-gray-700 mb-4">
-                  Amass Freight, Dubai is one of the leading logistics providers in the region providing
-                  Less-Than Container load (LCL) for the ultimate convenience of our customers to help in
-                  transporting their products to any location required.
+                  Haixun Global offers flexible Less-Than Container Load (LCL)
+                  solutions for customers who need reliable, cost-efficient,
+                  consolidated shipments. We design LCL movements that optimise
+                  space, reduce freight costs, and ensure timely delivery across
+                  key trade lanes.
                 </p>
-                <Link to={getNavLink("/services/lcl")} className="text-kargon-red font-medium hover:underline">
+                <Link
+                  to={getNavLink("/services/lcl")}
+                  className="text-kargon-red font-medium hover:underline"
+                >
                   Read more →
                 </Link>
               </motion.div>
 
-              {/* CFS Service */}
+              {/* CFS / Warehouse Service */}
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -196,14 +219,21 @@ const AboutUs = () => {
                   <div className="w-16 h-16 bg-kargon-blue rounded-full flex items-center justify-center mr-4">
                     <Truck className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-kargon-blue">CFS Services</h3>
+                  <h3 className="text-2xl font-bold text-kargon-blue">
+                    CFS & Warehouse Services
+                  </h3>
                 </div>
                 <p className="text-gray-700 mb-4">
-                  Take full advantage of our state-of-the-art CFS, which is equipped with the latest
-                  equipment, technology and staffed by experienced professionals at every level. Our
-                  warehouses are designed to handle your cargo efficiently across all regions.
+                  Our Container Freight Station (CFS) and dedicated warehousing
+                  facilities are equipped to handle diverse cargo types,
+                  including Flat Rack, Open Top, and Breakbulk. With experienced
+                  teams and modern handling equipment, we ensure cargo is
+                  received, stored, and dispatched safely and efficiently.
                 </p>
-                <Link to={getNavLink("/services/cfs")} className="text-kargon-red font-medium hover:underline">
+                <Link
+                  to={getNavLink("/services/cfs")}
+                  className="text-kargon-red font-medium hover:underline"
+                >
                   Read more →
                 </Link>
               </motion.div>
@@ -211,9 +241,47 @@ const AboutUs = () => {
           </div>
         </section>
 
-        {/* Stats Section (kept placeholder) */}
+        {/* Stats Section (optional, still simple) */}
         <section className="py-20 bg-slate-50">
-          {/* Add your stats/tiles here if needed */}
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-3xl font-bold text-gray-900 mb-10">
+              Why Businesses Trust Haixun Global
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+              <div className="bg-white rounded-2xl shadow-sm p-6">
+                <div className="text-4xl font-bold text-kargon-red mb-2">
+                  30+
+                </div>
+                <div className="text-gray-700 font-medium">
+                  Years of Industry Experience
+                </div>
+              </div>
+              <div className="bg-white rounded-2xl shadow-sm p-6">
+                <div className="text-4xl font-bold text-kargon-red mb-2">
+                  Multi-
+                </div>
+                <div className="text-gray-700 font-medium">
+                  Modal Transport Expertise
+                </div>
+              </div>
+              <div className="bg-white rounded-2xl shadow-sm p-6">
+                <div className="text-4xl font-bold text-kargon-red mb-2">
+                  5+
+                </div>
+                <div className="text-gray-700 font-medium">
+                  Key Global Regions Served
+                </div>
+              </div>
+              <div className="bg-white rounded-2xl shadow-sm p-6">
+                <div className="text-4xl font-bold text-kargon-red mb-2">
+                  24/7
+                </div>
+                <div className="text-gray-700 font-medium">
+                  Commitment to Service & Support
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
       </main>
 
