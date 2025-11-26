@@ -60,8 +60,8 @@ export default function AdvantagesSection() {
                   className="relative max-w-[380px] w-full bg-white rounded-2xl shadow-lg 
                              hover:shadow-2xl transition-all duration-300 overflow-hidden"
                 >
-                  {/* TOP IMAGE */}
-                  <div className="w-full h-48 bg-gray-200 overflow-hidden">
+                  {/* IMAGE */}
+                  <div className="w-full h-48 overflow-hidden bg-gray-200">
                     <img
                       src={advantage.image}
                       alt="service"
@@ -69,30 +69,28 @@ export default function AdvantagesSection() {
                     />
                   </div>
 
-                  {/* CONTENT BLOCK */}
+                  {/* CONTENT */}
                   <div className="p-7">
                     <h3 className="text-lg font-bold text-[#003F48] mb-3">
                       {t(advantage.titleKey)}
                     </h3>
-
                     <p className="text-gray-700 text-sm leading-relaxed mb-6">
                       {t(advantage.descriptionKey)}
                     </p>
 
-                    <div className="flex justify-start">
-                      <button className="text-[#003F48] font-semibold text-sm flex items-center gap-2">
-                        Read More
-                        <span className="text-lg">→</span>
-                      </button>
-                    </div>
+                    <button className="text-[#003F48] font-semibold text-sm flex items-center gap-2">
+                      Read More <span className="text-lg">→</span>
+                    </button>
                   </div>
 
-                  {/* BOTTOM RIGHT ICON BOX */}
+                  {/* BOTTOM RIGHT ICON BOX — PERFECTLY ALIGNED */}
                   <div
-                    className="absolute bottom-0 right-0 w-16 h-16 bg-[#003F48] 
-                               flex items-center justify-center rounded-tl-xl"
+                    className="absolute bottom-0 right-0 
+                               w-20 h-20 bg-[#003F48] 
+                               flex items-center justify-center 
+                               rounded-tl-2xl shadow-lg"
                   >
-                    <Icon className="w-7 h-7 text-white" />
+                    <Icon className="w-8 h-8 text-white" />
                   </div>
                 </motion.div>
               </ScrollAnimation>
