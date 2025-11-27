@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Ship, CheckCircle, Clock, DollarSign, Globe } from "lucide-react";
+import { Ship, CheckCircle, DollarSign, Globe } from "lucide-react";
 import { getCurrentCountryFromPath } from "@/services/countryDetection";
 
 const ScrollToTop = () => {
@@ -46,7 +46,6 @@ const LCL = () => {
     },
   ];
 
-  // Left-side services (taken from Services page)
   const servicesNav = [
     { label: "See All Services", path: "/services" },
     { label: "LCL Services", path: "/services/lcl" },
@@ -129,7 +128,7 @@ const LCL = () => {
                     viewport={{ once: true }}
                     className="space-y-5"
                   >
-                    <h2 className="text-2xl md:text-3xl font-bold text-kargon-blue">
+                    <h2 className="text-2xl md:text-3xl font-bold text-kargon-red">
                       Efficient LCL Solutions
                     </h2>
                     <p className="text-lg leading-relaxed text-gray-700">
@@ -184,7 +183,7 @@ const LCL = () => {
                     viewport={{ once: true }}
                     className="text-left mb-8"
                   >
-                    <h2 className="text-2xl md:text-3xl font-bold text-kargon-blue mb-3">
+                    <h2 className="text-2xl md:text-3xl font-bold text-kargon-red mb-3">
                       Why Choose Our LCL Services
                     </h2>
                     <p className="text-lg text-gray-600 max-w-2xl">
@@ -203,10 +202,10 @@ const LCL = () => {
                         viewport={{ once: true }}
                         className="rounded-2xl p-6 text-center bg-slate-100"
                       >
-                        <div className="w-16 h-16 bg-kargon-blue/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                          <feature.icon className="w-8 h-8 text-kargon-blue" />
+                        <div className="w-16 h-16 bg-kargon-red/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                          <feature.icon className="w-8 h-8 text-kargon-red" />
                         </div>
-                        <h3 className="text-lg font-bold text-kargon-blue mb-2">
+                        <h3 className="text-lg font-bold text-kargon-red mb-2">
                           {feature.title}
                         </h3>
                         <p className="text-gray-600 text-sm">{feature.description}</p>
@@ -217,7 +216,7 @@ const LCL = () => {
 
                 {/* CTA */}
                 <section className="mt-6">
-                  <div className="rounded-2xl bg-kargon-blue text-white px-8 py-10 text-center md:text-left flex flex-col md:flex-row items-center justify-between gap-6">
+                  <div className="rounded-2xl bg-kargon-red text-white px-8 py-10 text-center md:text-left flex flex-col md:flex-row items-center justify-between gap-6">
                     <div>
                       <h2 className="text-2xl md:text-3xl font-bold mb-2">
                         Ready to Ship with LCL?
@@ -229,7 +228,7 @@ const LCL = () => {
                     </div>
                     <Link
                       to={getNavLink("/contact")}
-                      className="inline-flex items-center bg-white text-kargon-blue px-8 py-4 rounded-xl font-semibold text-base md:text-lg hover:bg-gray-100 transition-colors duration-300"
+                      className="inline-flex items-center bg-white text-kargon-red px-8 py-4 rounded-xl font-semibold text-base md:text-lg hover:bg-gray-100 transition-colors duration-300"
                     >
                       Get Quote Now
                     </Link>
