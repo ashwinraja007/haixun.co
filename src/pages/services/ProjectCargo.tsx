@@ -1,102 +1,236 @@
 import { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { motion } from "framer-motion";
+import { getCurrentCountryFromPath } from "@/services/countryDetection";
 import { Container } from "lucide-react";
-import { Link } from "react-router-dom";
-const ProjectCargo = () => {
+
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-  return <div className="bg-white text-black min-h-screen">
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [pathname]);
+  return null;
+};
+
+const ProjectCargo = () => {
+  const location = useLocation();
+
+  const detected = getCurrentCountryFromPath(location.pathname);
+  const currentCountry = detected ?? { code: "SG", name: "Singapore" };
+
+  const getNavLink = (basePath: string) => {
+    if (currentCountry.code === "SG") return basePath;
+    return `/${currentCountry.name.toLowerCase().replace(/\s+/g, "-")}${basePath}`;
+  };
+
+  const servicesNav = [
+    { label: "See All Services", path: "/services" },
+    { label: "LCL Services", path: "/services/lcl" },
+    { label: "CFS Services", path: "/services/cfs" },
+    { label: "Sea Freight", path: "/services/sea-freight" },
+    { label: "Air Freight", path: "/services/air-freight" },
+    { label: "Warehousing", path: "/services/warehousing" },
+    { label: "Project Cargo", path: "/services/project-cargo" },
+    { label: "Customs Clearance", path: "/services/customs-clearance" },
+    { label: "Consolidation", path: "/services/consolidation" },
+    { label: "Liquid Cargo", path: "/services/liquid-cargo" },
+    { label: "Third Party Logistics", path: "/services/third-party-logistics" },
+    { label: "Liner Agency", path: "/services/liner-agency" },
+  ];
+
+  const pathname = location.pathname;
+
+  return (
+    <div className="bg-white text-gray-900 min-h-screen flex flex-col">
+      <ScrollToTop />
       <Navigation />
 
-      <section className="pt-28 pb-16 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-transparent"></div>
-        <div className="container mx-auto px-4 relative">
-          <motion.div initial={{
-          opacity: 0,
-          y: 30
-        }} animate={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.8
-        }} className="text-center mb-16">
-            <div className="inline-flex items-center gap-3 bg-blue-600/20 px-6 py-3 rounded-full mb-6 mt-9">
-              <Container className="w-6 h-6 text-blue-500" />
-              <span className="text-blue-500 font-semibold">Project Cargo Services</span>
-            </div>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              Project <span className="text-blue-500">Cargo</span>
-            </h1>
-          </motion.div>
+      <main className="flex-grow pt-20">
+        {/* BREADCRUMB HERO (MATCH AIR FREIGHT STYLE) */}
+        <section
+          className="relative h-56 md:h-64 flex items-center justify-center overflow-hidden border-b border-slate-200"
+          style={{
+            backgroundImage: "url('/counter-bg.webp')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          <div className="absolute inset-0 bg-white/70 backdrop-blur-[1px] z-0" />
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
-            <motion.div initial={{
-            opacity: 0,
-            x: -50
-          }} animate={{
-            opacity: 1,
-            x: 0
-          }} transition={{
-            duration: 0.8,
-            delay: 0.2
-          }} className="relative">
-              <div className="rounded-2xl overflow-hidden shadow-2xl">
-                <img src="/projectcargo.png" alt="Project Cargo" className="w-full h-96 object-cover" />
-              </div>
-            </motion.div>
+          <div className="relative text-center scale-[1.1] md:scale-[1.25] z-10">
+            <Breadcrumb>
+              <BreadcrumbList className="flex items-center justify-center gap-2 md:gap-3">
+                <BreadcrumbItem>
+                  <BreadcrumbLink
+                    asChild
+                    className="text-[#BC0018] text-lg md:text-xl font-semibold hover:text-black"
+                  >
+                    <Link to={getNavLink("/")}>Home</Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
 
-            <motion.div initial={{
-            opacity: 0,
-            x: 50
-          }} animate={{
-            opacity: 1,
-            x: 0
-          }} transition={{
-            duration: 0.8,
-            delay: 0.4
-          }} className="space-y-6">
-              <h2 className="text-3xl font-bold text-blue-500">Project Cargo</h2>
-              <p className="text-gray-700 text-lg leading-relaxed">
-                We operate a specialized division focused on knowledge-based projects, staffed with highly skilled experts who have inherited their expertise from major project handlers. GC is fully equipped to handle a wide range of challenging project cargoes, including long lengths, oversized dimensions, heavy lifts, and complex shipments that require floating cranes or tandem lifting.
-              </p>
-              <p className="text-gray-700 text-lg leading-relaxed">
-                Our approach involves developing customized solution packages that precisely meet the unique shipping and transport requirements of our customers, whether it involves port-to-port delivery or ex-works to door service. Our project and heavy-lift breakbulk handling team provides valuable guidance to our customers, formulating the right strategies after conducting thorough feasibility and risk assessments for each job.
-              </p>
-              <p className="text-gray-700 text-lg leading-relaxed">
-                Furthermore, we offer our customers the knowledge, efficiency, and safety they require, along with timely and effective communication throughout the process.
-              </p>
-              <p className="text-gray-700 text-lg leading-relaxed">
-                At GC, we prioritize transparency, especially when it comes to costs, to ensure that our customers receive the best value for their projects, as we understand its significance.
-              </p>
-            </motion.div>
+                <BreadcrumbSeparator>
+                  <span className="text-xl md:text-2xl text-slate-600">›</span>
+                </BreadcrumbSeparator>
+
+                <BreadcrumbItem>
+                  <BreadcrumbLink
+                    asChild
+                    className="text-[#BC0018] text-lg md:text-xl font-semibold hover:text-black"
+                  >
+                    <Link to={getNavLink("/services")}>Services</Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+
+                <BreadcrumbSeparator>
+                  <span className="text-xl md:text-2xl text-slate-600">›</span>
+                </BreadcrumbSeparator>
+
+                <BreadcrumbItem>
+                  <BreadcrumbPage className="text-black font-extrabold text-3xl md:text-4xl">
+                    Project Cargo
+                  </BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
           </div>
+        </section>
 
-          {/* CTA Section */}
-          <motion.div initial={{
-          opacity: 0,
-          y: 30
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.8
-        }} viewport={{
-          once: true
-        }} className="text-center bg-gradient-to-r from-blue-600 to-blue-700 text-white p-12 rounded-2xl">
-            <h3 className="text-2xl font-bold mb-4">Get a quick consultation and our experts are here to help you out</h3>
-            <Link to="/contact">
-              <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-300">
-                Reach Us
-              </button>
-            </Link>
-          </motion.div>
-        </div>
-      </section>
+        {/* MAIN CONTENT */}
+        <section className="py-16 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid gap-12 md:grid-cols-[260px,1fr] items-start">
+              {/* LEFT SIDEBAR */}
+              <aside className="space-y-10">
+                <div>
+                  <h2 className="text-sm font-semibold tracking-[0.15em] text-gray-900 mb-2 uppercase">
+                    OUR SERVICES
+                  </h2>
+                  <div className="w-12 h-[2px] bg-[#BC0018] mb-5" />
+
+                  <div className="border border-slate-200 rounded-md overflow-hidden bg-slate-50">
+                    {servicesNav.map((item) => {
+                      const to = getNavLink(item.path);
+                      const isActive =
+                        pathname === to ||
+                        (item.path !== "/services" && pathname.startsWith(to));
+
+                      return (
+                        <Link
+                          key={item.path}
+                          to={to}
+                          className={`block px-6 py-3 text-sm font-medium transition-colors ${
+                            isActive
+                              ? "bg-[#BC0018] text-white"
+                              : "text-slate-600 hover:bg-slate-100"
+                          }`}
+                        >
+                          {item.label}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              </aside>
+
+              {/* RIGHT CONTENT */}
+              <div className="space-y-12">
+                {/* TOP IMAGE */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8 }}
+                  viewport={{ once: true }}
+                  className="rounded-md overflow-hidden shadow-lg"
+                >
+                  <img
+                    src="/projectcargo.png"
+                    alt="Project Cargo"
+                    className="w-full h-[340px] md:h-[380px] object-cover"
+                    loading="lazy"
+                  />
+                </motion.div>
+
+                {/* TEXT HEADER (MATCHED STYLE) */}
+                <section>
+                  <div className="mb-6 flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#BC0018]/10">
+                      <Container className="w-5 h-5 text-[#BC0018]" />
+                    </div>
+                    <div>
+                      <h2 className="text-xl md:text-2xl font-extrabold tracking-wide text-gray-900 uppercase">
+                        Project Cargo Services
+                      </h2>
+                      <div className="mt-1 w-16 h-[2px] bg-[#BC0018]" />
+                    </div>
+                  </div>
+
+                  <div className="space-y-4 text-sm md:text-base leading-relaxed text-gray-700">
+                    <p>
+                      We operate a specialized division focused on knowledge-based projects,
+                      staffed with highly skilled experts who have inherited their expertise
+                      from major project handlers. GC is fully equipped to handle a wide range
+                      of challenging project cargoes, including long lengths, oversized
+                      dimensions, heavy lifts, and complex shipments that require floating
+                      cranes or tandem lifting.
+                    </p>
+                    <p>
+                      Our approach involves developing customized solution packages that
+                      precisely meet the unique shipping and transport requirements of our
+                      customers, whether it involves port-to-port delivery or ex-works to door
+                      service. Our project and heavy-lift breakbulk handling team provides
+                      valuable guidance to our customers, formulating the right strategies
+                      after conducting thorough feasibility and risk assessments for each job.
+                    </p>
+                    <p>
+                      Furthermore, we offer our customers the knowledge, efficiency, and safety
+                      they require, along with timely and effective communication throughout
+                      the process.
+                    </p>
+                    <p>
+                      At GC, we prioritize transparency, especially when it comes to costs, to
+                      ensure that our customers receive the best value for their projects, as
+                      we understand its significance.
+                    </p>
+                  </div>
+                </section>
+
+                {/* CTA – SAME STYLE AS AIR FREIGHT CTA */}
+                <section className="py-12 bg-white text-center">
+                  <h2 className="text-3xl md:text-4xl font-extrabold text-[#BC0018] mb-4">
+                    Ready to Move Your Project Cargo?
+                  </h2>
+                  <p className="text-lg md:text-xl text-[#BC0018] mb-10">
+                    Get a quick consultation – our experts are here to help you out.
+                  </p>
+
+                  <Link
+                    to={getNavLink("/contact")}
+                    className="inline-block bg-[#BC0018] hover:bg-[#a30014] text-white font-semibold text-lg px-10 py-4 rounded-lg transition-all"
+                  >
+                    Contact Us
+                  </Link>
+                </section>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
 
       <Footer />
-    </div>;
+    </div>
+  );
 };
+
 export default ProjectCargo;
