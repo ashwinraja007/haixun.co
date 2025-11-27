@@ -22,7 +22,7 @@ const ScrollToTop = () => {
   return null;
 };
 
-const CFS = () => {
+const FCL = () => {
   const location = useLocation();
 
   const detected = getCurrentCountryFromPath(location.pathname);
@@ -33,11 +33,10 @@ const CFS = () => {
     return `/${currentCountry.name.toLowerCase().replace(/\s+/g, "-")}${basePath}`;
   };
 
-  // UPDATED: same structure and paths as LCL page / Navigation component
   const servicesNav = [
     { label: "See All Services", path: "/services" },
     { label: "LCL Services", path: "/services/lcl" },
-    { label: "CFS Services", path: "/services/cfs" },
+    { label: "FCL Services", path: "/services/fcl" },
     { label: "Sea Freight", path: "/services/sea-freight" },
     { label: "Air Freight", path: "/services/air-freight" },
     { label: "Warehousing", path: "/services/warehousing" },
@@ -51,21 +50,14 @@ const CFS = () => {
 
   const pathname = location.pathname;
 
-  const cfsFeatureList = [
-    "7,000 sqm covered warehouse area",
-    "1,000 sqm open yard space",
-    "Latest cargo handling equipment",
-    "Advanced security and monitoring systems",
-    "Climate-controlled storage facilities",
-  ];
-
   return (
     <div className="bg-white text-gray-900 min-h-screen flex flex-col">
       <ScrollToTop />
       <Navigation />
 
       <main className="flex-grow pt-20">
-        {/* BREADCRUMB HERO (same style as LCL) */}
+
+        {/* BREADCRUMB HERO */}
         <section
           className="relative h-56 md:h-64 flex items-center justify-center overflow-hidden border-b border-slate-200"
           style={{
@@ -79,6 +71,7 @@ const CFS = () => {
           <div className="relative text-center scale-[1.1] md:scale-[1.25] z-10">
             <Breadcrumb>
               <BreadcrumbList className="flex items-center justify-center gap-2 md:gap-3">
+
                 <BreadcrumbItem>
                   <BreadcrumbLink
                     asChild
@@ -107,19 +100,22 @@ const CFS = () => {
 
                 <BreadcrumbItem>
                   <BreadcrumbPage className="text-black font-extrabold text-3xl md:text-4xl">
-                    CFS Services
+                    FCL Services
                   </BreadcrumbPage>
                 </BreadcrumbItem>
+
               </BreadcrumbList>
             </Breadcrumb>
           </div>
         </section>
 
-        {/* MAIN CONTENT */}
+        {/* MAIN SECTION */}
         <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
             <div className="grid gap-12 md:grid-cols-[260px,1fr] items-start">
-              {/* LEFT COLUMN */}
+
+              {/* LEFT NAVIGATION */}
               <aside className="space-y-10">
                 <div>
                   <h2 className="text-sm font-semibold tracking-[0.15em] text-gray-900 mb-2 uppercase">
@@ -152,8 +148,9 @@ const CFS = () => {
                 </div>
               </aside>
 
-              {/* RIGHT COLUMN */}
+              {/* RIGHT CONTENT */}
               <div className="space-y-12">
+
                 {/* TOP IMAGE */}
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
@@ -164,7 +161,7 @@ const CFS = () => {
                 >
                   <img
                     src="/container.jpg"
-                    alt="CFS Warehouse Facilities"
+                    alt="FCL Services"
                     className="w-full h-[340px] md:h-[380px] object-cover"
                     loading="lazy"
                   />
@@ -181,50 +178,43 @@ const CFS = () => {
 
                   <div className="space-y-4 text-sm md:text-base leading-relaxed text-gray-700">
                     <p>
-                      Our Container Freight Station (CFS) provides advanced facilities for
-                      handling, storing, and consolidating cargo efficiently and securely.
-                      Strategically designed and equipped with modern technology, the CFS
-                      supports a seamless flow of goods through your supply chain.
+                      HAIXUN has own fleet of containers including special equipment’s to 
+                      accommodate special requirements of customers and specializes in many 
+                      trade lanes. Being sea freight professionals with vast experience in 
+                      the field helps to match frequent sailing and flexible service options.
                     </p>
-                    <p>
-                      With a large covered warehouse area and an open yard, we handle a wide
-                      range of cargo types under strict safety and compliance standards.
-                      Every movement, from receiving to dispatch, is managed by experienced
-                      professionals.
-                    </p>
-                    <p>
-                      Our CFS services are tailored for importers, exporters, and logistics
-                      partners who require reliable, time-bound operations with full
-                      visibility and control over their cargo.
-                    </p>
-                  </div>
-                </section>
 
-                {/* FACILITY SPECIFICATIONS */}
-                <section>
-                  <div className="mb-6">
-                    <h2 className="text-xl md:text-2xl font-extrabold tracking-wide text-gray-900 uppercase">
-                      Facility Specifications
-                    </h2>
-                    <div className="mt-2 w-16 h-[2px] bg-[#BC0018]" />
-                  </div>
+                    <p>
+                      Multiple carrier options on any trade route with contracted rates helps 
+                      to secure the space, allocation, timing, pricing and frequency of your 
+                      shipments. FCL is the most optimized container shipping way regarding 
+                      cost, volume and weight of the cargo.
+                    </p>
 
-                  <div className="bg-slate-50 border border-slate-200 rounded-lg p-6 md:p-8">
-                    <ul className="space-y-2 text-sm md:text-base text-gray-700">
-                      {cfsFeatureList.map((item) => (
-                        <li key={item}>• {item}</li>
-                      ))}
-                    </ul>
+                    <p>
+                      We take special care at each step of the process which involves fixing 
+                      contract pricing with carriers, reserving space, making booking, 
+                      picking up empty container at the depot, loading at shipper facility, 
+                      transporting by truck / rail to the port and vessel loading, monitoring 
+                      vessel schedule till final delivery to consignee.
+                    </p>
+
+                    <p>
+                      For import bookings, we engage our overseas partners in the absence of 
+                      our own network and monitor each step carefully, keeping our customers 
+                      and consignees informed at all stages.
+                    </p>
                   </div>
                 </section>
 
                 {/* CTA */}
                 <section className="py-12 bg-white text-center">
                   <h2 className="text-3xl md:text-4xl font-extrabold text-[#BC0018] mb-4">
-                    Need Reliable CFS Solutions?
+                    Need Reliable FCL Solutions?
                   </h2>
+
                   <p className="text-lg md:text-xl text-[#BC0018] mb-10">
-                    Contact us today to discuss your CFS, storage, and distribution requirements.
+                    Contact us today to discuss your full-container load requirements.
                   </p>
 
                   <Link
@@ -234,8 +224,10 @@ const CFS = () => {
                     Contact Us
                   </Link>
                 </section>
+
               </div>
             </div>
+
           </div>
         </section>
       </main>
@@ -245,4 +237,4 @@ const CFS = () => {
   );
 };
 
-export default CFS;
+export default FCL;
