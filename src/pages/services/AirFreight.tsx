@@ -91,7 +91,7 @@ const AirFreight = () => {
       <Navigation />
 
       <main className="flex-grow pt-20">
-        {/* BREADCRUMB HERO (aligned with LCL / CFS / Sea Freight) */}
+        {/* BREADCRUMB HERO */}
         <section
           className="relative h-56 md:h-64 flex items-center justify-center overflow-hidden border-b border-slate-200"
           style={{
@@ -196,7 +196,7 @@ const AirFreight = () => {
                   />
                 </motion.div>
 
-                {/* AIR FREIGHT DESCRIPTION */}
+                {/* AIR FREIGHT DESCRIPTION – UPDATED TEXT */}
                 <section>
                   <div className="mb-6 flex items-center gap-3">
                     <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#BC0018]/10">
@@ -212,25 +212,17 @@ const AirFreight = () => {
 
                   <div className="space-y-4 text-sm md:text-base leading-relaxed text-gray-700">
                     <p>
-                      As a leading air freight company, OECL excels in offering enhanced
-                      flexibility and global choice by collaborating with a diverse range of
-                      specialized carriers. These partners provide tailored schedules and
-                      solutions, ensuring our clients have more options to meet their
-                      specific needs.
+                      HAIXUN can provide customized sea-air &amp; air-sea options to meet
+                      customer’s deadline and timeliness while achieving significant cost
+                      savings. These hybrid transport solutions are designed to balance speed
+                      and cost efficiency based on each customer’s cargo type and delivery
+                      requirements.
                     </p>
                     <p>
-                      Our Directors and Managers actively engage with our team members,
-                      fostering a hands-on approach to deliver a seamlessly integrated and
-                      highly professional service. Through our extensive worldwide
-                      network, we have established a swift and efficient airfreight
-                      solution that enables the expedited and cost-effective movement of
-                      cargo to and from international markets.
-                    </p>
-                    <p>
-                      OECL specializes in providing customized sea-air and air-sea options,
-                      tailored to meet our customers&apos; deadlines while achieving significant
-                      cost savings. Leveraging our efficient global network, we efficiently
-                      handle air freight consolidation on numerous major routes.
+                      Through its efficient and well-connected worldwide network, the company
+                      handles airfreight consolidation on many major global routes. This
+                      ensures reliable schedules, competitive pricing, and seamless cargo
+                      movement from origin to final destination.
                     </p>
                   </div>
                 </section>
