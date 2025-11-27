@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Package, Settings, Truck } from "lucide-react";
 import { getCurrentCountryFromPath } from "@/services/countryDetection";
 
 import {
@@ -23,7 +22,7 @@ const ScrollToTop = () => {
   return null;
 };
 
-const CFS = () => {
+const LCL = () => {
   const location = useLocation();
 
   const detected = getCurrentCountryFromPath(location.pathname);
@@ -44,40 +43,9 @@ const CFS = () => {
     { label: "Customs Declaration & Insurance", path: "/services/customs-declaration" },
     { label: "OOG Shipments", path: "/services/oog-shipments" },
     { label: "LCL Consolidation", path: "/services/lcl-consolidation" },
-    // Optional: if your route is /services/cfs, keep this.
-    { label: "CFS Services", path: "/services/cfs" },
   ];
 
   const pathname = location.pathname;
-
-  const cfsFeatureList = [
-    "7,000 sqm covered warehouse area",
-    "1,000 sqm open yard space",
-    "Latest cargo handling equipment",
-    "Advanced security and monitoring systems",
-    "Climate-controlled storage facilities",
-  ];
-
-  const cfsServices = [
-    {
-      icon: Package,
-      title: "3PL Storage",
-      description:
-        "Short-term and long-term storage with secure warehouse management and inventory tracking.",
-    },
-    {
-      icon: Settings,
-      title: "Value-Added Services",
-      description:
-        "Labelling, repacking, palletization, kitting, and other custom value-added services.",
-    },
-    {
-      icon: Truck,
-      title: "Supply Chain Management",
-      description:
-        "End-to-end logistics coordination and supply chain optimization from origin to destination.",
-    },
-  ];
 
   return (
     <div className="bg-white text-gray-900 min-h-screen flex flex-col">
@@ -85,7 +53,7 @@ const CFS = () => {
       <Navigation />
 
       <main className="flex-grow pt-20">
-        {/* BREADCRUMB HERO (same style as LCL) */}
+        {/* BREADCRUMB HERO WITH counter-bg.webp, NO LEFT LOGO, MORE HEIGHT */}
         <section
           className="relative h-56 md:h-64 flex items-center justify-center overflow-hidden border-b border-slate-200"
           style={{
@@ -127,7 +95,7 @@ const CFS = () => {
 
                 <BreadcrumbItem>
                   <BreadcrumbPage className="text-black font-extrabold text-3xl md:text-4xl">
-                    CFS Services
+                    LCL Services
                   </BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
@@ -135,11 +103,11 @@ const CFS = () => {
           </div>
         </section>
 
-        {/* MAIN CONTENT (same 2-column layout as LCL) */}
+        {/* MAIN CONTENT */}
         <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid gap-12 md:grid-cols-[260px,1fr] items-start">
-              {/* LEFT COLUMN: SERVICES NAV */}
+              {/* LEFT COLUMN */}
               <aside className="space-y-10">
                 <div>
                   <h2 className="text-sm font-semibold tracking-[0.15em] text-gray-900 mb-2 uppercase">
@@ -172,7 +140,7 @@ const CFS = () => {
                 </div>
               </aside>
 
-              {/* RIGHT COLUMN: CONTENT */}
+              {/* RIGHT COLUMN */}
               <div className="space-y-12">
                 {/* TOP IMAGE */}
                 <motion.div
@@ -183,14 +151,14 @@ const CFS = () => {
                   className="rounded-md overflow-hidden shadow-lg"
                 >
                   <img
-                    src="/container.jpg"
-                    alt="CFS Warehouse Facilities"
+                    src="/lcl1.JPG"
+                    alt="LCL Road & Ocean Freight"
                     className="w-full h-[340px] md:h-[380px] object-cover"
                     loading="lazy"
                   />
                 </motion.div>
 
-                {/* DESCRIPTION SECTION */}
+                {/* DESCRIPTION */}
                 <section>
                   <div className="mb-6">
                     <h2 className="text-xl md:text-2xl font-extrabold tracking-wide text-gray-900 uppercase">
@@ -201,83 +169,36 @@ const CFS = () => {
 
                   <div className="space-y-4 text-sm md:text-base leading-relaxed text-gray-700">
                     <p>
-                      Our Container Freight Station (CFS) provides advanced facilities for
-                      handling, storing, and consolidating cargo efficiently and securely.
-                      Strategically designed and equipped with modern technology, the CFS
-                      supports a seamless flow of goods through your supply chain.
+                      Amass Freight, Dubai provides Less-Than-Container Load (LCL) services
+                      designed for customers who do not have enough cargo to fill a full
+                      container but require reliable shipping.
                     </p>
                     <p>
-                      With a large covered warehouse area and an open yard, we handle a wide
-                      range of cargo types under strict safety and compliance standards.
-                      Every movement, from receiving to dispatch, is managed by experienced
-                      professionals.
+                      Our extensive global consolidation network helps customers move
+                      smaller shipments more economically by combining multiple consignments
+                      into one container, reducing freight cost while maintaining service
+                      reliability.
                     </p>
                     <p>
-                      Our CFS services are tailored for importers, exporters, and logistics
-                      partners who require reliable, time-bound operations with full
-                      visibility and control over their cargo.
+                      Our operations team manages receiving, stuffing, documentation, and
+                      delivery at destination, ensuring safety, transparency, and efficiency
+                      at every step of the supply chain.
+                    </p>
+                    <p>
+                      With predictable transit schedules, frequent departures, and
+                      transparent pricing, our LCL solutions provide unmatched flexibility
+                      for businesses of all sizes.
                     </p>
                   </div>
                 </section>
 
-                {/* FACILITY SPECIFICATIONS */}
-                <section>
-                  <div className="mb-6">
-                    <h2 className="text-xl md:text-2xl font-extrabold tracking-wide text-gray-900 uppercase">
-                      Facility Specifications
-                    </h2>
-                    <div className="mt-2 w-16 h-[2px] bg-[#BC0018]" />
-                  </div>
-
-                  <div className="bg-slate-50 border border-slate-200 rounded-lg p-6 md:p-8">
-                    <ul className="space-y-2 text-sm md:text-base text-gray-700">
-                      {cfsFeatureList.map((item) => (
-                        <li key={item}>• {item}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </section>
-
-                {/* CFS SERVICES CARDS */}
-                <section>
-                  <div className="mb-6">
-                    <h2 className="text-xl md:text-2xl font-extrabold tracking-wide text-gray-900 uppercase">
-                      Our CFS Services
-                    </h2>
-                    <div className="mt-2 w-16 h-[2px] bg-[#BC0018]" />
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {cfsServices.map((service, index) => (
-                      <motion.div
-                        key={service.title}
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.7, delay: index * 0.1 }}
-                        viewport={{ once: true }}
-                        className="bg-slate-50 border border-slate-200 rounded-xl p-6 text-center"
-                      >
-                        <div className="w-14 h-14 rounded-full bg-[#BC0018]/10 flex items-center justify-center mx-auto mb-4">
-                          <service.icon className="w-7 h-7 text-[#BC0018]" />
-                        </div>
-                        <h3 className="text-lg font-bold text-gray-900 mb-2">
-                          {service.title}
-                        </h3>
-                        <p className="text-sm text-gray-700 leading-relaxed">
-                          {service.description}
-                        </p>
-                      </motion.div>
-                    ))}
-                  </div>
-                </section>
-
-                {/* CTA SECTION (same pattern as LCL, text + button) */}
+                {/* CTA */}
                 <section className="py-12 bg-white text-center">
                   <h2 className="text-3xl md:text-4xl font-extrabold text-[#BC0018] mb-4">
-                    Need Reliable CFS Solutions?
+                    Ready to Ship with LCL?
                   </h2>
                   <p className="text-lg md:text-xl text-[#BC0018] mb-10">
-                    Contact us today to discuss your CFS, storage, and distribution requirements.
+                    Contact us today for competitive rates and dependable LCL shipping.
                   </p>
 
                   <Link
@@ -298,4 +219,4 @@ const CFS = () => {
   );
 };
 
-export default CFS;
+export default LCL;
