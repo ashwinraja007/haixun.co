@@ -53,17 +53,27 @@ const LCL = () => {
       <Navigation />
 
       <main className="flex-grow pt-20">
-        {/* ========== CLEAN SMALLER BREADCRUMB HERO ========== */}
-        <section className="relative bg-white h-40 md:h-44 flex items-center justify-center overflow-hidden border-b border-slate-200">
-          {/* LEFT DECORATIVE SHAPE IMAGE */}
+        {/* ========== BREADCRUMB HERO WITH counter-bg.webp ========== */}
+        <section
+          className="relative h-40 md:h-44 flex items-center justify-center overflow-hidden border-b border-slate-200"
+          style={{
+            backgroundImage: "url('/counter-bg.webp')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          {/* Overlay for readability */}
+          <div className="absolute inset-0 bg-white/70 backdrop-blur-[1px] z-0" />
+
+          {/* LEFT DECORATIVE SHAPE */}
           <img
             src="/breadcrumn-shape.png"
             alt="Breadcrumb Shape"
-            className="absolute left-0 bottom-0 h-full object-contain opacity-100 pointer-events-none"
+            className="absolute left-0 bottom-0 h-full object-contain opacity-100 pointer-events-none z-10"
           />
 
           {/* CENTERED BREADCRUMB */}
-          <div className="relative text-center scale-[1.1] md:scale-[1.25]">
+          <div className="relative text-center scale-[1.1] md:scale-[1.25] z-20">
             <Breadcrumb>
               <BreadcrumbList className="flex items-center justify-center gap-2 md:gap-3">
                 {/* HOME */}
