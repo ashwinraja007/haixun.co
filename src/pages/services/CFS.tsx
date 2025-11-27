@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Package, Settings, Truck } from "lucide-react";
 import { getCurrentCountryFromPath } from "@/services/countryDetection";
 
 import {
@@ -44,7 +43,6 @@ const CFS = () => {
     { label: "Customs Declaration & Insurance", path: "/services/customs-declaration" },
     { label: "OOG Shipments", path: "/services/oog-shipments" },
     { label: "LCL Consolidation", path: "/services/lcl-consolidation" },
-    // Optional: if your route is /services/cfs, keep this.
     { label: "CFS Services", path: "/services/cfs" },
   ];
 
@@ -58,34 +56,13 @@ const CFS = () => {
     "Climate-controlled storage facilities",
   ];
 
-  const cfsServices = [
-    {
-      icon: Package,
-      title: "3PL Storage",
-      description:
-        "Short-term and long-term storage with secure warehouse management and inventory tracking.",
-    },
-    {
-      icon: Settings,
-      title: "Value-Added Services",
-      description:
-        "Labelling, repacking, palletization, kitting, and other custom value-added services.",
-    },
-    {
-      icon: Truck,
-      title: "Supply Chain Management",
-      description:
-        "End-to-end logistics coordination and supply chain optimization from origin to destination.",
-    },
-  ];
-
   return (
     <div className="bg-white text-gray-900 min-h-screen flex flex-col">
       <ScrollToTop />
       <Navigation />
 
       <main className="flex-grow pt-20">
-        {/* BREADCRUMB HERO (same style as LCL) */}
+        {/* BREADCRUMB HERO */}
         <section
           className="relative h-56 md:h-64 flex items-center justify-center overflow-hidden border-b border-slate-200"
           style={{
@@ -135,11 +112,11 @@ const CFS = () => {
           </div>
         </section>
 
-        {/* MAIN CONTENT (same 2-column layout as LCL) */}
+        {/* MAIN CONTENT */}
         <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid gap-12 md:grid-cols-[260px,1fr] items-start">
-              {/* LEFT COLUMN: SERVICES NAV */}
+              {/* LEFT COLUMN */}
               <aside className="space-y-10">
                 <div>
                   <h2 className="text-sm font-semibold tracking-[0.15em] text-gray-900 mb-2 uppercase">
@@ -172,7 +149,7 @@ const CFS = () => {
                 </div>
               </aside>
 
-              {/* RIGHT COLUMN: CONTENT */}
+              {/* RIGHT COLUMN */}
               <div className="space-y-12">
                 {/* TOP IMAGE */}
                 <motion.div
@@ -190,7 +167,7 @@ const CFS = () => {
                   />
                 </motion.div>
 
-                {/* DESCRIPTION SECTION */}
+                {/* DESCRIPTION */}
                 <section>
                   <div className="mb-6">
                     <h2 className="text-xl md:text-2xl font-extrabold tracking-wide text-gray-900 uppercase">
@@ -238,40 +215,7 @@ const CFS = () => {
                   </div>
                 </section>
 
-                {/* CFS SERVICES CARDS */}
-                <section>
-                  <div className="mb-6">
-                    <h2 className="text-xl md:text-2xl font-extrabold tracking-wide text-gray-900 uppercase">
-                      Our CFS Services
-                    </h2>
-                    <div className="mt-2 w-16 h-[2px] bg-[#BC0018]" />
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {cfsServices.map((service, index) => (
-                      <motion.div
-                        key={service.title}
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.7, delay: index * 0.1 }}
-                        viewport={{ once: true }}
-                        className="bg-slate-50 border border-slate-200 rounded-xl p-6 text-center"
-                      >
-                        <div className="w-14 h-14 rounded-full bg-[#BC0018]/10 flex items-center justify-center mx-auto mb-4">
-                          <service.icon className="w-7 h-7 text-[#BC0018]" />
-                        </div>
-                        <h3 className="text-lg font-bold text-gray-900 mb-2">
-                          {service.title}
-                        </h3>
-                        <p className="text-sm text-gray-700 leading-relaxed">
-                          {service.description}
-                        </p>
-                      </motion.div>
-                    ))}
-                  </div>
-                </section>
-
-                {/* CTA SECTION (same pattern as LCL, text + button) */}
+                {/* CTA */}
                 <section className="py-12 bg-white text-center">
                   <h2 className="text-3xl md:text-4xl font-extrabold text-[#BC0018] mb-4">
                     Need Reliable CFS Solutions?
