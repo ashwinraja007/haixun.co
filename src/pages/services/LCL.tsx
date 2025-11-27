@@ -53,8 +53,10 @@ const LCL = () => {
       <Navigation />
 
       <main className="flex-grow pt-20">
-        {/* ========== WHITE BREADCRUMB HERO WITH SHAPE ========== */}
-        <section className="relative bg-white h-40 md:h-48 flex items-center justify-center overflow-hidden border-b border-slate-200">
+
+        {/* ========== SUPER BIG BREADCRUMB HERO ========== */}
+        <section className="relative bg-white h-48 md:h-60 flex items-center justify-center overflow-hidden border-b border-slate-200">
+
           {/* LEFT DECORATIVE SHAPE IMAGE */}
           <img
             src="/breadcrumn-shape.png"
@@ -62,41 +64,46 @@ const LCL = () => {
             className="absolute left-0 bottom-0 h-full object-contain opacity-100 pointer-events-none"
           />
 
-          {/* CENTERED BREADCRUMB */}
-          <div className="relative text-center">
-            <Breadcrumb className="scale-110 md:scale-125">
-              <BreadcrumbList className="flex items-center justify-center gap-3">
+          {/* BIG BREADCRUMB */}
+          <div className="relative text-center scale-[1.5] md:scale-[1.9]">
+            <Breadcrumb>
+              <BreadcrumbList className="flex items-center justify-center gap-4">
+
+                {/* HOME */}
                 <BreadcrumbItem>
                   <BreadcrumbLink
                     asChild
-                    className="text-[#BC0018] text-lg md:text-xl font-medium hover:text-black"
+                    className="text-[#BC0018] text-xl md:text-3xl font-semibold hover:text-black"
                   >
                     <Link to={getNavLink("/")}>Home</Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
 
                 <BreadcrumbSeparator>
-                  <span className="text-2xl md:text-3xl text-slate-600">›</span>
+                  <span className="text-3xl md:text-4xl text-slate-600">›</span>
                 </BreadcrumbSeparator>
 
+                {/* SERVICES */}
                 <BreadcrumbItem>
                   <BreadcrumbLink
                     asChild
-                    className="text-[#BC0018] text-lg md:text-xl font-medium hover:text-black"
+                    className="text-[#BC0018] text-xl md:text-3xl font-semibold hover:text-black"
                   >
                     <Link to={getNavLink("/services")}>Services</Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
 
                 <BreadcrumbSeparator>
-                  <span className="text-2xl md:text-3xl text-slate-600">›</span>
+                  <span className="text-3xl md:text-4xl text-slate-600">›</span>
                 </BreadcrumbSeparator>
 
+                {/* CURRENT PAGE */}
                 <BreadcrumbItem>
-                  <BreadcrumbPage className="text-black font-bold text-3xl md:text-5xl">
+                  <BreadcrumbPage className="text-black font-extrabold text-4xl md:text-6xl">
                     LCL Services
                   </BreadcrumbPage>
                 </BreadcrumbItem>
+
               </BreadcrumbList>
             </Breadcrumb>
           </div>
@@ -105,10 +112,11 @@ const LCL = () => {
         {/* ========== MAIN CONTENT ========== */}
         <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
             <div className="grid gap-12 md:grid-cols-[260px,1fr] items-start">
-              {/* LEFT COLUMN */}
+
+              {/* LEFT COLUMN (SERVICE LIST) */}
               <aside className="space-y-10">
-                {/* OUR SERVICES */}
                 <div>
                   <h2 className="text-sm font-semibold tracking-[0.15em] text-gray-900 mb-2 uppercase">
                     OUR SERVICES
@@ -118,9 +126,7 @@ const LCL = () => {
                   <div className="border border-slate-200 rounded-md overflow-hidden bg-slate-50">
                     {servicesNav.map((item) => {
                       const to = getNavLink(item.path);
-                      const isActive =
-                        pathname === to ||
-                        (item.path !== "/services" && pathname.startsWith(to));
+                      const isActive = pathname === to || pathname.startsWith(to);
 
                       return (
                         <Link
@@ -142,7 +148,8 @@ const LCL = () => {
 
               {/* RIGHT COLUMN */}
               <div className="space-y-12">
-                {/* TOP LARGE IMAGE */}
+
+                {/* TOP IMAGE */}
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -154,14 +161,13 @@ const LCL = () => {
                     src="/lcl1.JPG"
                     alt="LCL Road & Ocean Freight"
                     className="w-full h-[340px] md:h-[380px] object-cover"
-                    loading="lazy"
                   />
                 </motion.div>
 
-                {/* DESCRIPTION BLOCK – FULL WIDTH, NO IMAGE */}
+                {/* DESCRIPTION FULL WIDTH */}
                 <section>
                   <div className="mb-6">
-                    <h2 className="text-xl md:text-2xl font-extrabold tracking-wide text-gray-900 uppercase">
+                    <h2 className="text-xl md:text-2xl font-extrabold text-gray-900 uppercase tracking-wide">
                       Description
                     </h2>
                     <div className="mt-2 w-16 h-[2px] bg-[#BC0018]" />
@@ -169,25 +175,23 @@ const LCL = () => {
 
                   <div className="space-y-4 text-sm md:text-base leading-relaxed text-gray-700">
                     <p>
-                      Amass Freight, Dubai provides Less-Than-Container Load (LCL) services
-                      designed for customers who do not have enough cargo to fill a full
-                      container but require reliable shipping.
+                      Amass Freight, Dubai provides Less-Than-Container Load (LCL)
+                      services designed for customers who do not have enough cargo
+                      to fill an entire container.
                     </p>
                     <p>
-                      Our extensive global consolidation network helps customers move
-                      smaller shipments more economically by combining multiple consignments
-                      into one container, reducing freight cost while maintaining service
-                      reliability.
+                      Our global consolidation network helps customers ship more
+                      economically by combining multiple consignments into one
+                      container, significantly reducing freight cost.
                     </p>
                     <p>
-                      Our operations team manages receiving, stuffing, documentation, and
-                      delivery at destination, ensuring safety, transparency, and efficiency
-                      at every step of the supply chain.
+                      Our operations team handles receiving, stuffing,
+                      documentation, and delivery with high efficiency and safety.
                     </p>
                     <p>
-                      With predictable transit schedules, frequent departures, and
-                      transparent pricing, our LCL solutions provide unmatched flexibility
-                      for businesses of all sizes.
+                      With predictable transit schedules and competitive pricing,
+                      our LCL service offers unmatched flexibility for businesses
+                      of all sizes.
                     </p>
                   </div>
                 </section>
@@ -208,10 +212,12 @@ const LCL = () => {
                     Contact Us
                   </Link>
                 </section>
+
               </div>
             </div>
           </div>
         </section>
+
       </main>
 
       <Footer />
