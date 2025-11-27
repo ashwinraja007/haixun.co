@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Box } from "lucide-react";
 import { getCurrentCountryFromPath } from "@/services/countryDetection";
 
 import {
@@ -44,6 +43,7 @@ const Warehousing = () => {
     { label: "Customs Declaration & Insurance", path: "/services/customs-declaration" },
     { label: "OOG Shipments", path: "/services/oog-shipments" },
     { label: "LCL Consolidation", path: "/services/lcl-consolidation" },
+    { label: "CFS Services", path: "/services/cfs" },
   ];
 
   const pathname = location.pathname;
@@ -96,7 +96,7 @@ const Warehousing = () => {
 
                 <BreadcrumbItem>
                   <BreadcrumbPage className="text-black font-extrabold text-3xl md:text-4xl">
-                    Warehousing
+                    Warehouse Management
                   </BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
@@ -130,7 +130,7 @@ const Warehousing = () => {
                           className={`block px-6 py-3 text-sm font-medium transition-colors ${
                             isActive
                               ? "bg-[#BC0018] text-white"
-                              : "text-slate-700 hover:bg-slate-100 hover:text-[#BC0018] cursor-pointer"
+                              : "text-slate-600 hover:bg-slate-100"
                           }`}
                         >
                           {item.label}
@@ -143,29 +143,20 @@ const Warehousing = () => {
 
               {/* RIGHT COLUMN */}
               <div className="space-y-12">
-                {/* TAG + IMAGE */}
+                {/* TOP IMAGE */}
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8 }}
                   viewport={{ once: true }}
-                  className="space-y-6"
+                  className="rounded-md overflow-hidden shadow-lg"
                 >
-                  <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-blue-100">
-                    <Box className="w-6 h-6 text-blue-500" />
-                    <span className="text-blue-500 font-semibold">
-                      Warehousing Services
-                    </span>
-                  </div>
-
-                  <div className="rounded-2xl overflow-hidden shadow-2xl">
-                    <img
-                      src="/warehousing.png"
-                      alt="Warehousing Services"
-                      className="w-full h-[340px] md:h-[380px] object-cover"
-                      loading="lazy"
-                    />
-                  </div>
+                  <img
+                    src="/warehousing.png"
+                    alt="Warehousing Services"
+                    className="w-full h-[340px] md:h-[380px] object-cover"
+                    loading="lazy"
+                  />
                 </motion.div>
 
                 {/* DESCRIPTION */}
@@ -174,6 +165,7 @@ const Warehousing = () => {
                     <h2 className="text-xl md:text-2xl font-extrabold tracking-wide text-gray-900 uppercase">
                       Warehousing Solutions
                     </h2>
+                    <div className="mt-2 w-16 h-[2px] bg-[#BC0018]" />
                   </div>
 
                   <div className="space-y-4 text-sm md:text-base leading-relaxed text-gray-700">
@@ -205,9 +197,10 @@ const Warehousing = () => {
                     <h2 className="text-xl md:text-2xl font-extrabold tracking-wide text-gray-900 uppercase">
                       Value We Deliver
                     </h2>
+                    <div className="mt-2 w-16 h-[2px] bg-[#BC0018]" />
                   </div>
 
-                  <div className="bg-gray-50 rounded-2xl p-6 md:p-8">
+                  <div className="bg-slate-50 border border-slate-200 rounded-lg p-6 md:p-8">
                     <div className="space-y-4 text-sm md:text-base leading-relaxed text-gray-700">
                       <p>
                         An effective warehouse management system provides a competitive
@@ -233,17 +226,17 @@ const Warehousing = () => {
                 {/* CTA */}
                 <section className="py-12 bg-white text-center">
                   <h2 className="text-3xl md:text-4xl font-extrabold text-[#BC0018] mb-4">
-                    Get a quick consultation
+                    Need Warehouse Management Support?
                   </h2>
                   <p className="text-lg md:text-xl text-[#BC0018] mb-10">
-                    Our experts are here to help you with the right warehousing solution.
+                    Contact us today to discuss your warehousing and distribution requirements.
                   </p>
 
                   <Link
                     to={getNavLink("/contact")}
                     className="inline-block bg-[#BC0018] hover:bg-[#a30014] text-white font-semibold text-lg px-10 py-4 rounded-lg transition-all"
                   >
-                    Reach Us
+                    Contact Us
                   </Link>
                 </section>
               </div>
