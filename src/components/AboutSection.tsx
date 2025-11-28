@@ -10,15 +10,14 @@ const AboutSection: React.FC = () => {
     <section
       className="relative py-16 md:py-20 bg-cover bg-center bg-no-repeat overflow-hidden"
     >
-      {/* BOTTOM-CENTER DECOR SHAPE */}
+      {/* BOTTOM-RIGHT DECOR SHAPE */}
       <img
         src="/about-shape-2.png"
         alt="Decor Shape"
         className="
           absolute 
           bottom-0 
-          left-1/2 
-          -translate-x-1/2
+          right-4
           w-36 md:w-48 
           opacity-100 
           pointer-events-none 
