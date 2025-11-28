@@ -1,138 +1,225 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { Globe2, ShieldCheck, Phone } from "lucide-react";
+import { motion } from "framer-motion";
+import { useTranslation } from 'react-i18next';
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
+import { Truck, Ship, Globe, Users, Award, TrendingUp } from "lucide-react";
+import { getCurrentCountryFromPath } from "@/services/countryDetection";
 
-const AboutSection: React.FC = () => {
-  const ACCENT = "#BC0018";
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [pathname]);
+  return null;
+};
+
+const AboutUs = () => {
+  const { t } = useTranslation();
+  const location = useLocation();
+
+  // Safe fallback (mirrors your first section’s pattern)
+  const detected = getCurrentCountryFromPath(location.pathname);
+  const currentCountry = detected ?? { code: "SG", name: "Singapore" };
+
+  const isSriLanka = currentCountry.code === "LK";
+
+  const getNavLink = (basePath: string) => {
+    if (currentCountry.code === "SG") return basePath;
+    return `/${currentCountry.name.toLowerCase().replace(/\s+/g, "-")}${basePath}`;
+  };
+
+  const stats = [
+    { number: "9+", label: "Years of Growth", icon: TrendingUp },
+    { number: "40+", label: "Dedicated Staff", icon: Users },
+    { number: "100+", label: "Ports Worldwide", icon: Globe },
+    { number: "2000+", label: "Destinations", icon: Award },
+  ];
+
+  const features = [
+    "Global freight forwarding expertise",
+    "Reliable network of agents",
+    "30+ years industry experience",
+    "Dedicated warehouse facilities",
+    "Own fleet of trucks",
+    "Strategic location advantages",
+  ];
+
+  // ======= NEW: image scroller like your first section =======
+  // Place these in /public; reuse your earlier images for consistency
+  const images = ["/Dubai.jpg", "/jebelali1.png", "/burj-khalifa.jpg"];
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (!images.length) return;
+    const id = setInterval(() => setIndex((i) => (i + 1) % images.length), 4000);
+    return () => clearInterval(id);
+  }, [images.length]);
+  // ===========================================================
 
   return (
-    <section className="relative overflow-hidden py-16 md:py-20 bg-white">
+    <div className="bg-white text-gray-900 min-h-screen flex flex-col">
+      <ScrollToTop />
+      <Navigation />
+      <main className="flex-grow pt-20">
+        {/* Hero Section */}
+        <section className="py-20 relative overflow-hidden">
+          <div className="absolute inset-0 bg-slate-50"></div>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <h1 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900">
+                {t('about.title')}
+              </h1>
+              <p className="text-xl max-w-3xl mx-auto leading-relaxed text-gray-700">
+                {t('about.subtitle')}
+              </p>
+            </motion.div>
 
-      {/* TOP-RIGHT SHAPE (smaller + moved right) */}
-      <div className="pointer-events-none absolute top-4 right-4 z-0">
-        <img
-          src="/about-shape-1.png"
-          alt="Decorative shape"
-          className="w-24 md:w-32 opacity-80 select-none"
-        />
-      </div>
-
-      <div className="container mx-auto px-4 md:px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
-
-        {/* LEFT — TEXT CONTENT */}
-        <div>
-          <p
-            className="uppercase tracking-wide font-extrabold text-3xl"
-            style={{ color: ACCENT }}
-          >
-            ABOUT US
-          </p>
-
-          <p className="mt-5 text-gray-700 max-w-xl">
-            <strong>Haixun Global Shenzhen</strong> leverages over 30 years of expertise
-            in logistics including sea, land, and air transportation, customs declaration,
-            warehousing, and distribution.
-          </p>
-
-          <p className="mt-5 text-gray-700 max-w-xl">
-            Established in <strong>2019</strong>, Haixun Global Shenzhen upholds the Group’s
-            commitment to integrity, customer satisfaction, and rapid response.
-          </p>
-
-          {/* FEATURES */}
-          <div className="mt-8 space-y-7">
-            <div className="flex items-start gap-4">
-              <Globe2 className="w-8 h-8" style={{ color: ACCENT }} />
-              <div>
-                <h4 className="font-bold text-gray-900 text-lg">
-                  Fast Worldwide Delivery
-                </h4>
-                <p className="text-gray-600 text-sm">
-                  Our global network ensures timely delivery across destinations.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <ShieldCheck className="w-8 h-8" style={{ color: ACCENT }} />
-              <div>
-                <h4 className="font-bold text-gray-900 text-lg">
-                  Safe And Secure Delivery
-                </h4>
-                <p className="text-gray-600 text-sm">
-                  We maintain strict safety and compliance from pickup to drop-off.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* CTA & CONTACT */}
-          <div className="mt-10 flex flex-col sm:flex-row items-center gap-6">
-            <Link to="/contact">
-              <Button
-                className="text-white text-base font-semibold px-6 py-3 rounded-md shadow-lg"
-                style={{ backgroundColor: ACCENT }}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+              {/* Text Section */}
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="space-y-6"
               >
-                Know More About Us
-              </Button>
-            </Link>
-
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-3">
-                <div
-                  className="w-10 h-10 rounded-full flex items-center justify-center"
-                  style={{ backgroundColor: ACCENT }}
-                >
-                  <Phone className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-600">Need Help?</p>
-                  <p className="text-lg font-bold text-gray-900">
-                    +86 75582222447
+                <div className="space-y-4">
+                  <h2 className="text-3xl font-bold mb-4 text-gray-900">{t('about.whoWeAre')}</h2>
+                  <p className="text-lg leading-relaxed text-gray-700">
+                    {t('about.paragraph1')}
+                  </p>
+                  <p className="text-lg leading-relaxed text-gray-700">
+                    {t('about.paragraph2')}
+                  </p>
+                  <p className="text-lg leading-relaxed text-gray-700">
+                    {t('about.paragraph3')}
                   </p>
                 </div>
-              </div>
+
+                <Link to="/contact" className="inline-block pt-4">
+                  <Button className="bg-red-600 hover:bg-red-700 text-white">
+                    {t('nav.contact')}
+                  </Button>
+                </Link>
+              </motion.div>
+
+              {/* Image Section: replaced with auto-fading scroller */}
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                viewport={{ once: true }}
+                className="relative"
+              >
+                <div className="relative w-full aspect-[16/10] overflow-hidden rounded-2xl shadow-2xl border border-slate-200 bg-slate-100">
+                  {images.map((src, i) => (
+                    <motion.img
+                      key={src}
+                      src={src}
+                      alt={`about-slide-${i}`}
+                      className="absolute inset-0 w-full h-full object-cover"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: i === index ? 1 : 0 }}
+                      transition={{ duration: 0.8 }}
+                      onError={(e) => {
+                        (e.currentTarget as HTMLImageElement).style.display = "none";
+                      }}
+                    />
+                  ))}
+                </div>
+
+                {/* Optional badge (kept from your design) */}
+                <div className="absolute -bottom-6 -right-6 p-4 rounded-xl shadow-lg bg-kargon-red">
+                  <Ship className="w-8 h-8 text-white" />
+                </div>
+              </motion.div>
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* RIGHT — IMAGE BLOCK */}
-        <div className="relative flex justify-center lg:justify-end">
-          <div className="relative grid grid-cols-2 gap-3 items-center w-[70%]">
-
-            {/* IMAGE 1 */}
-            <img
-              src="/container.png"
-              alt="Container stacks"
-              className="rounded-xl shadow-xl w-full h-[260px] md:h-[300px] object-cover"
-            />
-
-            {/* IMAGE 2 */}
-            <img
-              src="/service.png"
-              alt="Logistics truck"
-              className="rounded-xl shadow-xl w-full h-[260px] md:h-[300px] mt-8 -ml-2 object-cover"
-            />
-
-            {/* CENTER LOGO */}
-            <div
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 
-              w-24 h-24 md:w-28 md:h-28 rounded-full bg-white shadow-2xl flex items-center justify-center border-4"
-              style={{ borderColor: ACCENT }}
+        {/* Core Services Section */}
+        <section className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
             >
-              <img
-                src="/haixun-logo.svg"
-                alt="Haixun Logo"
-                className="w-14 h-14 object-contain"
-              />
+              <h2 className="text-4xl font-bold text-kargon-blue mb-6">Our Core Services</h2>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              {/* LCL Service */}
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="rounded-2xl p-8 bg-slate-100"
+              >
+                <div className="flex items-center mb-6">
+                  <div className="w-16 h-16 bg-kargon-blue rounded-full flex items-center justify-center mr-4">
+                    <Ship className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-kargon-blue">LCL Services</h3>
+                </div>
+                <p className="text-gray-700 mb-4">
+                  Amass Freight, Dubai is one of the leading logistics providers in the region providing
+                  Less-Than Container load (LCL) for the ultimate convenience of our customers to help in
+                  transporting their products to any location required.
+                </p>
+                <Link to={getNavLink("/services/lcl")} className="text-kargon-red font-medium hover:underline">
+                  Read more →
+                </Link>
+              </motion.div>
+
+              {/* CFS Service */}
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                viewport={{ once: true }}
+                className="rounded-2xl p-8 bg-slate-100"
+              >
+                <div className="flex items-center mb-6">
+                  <div className="w-16 h-16 bg-kargon-blue rounded-full flex items-center justify-center mr-4">
+                    <Truck className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-kargon-blue">CFS Services</h3>
+                </div>
+                <p className="text-gray-700 mb-4">
+                  Take full advantage of our state-of-the-art CFS, which is equipped with the latest
+                  equipment, technology and staffed by experienced professionals at every level. Our
+                  warehouses are designed to handle your cargo efficiently across all regions.
+                </p>
+                <Link to={getNavLink("/services/cfs")} className="text-kargon-red font-medium hover:underline">
+                  Read more →
+                </Link>
+              </motion.div>
             </div>
           </div>
-        </div>
+        </section>
 
-      </div>
-    </section>
+        {/* Stats Section (kept placeholder) */}
+        <section className="py-20 bg-slate-50">
+          {/* Add your stats/tiles here if needed */}
+        </section>
+      </main>
+
+      <Footer />
+    </div>
   );
 };
 
-export default AboutSection;
+export default AboutUs;
