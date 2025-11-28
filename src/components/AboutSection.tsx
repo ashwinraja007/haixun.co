@@ -4,33 +4,34 @@ import { Button } from "@/components/ui/button";
 import { Globe2, ShieldCheck, Phone } from "lucide-react";
 
 const AboutSection: React.FC = () => {
-  const ACCENT = "#BC0018"; // Haixun red
+  const ACCENT = "#BC0018";
 
   return (
     <section
       className="relative py-16 md:py-20 bg-cover bg-center bg-no-repeat overflow-hidden"
     >
-      {/* BOTTOM-RIGHT DECOR SHAPE (Moved left next to content) */}
+      {/* BOTTOM-CENTER DECOR SHAPE */}
       <img
         src="/about-shape-2.png"
         alt="Decor Shape"
         className="
           absolute 
-          bottom-4 md:bottom-12 
-          right-20 md:right-40 
-          w-32 md:w-44 
+          bottom-0 
+          left-1/2 
+          -translate-x-1/2
+          w-36 md:w-48 
           opacity-100 
           pointer-events-none 
           select-none 
-          animate-float-slow 
+          animate-float-slow
           z-0
         "
       />
 
       <div className="container mx-auto px-4 md:px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+        
         {/* LEFT — Image Composition */}
         <div className="relative flex justify-center lg:justify-start">
-          {/* Red L-frame block */}
           <div
             className="absolute -top-8 -left-8 rounded-lg -z-10"
             style={{
@@ -45,22 +46,27 @@ const AboutSection: React.FC = () => {
             }}
           />
 
-          {/* Two images with overlap */}
           <div className="relative grid grid-cols-2 gap-3 items-center">
             <img
               src="/container.png"
               alt="Container stacks"
               className="rounded-xl shadow-xl object-cover w-full h-[320px] md:h-[380px] lg:h-[420px]"
             />
+
             <img
               src="/service.png"
               alt="Logistics truck"
               className="rounded-xl shadow-xl object-cover w-full h-[320px] md:h-[380px] lg:h-[420px] mt-8 -ml-2"
             />
 
-            {/* Center Logo */}
             <div
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center w-28 h-28 md:w-32 md:h-32 rounded-full bg-white shadow-2xl border-4"
+              className="
+                absolute left-1/2 top-1/2 
+                -translate-x-1/2 -translate-y-1/2
+                flex items-center justify-center
+                w-28 h-28 md:w-32 md:h-32 
+                rounded-full bg-white shadow-2xl border-4
+              "
               style={{ borderColor: ACCENT }}
             >
               <img
@@ -90,33 +96,28 @@ const AboutSection: React.FC = () => {
           </p>
 
           <p className="mt-5 text-gray-700 max-w-xl">
-            Established in <strong>2019</strong>, Haixun Global Shenzhen upholds
-            the Group’s commitment to integrity, customer satisfaction, and rapid
-            response, ensuring a reliable and customer-focused service experience
-            in China.
+            Established in <strong>2019</strong>, Haixun Global Shenzhen
+            upholds the Group’s commitment to integrity, customer satisfaction,
+            and rapid response, ensuring a reliable and customer-focused service
+            experience in China.
           </p>
 
-          {/* Features */}
           <div className="mt-8 space-y-7">
             <div className="flex items-start gap-4">
-              <div className="shrink-0">
-                <Globe2 className="w-8 h-8" style={{ color: ACCENT }} />
-              </div>
+              <Globe2 className="w-8 h-8" style={{ color: ACCENT }} />
               <div>
                 <h4 className="font-bold text-gray-900 text-lg">
                   Fast Worldwide Delivery
                 </h4>
                 <p className="text-gray-600 text-sm">
-                  Our vast global network ensures your cargo reaches destinations
-                  on schedule.
+                  Our vast global network ensures your cargo reaches
+                  destinations on schedule.
                 </p>
               </div>
             </div>
 
             <div className="flex items-start gap-4">
-              <div className="shrink-0">
-                <ShieldCheck className="w-8 h-8" style={{ color: ACCENT }} />
-              </div>
+              <ShieldCheck className="w-8 h-8" style={{ color: ACCENT }} />
               <div>
                 <h4 className="font-bold text-gray-900 text-lg">
                   Safe And Secure Delivery
@@ -129,7 +130,6 @@ const AboutSection: React.FC = () => {
             </div>
           </div>
 
-          {/* CTA + Contact */}
           <div className="mt-10 flex flex-col sm:flex-row items-center gap-6">
             <Link to="/contact">
               <Button
@@ -157,6 +157,7 @@ const AboutSection: React.FC = () => {
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </section>
