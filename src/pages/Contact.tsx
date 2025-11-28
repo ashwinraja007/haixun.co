@@ -12,7 +12,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, XCircle, Phone, Mail, MapPin } from "lucide-react";
+import {
+  Send,
+  XCircle,
+  Phone,
+  Mail,
+  MapPin,
+  Truck,
+  Headset,
+} from "lucide-react";
 
 const BRAND_RED = "#BC0018";
 
@@ -73,10 +81,10 @@ const Contact: React.FC = () => {
     <div className="min-h-screen flex flex-col bg-white relative">
       <Navigation />
 
-      {/* ⭐ PERFECT HEADER-SIZED WHITE SPACE */}
-      <div className="h-20 md:h-24 bg-white"></div>
+      {/* header-height white space */}
+      <div className="h-20 md:h-24 bg-white" />
 
-      {/* ⭐ MAP */}
+      {/* MAP */}
       <section className="relative h-[50vh] md:h-[60vh] w-full overflow-hidden bg-white">
         <iframe
           title="Haixun Global Shenzhen Map"
@@ -88,7 +96,7 @@ const Contact: React.FC = () => {
         />
       </section>
 
-      {/* SUCCESS POPUP */}
+      {/* success toast */}
       <AnimatePresence>
         {showNotification && (
           <motion.div
@@ -111,173 +119,161 @@ const Contact: React.FC = () => {
       </AnimatePresence>
 
       <main className="flex-grow">
-        {/* CONTACT BOX */}
+        {/* CONTACT SECTION – MATCH REFERENCE LAYOUT */}
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
-            <div className="relative grid gap-10 rounded-2xl bg-white shadow-[0_30px_80px_rgba(15,23,42,0.12)] lg:grid-cols-[1.5fr,1fr] overflow-hidden">
-              
-              <div className="pointer-events-none absolute inset-0 opacity-[0.06] bg-[url('/world-map-light.png')] bg-cover bg-center" />
+            <div className="relative overflow-hidden rounded-none md:rounded-2xl bg-white">
+              {/* subtle world map background */}
+              <div className="pointer-events-none absolute inset-0 opacity-[0.12] bg-[url('/world-map-light.png')] bg-cover bg-center" />
 
-              {/* LEFT FORM */}
-              <div className="relative border-r border-slate-100 p-8 md:p-10">
-                <span
-                  className="bg-[#FFF2F3] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] rounded-full text-[#BC0018]"
-                >
-                  Send Us Mail
-                </span>
+              <div className="relative grid gap-12 lg:grid-cols-2">
+                {/* LEFT – FORM SIDE */}
+                <div className="px-4 sm:px-8 pb-10">
+                  {/* small red label with icon */}
+                  <button className="group inline-flex items-center gap-2 text-[13px] font-semibold text-[#{BRAND_RED}] text-red-600 mb-2">
+                    <span className="text-[13px] text-red-600 underline decoration-red-600">
+                      Send Us Mail
+                    </span>
+                    <Truck className="h-4 w-4 text-red-600 group-hover:translate-x-0.5 transition-transform" />
+                  </button>
 
-                <h2 className="text-3xl md:text-4xl font-semibold text-slate-900 mt-3 mb-3 leading-snug">
-                  Feel Free To{" "}
-                  <span
-                    className="underline decoration-4 underline-offset-4"
-                    style={{ textDecorationColor: BRAND_RED }}
-                  >
-                    Write
-                  </span>
-                </h2>
+                  {/* big heading */}
+                  <h2 className="text-[32px] sm:text-[40px] font-bold text-slate-900 leading-tight mb-4">
+                    Feel Free To{" "}
+                    <span
+                      className="underline decoration-[4px] underline-offset-[6px]"
+                      style={{ textDecorationColor: BRAND_RED }}
+                    >
+                      Write
+                    </span>
+                  </h2>
 
-                <p className="text-sm text-slate-500 mb-8 max-w-xl">
-                  Logistics involves the efficient planning, management and
-                  coordination of goods.
-                </p>
+                  <p className="max-w-xl text-[15px] leading-relaxed text-slate-600 mb-8">
+                    Logistics involves the efficient planning, management and
+                    coordination of the movement of goods services and
+                    information.
+                  </p>
 
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  <input type="hidden" name="Location" value={selectedLocation} />
+                  {/* form styled like reference (beige fields) */}
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <input type="hidden" name="Location" value={selectedLocation} />
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <Input
-                      name="First Name"
-                      placeholder="First Name"
+                    <div className="grid gap-4 md:grid-cols-2">
+                      <Input
+                        name="First Name"
+                        placeholder="First Name"
+                        required
+                        className="h-12 rounded-none border border-transparent bg-[#f8f4ee] text-sm text-slate-800 placeholder:text-slate-400 focus:border-[#f0e6da] focus:ring-0"
+                      />
+                      <Input
+                        name="Last Name"
+                        placeholder="Last Name"
+                        className="h-12 rounded-none border border-transparent bg-[#f8f4ee] text-sm text-slate-800 placeholder:text-slate-400 focus:border-[#f0e6da] focus:ring-0"
+                      />
+                    </div>
+
+                    <div className="grid gap-4 md:grid-cols-2">
+                      <Input
+                        type="email"
+                        name="Email"
+                        placeholder="Email"
+                        required
+                        className="h-12 rounded-none border border-transparent bg-[#f8f4ee] text-sm text-slate-800 placeholder:text-slate-400 focus:border-[#f0e6da] focus:ring-0"
+                      />
+                      <Input
+                        name="Phone"
+                        placeholder="Phone Number"
+                        className="h-12 rounded-none border border-transparent bg-[#f8f4ee] text-sm text-slate-800 placeholder:text-slate-400 focus:border-[#f0e6da] focus:ring-0"
+                      />
+                    </div>
+
+                    <Textarea
+                      name="Message"
+                      placeholder="Message"
                       required
-                      className="rounded-none bg-slate-50"
+                      className="min-h-[150px] rounded-none border border-transparent bg-[#f8f4ee] text-sm text-slate-800 placeholder:text-slate-400 focus:border-[#f0e6da] focus:ring-0"
                     />
-                    <Input
-                      name="Last Name"
-                      placeholder="Last Name"
-                      className="rounded-none bg-slate-50"
-                    />
-                  </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <Input
-                      type="email"
-                      name="Email"
-                      placeholder="Email"
-                      required
-                      className="rounded-none bg-slate-50"
-                    />
-                    <Input
-                      name="Phone"
-                      placeholder="Phone Number"
-                      className="rounded-none bg-slate-50"
-                    />
-                  </div>
+                    <Button
+                      type="submit"
+                      className="mt-2 inline-flex h-11 items-center justify-center rounded-none bg-[#E0001B] px-8 text-sm font-semibold text-white hover:bg-[#c30017]"
+                    >
+                      <Send className="mr-2 h-4 w-4" />
+                      Send Message
+                    </Button>
+                  </form>
+                </div>
 
-                  <Select
-                    value={selectedLocation}
-                    onValueChange={setSelectedLocation}
-                  >
-                    <SelectTrigger className="rounded-none bg-slate-50">
-                      <SelectValue placeholder="Select Location" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {locationNames.map((loc) => (
-                        <SelectItem key={loc} value={loc}>
-                          {loc}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                {/* RIGHT – CONTACT INFO SIDE */}
+                <div className="px-4 sm:px-8 pb-12">
+                  {/* small red label with icon */}
+                  <button className="group inline-flex items-center gap-2 text-[13px] font-semibold text-red-600 mb-2">
+                    <span className="underline decoration-red-600">
+                      Need Any Help?
+                    </span>
+                    <Headset className="h-4 w-4 text-red-600 group-hover:-translate-y-0.5 transition-transform" />
+                  </button>
 
-                  <Textarea
-                    name="Message"
-                    placeholder="Write your message..."
-                    required
-                    className="min-h-[120px] rounded-none bg-slate-50"
-                  />
+                  <h2 className="text-[32px] sm:text-[40px] font-bold text-slate-900 leading-tight mb-4">
+                    Get In Touch{" "}
+                    <span
+                      className="underline decoration-[4px] underline-offset-[6px]"
+                      style={{ textDecorationColor: BRAND_RED }}
+                    >
+                      With Us!
+                    </span>
+                  </h2>
 
-                  <Button
-                    type="submit"
-                    className="rounded-none bg-[#E0001B] hover:bg-[#c30017] px-8"
-                  >
-                    <Send className="h-4 w-4 mr-2" />
-                    Send Message
-                  </Button>
-                </form>
-              </div>
+                  <p className="text-[15px] leading-relaxed text-slate-600 mb-10 max-w-md">
+                    Logistics involves the efficient management and coordination
+                    of the movement of goods.
+                  </p>
 
-              {/* RIGHT CONTACT INFO */}
-              <div className="relative bg-slate-50 p-8 md:p-10">
-                <span
-                  className="inline-block mb-2 px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-[0.18em]"
-                  style={{ backgroundColor: "#FFF2F3", color: BRAND_RED }}
-                >
-                  Need Any Help?
-                </span>
-
-                <h2 className="text-3xl md:text-[32px] font-semibold text-slate-900 leading-snug mb-5">
-                  Get In Touch{" "}
-                  <span
-                    className="underline decoration-4 underline-offset-4"
-                    style={{ textDecorationColor: BRAND_RED }}
-                  >
-                    With Us!
-                  </span>
-                </h2>
-
-                <div className="space-y-6">
-                  
-                  {/* Phone */}
-                  <div className="flex items-start gap-4">
-                    <div className="h-11 w-11 flex items-center justify-center rounded-md bg-[#FFE7EA]">
-                      <Phone className="text-[#BC0018] h-5 w-5" />
+                  <div className="space-y-6">
+                    {/* phone block */}
+                    <div className="flex items-center gap-4">
+                      <div className="flex h-14 w-14 items-center justify-center rounded-sm bg-[#E0001B]">
+                        <Phone className="h-6 w-6 text-white" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-slate-900">
+                          Have any question?
+                        </p>
+                        <p className="text-sm text-slate-700">+65 0000 0000</p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-xs uppercase text-slate-500">
-                        Have Any Question?
-                      </p>
-                      <p className="font-semibold text-slate-900">
-                        +65 0000 0000
-                      </p>
-                    </div>
-                  </div>
 
-                  {/* Email */}
-                  <div className="flex items-start gap-4">
-                    <div className="h-11 w-11 flex items-center justify-center rounded-md bg-[#FFE7EA]">
-                      <Mail className="text-[#BC0018] h-5 w-5" />
+                    {/* email block */}
+                    <div className="flex items-center gap-4">
+                      <div className="flex h-14 w-14 items-center justify-center rounded-sm bg-[#E0001B]">
+                        <Mail className="h-6 w-6 text-white" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-slate-900">
+                          Write us email
+                        </p>
+                        <p className="text-sm text-slate-700">info@haixun.co</p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-xs uppercase text-salet-500">
-                        Write Us Email
-                      </p>
-                      <p className="font-semibold text-slate-900">
-                        info@haixun.co
-                      </p>
-                    </div>
-                  </div>
 
-                  {/* Address */}
-                  <div className="flex items-start gap-4">
-                    <div className="h-11 w-11 flex items-center justify-center rounded-md bg-[#FFE7EA]">
-                      <MapPin className="text-[#BC0018] h-5 w-5" />
-                    </div>
-                    <div>
-                      <p className="text-xs uppercase text-slate-500">
-                        Headquarters
-                      </p>
-                      <p className="font-semibold text-slate-900">
-                        123 Global Trade Center,
-                        <br />
-                        Singapore.
-                      </p>
+                    {/* address block */}
+                    <div className="flex items-center gap-4">
+                      <div className="flex h-14 w-14 items-center justify-center rounded-sm bg-[#E0001B]">
+                        <MapPin className="h-6 w-6 text-white" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-slate-900">
+                          Headquarters
+                        </p>
+                        <p className="text-sm text-slate-700">
+                          123 Global Trade Center,
+                          <br />
+                          Singapore.
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
-
-                <p className="text-xs text-slate-400 mt-10">
-                  Our regional teams are available 24/7.
-                </p>
               </div>
             </div>
           </div>
