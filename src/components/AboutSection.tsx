@@ -9,12 +9,12 @@ const AboutSection: React.FC = () => {
   return (
     <section className="relative overflow-hidden py-16 md:py-20 bg-white">
 
-      {/* TOP-LEFT SHAPE */}
-      <div className="pointer-events-none absolute -top-6 left-0">
+      {/* TOP-RIGHT SHAPE (smaller + moved right) */}
+      <div className="pointer-events-none absolute top-4 right-4 z-0">
         <img
           src="/about-shape-1.png"
           alt="Decorative shape"
-          className="w-40 md:w-60 opacity-80"
+          className="w-24 md:w-32 opacity-80 select-none"
         />
       </div>
 
@@ -30,15 +30,14 @@ const AboutSection: React.FC = () => {
           </p>
 
           <p className="mt-5 text-gray-700 max-w-xl">
-            <strong>Haixun Global Shenzhen</strong> leverages over 30 years of
-            expertise in logistics including sea, land, and air transportation,
-            customs declaration, warehousing, and distribution.
+            <strong>Haixun Global Shenzhen</strong> leverages over 30 years of expertise
+            in logistics including sea, land, and air transportation, customs declaration,
+            warehousing, and distribution.
           </p>
 
           <p className="mt-5 text-gray-700 max-w-xl">
-            Established in <strong>2019</strong>, Haixun Global Shenzhen upholds
-            the Group’s commitment to integrity, customer satisfaction, and rapid
-            response, ensuring reliable and customer-focused service in China.
+            Established in <strong>2019</strong>, Haixun Global Shenzhen upholds the Group’s
+            commitment to integrity, customer satisfaction, and rapid response.
           </p>
 
           {/* FEATURES */}
@@ -50,7 +49,7 @@ const AboutSection: React.FC = () => {
                   Fast Worldwide Delivery
                 </h4>
                 <p className="text-gray-600 text-sm">
-                  Our vast global network ensures timely delivery across destinations.
+                  Our global network ensures timely delivery across destinations.
                 </p>
               </div>
             </div>
@@ -62,13 +61,13 @@ const AboutSection: React.FC = () => {
                   Safe And Secure Delivery
                 </h4>
                 <p className="text-gray-600 text-sm">
-                  We maintain strict safety and compliance from pickup to delivery.
+                  We maintain strict safety and compliance from pickup to drop-off.
                 </p>
               </div>
             </div>
           </div>
 
-          {/* CTA & Contact */}
+          {/* CTA & CONTACT */}
           <div className="mt-10 flex flex-col sm:flex-row items-center gap-6">
             <Link to="/contact">
               <Button
@@ -98,7 +97,7 @@ const AboutSection: React.FC = () => {
           </div>
         </div>
 
-        {/* RIGHT — IMAGE BLOCK (SMALL + RIGHT SIDE) */}
+        {/* RIGHT — IMAGE BLOCK */}
         <div className="relative flex justify-center lg:justify-end">
           <div className="relative grid grid-cols-2 gap-3 items-center w-[70%]">
 
