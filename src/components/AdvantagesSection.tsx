@@ -32,11 +32,18 @@ export default function AdvantagesSection() {
 
   return (
     <section className="py-20 bg-white relative overflow-hidden">
-      {/* LEFT DECOR IMAGE */}
-      <img
+
+      {/* FLOATING DECOR SHAPE — 50% SMALLER + MOTION UP/DOWN */}
+      <motion.img
         src="/about-shape-1.png"
         alt=""
-        className="absolute left-0 top-0 w-40 md:w-56 opacity-90 pointer-events-none select-none"
+        className="absolute left-0 top-0 w-20 md:w-28 opacity-90 pointer-events-none select-none"
+        animate={{ y: [0, -15, 0] }}
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
       />
 
       <div className="container mx-auto px-4">
@@ -58,6 +65,7 @@ export default function AdvantagesSection() {
             return (
               <ScrollAnimation key={index} delay={index * 120}>
                 <div className="relative bg-white rounded-none shadow-lg overflow-hidden">
+                  
                   {/* IMAGE */}
                   <div className="w-full h-64 overflow-hidden">
                     <img
