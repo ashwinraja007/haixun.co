@@ -73,15 +73,15 @@ const Contact: React.FC = () => {
     <div className="min-h-screen flex flex-col bg-white relative">
       <Navigation />
 
-      {/* MAP JUST BELOW HEADER – SHENZHEN / ZHAOXIN HUIJIN PLAZA */}
+      {/* MAP DIRECTLY BELOW HEADER */}
       <section className="relative h-[50vh] md:h-[60vh] w-full overflow-hidden">
         <iframe
           title="Haixun Global Shenzhen Map"
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3684.9747126781313!2d114.11695999999999!3d22.54262!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3403f5bf0884ff7b%3A0xda2e416692e764e2!2sZhaoxin%20Huijin%20Plaza!5e0!3m2!1sen!2sin!4v1764335462682!5m2!1sen!2sin"
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
           className="absolute inset-0 h-full w-full border-0"
+          loading="lazy"
           allowFullScreen
+          referrerPolicy="no-referrer-when-downgrade"
         />
       </section>
 
@@ -126,7 +126,7 @@ const Contact: React.FC = () => {
                   </span>
                 </div>
 
-                <h2 className="text-3xl md:text-4xl font-semibold text-slate-900 mb-3">
+                <h2 className="text-3xl md:text-4xl font-semibold text-slate-900 mb-3 leading-snug">
                   Feel Free To{" "}
                   <span
                     className="underline decoration-4 underline-offset-4"
@@ -137,8 +137,9 @@ const Contact: React.FC = () => {
                 </h2>
 
                 <p className="text-sm text-slate-500 mb-8 max-w-xl">
-                  Logistics involves the efficient planning, management and
-                  coordination of the movement of goods.
+                  Logistics involves the efficient planning, management, and
+                  coordination of the movement of goods, services, and
+                  information.
                 </p>
 
                 <form onSubmit={handleSubmit} className="space-y-5">
