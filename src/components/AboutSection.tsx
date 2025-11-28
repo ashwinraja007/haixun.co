@@ -10,11 +10,21 @@ const AboutSection: React.FC = () => {
     <section
       className="relative py-16 md:py-20 bg-cover bg-center bg-no-repeat overflow-hidden"
     >
-      {/* BOTTOM-RIGHT DECOR SHAPE */}
+      {/* BOTTOM-RIGHT DECOR SHAPE (Moved left next to content) */}
       <img
-        src="/about-shape-2.png"
+        src="/about-shshape-2.png"
         alt="Decor Shape"
-        className="absolute bottom-0 right-0 w-32 md:w-40 opacity-90 pointer-events-none select-none animate-float-slow"
+        className="
+          absolute 
+          bottom-4 md:bottom-12 
+          right-20 md:right-40 
+          w-32 md:w-44 
+          opacity-100 
+          pointer-events-none 
+          select-none 
+          animate-float-slow 
+          z-0
+        "
       />
 
       <div className="container mx-auto px-4 md:px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
@@ -35,7 +45,7 @@ const AboutSection: React.FC = () => {
             }}
           />
 
-          {/* Two images with slight overlap */}
+          {/* Two images with overlap */}
           <div className="relative grid grid-cols-2 gap-3 items-center">
             <img
               src="/container.png"
