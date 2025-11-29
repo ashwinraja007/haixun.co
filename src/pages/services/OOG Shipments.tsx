@@ -153,30 +153,30 @@ const OOGShipments = () => {
                   <h2 className="text-sm font-semibold tracking-[0.15em] text-gray-900 mb-2 uppercase">
                     OUR SERVICES
                   </h2>
-                  <div className="w-12 h-[2px] bg-[#BC0018] mb-5" />
+                </div>
+                <div className="w-12 h-[2px] bg-[#BC0018] mb-5" />
 
-                  <div className="border border-slate-200 rounded-md overflow-hidden bg-slate-50">
-                    {servicesNav.map((item) => {
-                      const to = getNavLink(item.path);
-                      const isActive =
-                        pathname === to ||
-                        (item.path !== "/services" && pathname.startsWith(to));
+                <div className="border border-slate-200 rounded-md overflow-hidden bg-slate-50">
+                  {servicesNav.map((item) => {
+                    const to = getNavLink(item.path);
+                    const isActive =
+                      pathname === to ||
+                      (item.path !== "/services" && pathname.startsWith(to));
 
-                      return (
-                        <Link
-                          key={item.path}
-                          to={to}
-                          className={`block px-6 py-3 text-sm font-medium transition-colors ${
-                            isActive
-                              ? "bg-[#BC0018] text-white"
-                              : "text-slate-600 hover:bg-slate-100"
-                          }`}
-                        >
-                          {item.label}
-                        </Link>
-                      );
-                    })}
-                  </div>
+                    return (
+                      <Link
+                        key={item.path}
+                        to={to}
+                        className={`block px-6 py-3 text-sm font-medium transition-colors ${
+                          isActive
+                            ? "bg-[#BC0018] text-white"
+                            : "text-slate-600 hover:bg-slate-100"
+                        }`}
+                      >
+                        {item.label}
+                      </Link>
+                    );
+                  })}
                 </div>
               </aside>
 
@@ -300,7 +300,7 @@ const OOGShipments = () => {
                   </div>
                 </section>
 
-                {/* CTA – CONSISTENT WITH OTHER SERVICE PAGES */}
+                {/* CTA */}
                 <section className="py-12 bg-white text-center">
                   <h2 className="text-3xl md:text-4xl font-extrabold text-[#BC0018] mb-4">
                     Need Support for OOG & Inter Island Movements?
