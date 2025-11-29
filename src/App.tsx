@@ -35,7 +35,7 @@ import NewsOverviewPage from "@/pages/NewsOverviewPage";
 import Projects from "@/pages/Projects";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import TermsAndConditions from "@/pages/TermsAndConditions";
-
+import NotFound from "@/pages/NotFound";
 
 // Service pages
 import SeaFreight from "@/pages/services/SeaFreight";
@@ -96,10 +96,8 @@ const serviceRoutes: ServiceRoute[] = [
   { path: "third-party-logistics", component: ThirdPartyLogistics },
   { path: "liner-agency", component: LinerAgency },
   { path: "lcl", component: LCL },
-  // FIX: use CFS here (imported from "@/pages/services/fcl")
   { path: "fcl", component: CFS },
-   { path: "oog-shipments", component: OOG },
-  
+  { path: "oog-shipments", component: OOGShipments },
 ];
 
 // Country prefixes
@@ -134,7 +132,7 @@ const App: React.FC = () => {
               <Route path="/blogs" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogDetail />} />
               <Route path="/news" element={<NewsOverviewPage />} />
-              {/* If you want a news detail page, you can add: */}
+              {/* Optional news detail page */}
               {/* <Route path="/news/:slug" element={<NewsDetailPage />} /> */}
               <Route path="/projects" element={<Projects />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
@@ -165,17 +163,17 @@ const App: React.FC = () => {
               ))}
 
               {/* Service detail pages for global and each country */}
-              {serviceRoutes.map((service) => (
-                <React.Fragment key={service.path}>
+              {serviceRoutes.map(({ path, component: Component }) => (
+                <React.Fragment key={path}>
                   {/* Global route */}
-                  <Route path={`/services/${service.path}`} element={<service.component />} />
+                  <Route path={`/services/${path}`} element={<Component />} />
 
                   {/* Country-specific routes */}
                   {countries.map((country) => (
                     <Route
-                      key={`${country}-${service.path}`}
-                      path={`/${country}/services/${service.path}`}
-                      element={<service.component />}
+                      key={`${country}-${path}`}
+                      path={`/${country}/services/${path}`}
+                      element={<Component />}
                     />
                   ))}
                 </React.Fragment>
