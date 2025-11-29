@@ -35,7 +35,7 @@ import NewsOverviewPage from "@/pages/NewsOverviewPage";
 import Projects from "@/pages/Projects";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import TermsAndConditions from "@/pages/TermsAndConditions";
-import NotFound from "@/pages/NotFound";
+
 
 // Service pages
 import SeaFreight from "@/pages/services/SeaFreight";
@@ -49,6 +49,7 @@ import ThirdPartyLogistics from "@/pages/services/ThirdPartyLogistics";
 import LinerAgency from "@/pages/services/LinerAgency";
 import LCL from "@/pages/services/LCL";
 import CFS from "@/pages/services/fcl";
+import OOGShipments from "@/pages/services/OOGShipments";
 
 import { AuthProvider } from "@/contexts/AuthContext";
 import ProtectedRoute from "@/components/ProtectedRoute";
@@ -97,6 +98,8 @@ const serviceRoutes: ServiceRoute[] = [
   { path: "lcl", component: LCL },
   // FIX: use CFS here (imported from "@/pages/services/fcl")
   { path: "fcl", component: CFS },
+   { path: "oog-shipments", component: OOG },
+  
 ];
 
 // Country prefixes
