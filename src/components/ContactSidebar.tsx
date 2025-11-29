@@ -68,6 +68,7 @@ const countries = [
       },
     ],
   },
+
   {
     code: "my",
     name: "Malaysia",
@@ -92,7 +93,7 @@ const countries = [
       },
     ],
   },
-  // UAE removed
+
   {
     code: "qa",
     name: "Qatar",
@@ -109,7 +110,7 @@ const countries = [
       },
     ],
   },
-  // Saudi Arabia removed
+
   {
     code: "sg",
     name: "Singapore",
@@ -127,6 +128,7 @@ const countries = [
       },
     ],
   },
+
   {
     code: "id",
     name: "Indonesia",
@@ -151,6 +153,7 @@ const countries = [
       },
     ],
   },
+
   {
     code: "lk",
     name: "Sri Lanka",
@@ -168,6 +171,7 @@ const countries = [
       },
     ],
   },
+
   {
     code: "th",
     name: "Thailand",
@@ -184,6 +188,7 @@ const countries = [
       },
     ],
   },
+
   {
     code: "mm",
     name: "Myanmar",
@@ -201,7 +206,7 @@ const countries = [
       },
     ],
   },
-  // Bangladesh removed
+
   {
     code: "pk",
     name: "Pakistan",
@@ -228,7 +233,8 @@ const countries = [
       },
     ],
   },
-  // NEW: China (Shenzhen)
+
+  // NEW — CHINA
   {
     code: "cn",
     name: "China",
@@ -241,10 +247,11 @@ const countries = [
         lng: 114.11696,
         address:
           "13C02, Block A, Zhaoxin Huijin Plaza 3085 Shennan East Road, Luohu, Shenzhen.",
-        contacts: [], // add phone/fax later if needed
+        contacts: [],
       },
     ],
   },
+
   {
     code: "us",
     name: "United States (USA)",
@@ -278,6 +285,7 @@ const countries = [
       },
     ],
   },
+
   {
     code: "gb",
     name: "United Kingdom (UK)",
@@ -294,6 +302,7 @@ const countries = [
       },
     ],
   },
+
   {
     code: "au",
     name: "Australia",
@@ -313,7 +322,6 @@ const countries = [
   },
 ];
 
-// Sort countries alphabetically by name
 const sortedCountries = [...countries].sort((a, b) =>
   a.name.localeCompare(b.name)
 );
@@ -321,17 +329,17 @@ const sortedCountries = [...countries].sort((a, b) =>
 const ContactSidebar: React.FC<ContactSidebarProps> = ({ isOpen, onClose }) => {
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
   const [expandedCountry, setExpandedCountry] = useState<string | null>(null);
-  const [selectedLocation, setSelectedLocation] = useState<any | null>(null);
+  const [selectedLocation, setSelectedLocation] =
+    useState<any | null>(null);
   const [selectedCityIndexes, setSelectedCityIndexes] = useState<{
     [countryName: string]: number;
   }>({});
   const isMobile = useIsMobile();
 
   useEffect(() => {
-    iframeRef.current = document.querySelector('iframe');
+    iframeRef.current = document.querySelector("iframe");
   }, []);
 
-  // Set default selected location to the first city of the first country
   useEffect(() => {
     if (sortedCountries.length > 0 && sortedCountries[0].cities.length > 0) {
       const firstCountry = sortedCountries[0];
@@ -339,14 +347,12 @@ const ContactSidebar: React.FC<ContactSidebarProps> = ({ isOpen, onClose }) => {
       setSelectedLocation(firstCity);
       setExpandedCountry(firstCountry.name);
 
-      // Initialize selected city indexes for all countries to 0 (first city)
       const initialIndexes: { [countryName: string]: number } = {};
       sortedCountries.forEach((country) => {
         initialIndexes[country.name] = 0;
       });
       setSelectedCityIndexes(initialIndexes);
 
-      // Navigate to the first location on map
       navigateToLocation(firstCity.lat, firstCity.lng, firstCity);
     }
   }, []);
@@ -387,7 +393,6 @@ const ContactSidebar: React.FC<ContactSidebarProps> = ({ isOpen, onClose }) => {
 
   return (
     <>
-      {/* Backdrop overlay for mobile */}
       {isOpen && isMobile && (
         <div
           className="fixed inset-0 bg-black/50 z-40 backdrop-blur-sm transition-opacity duration-300"
@@ -395,13 +400,11 @@ const ContactSidebar: React.FC<ContactSidebarProps> = ({ isOpen, onClose }) => {
         />
       )}
 
-      {/* Sidebar container */}
       <div
         className={`my-3 w-full ${
           isMobile ? "max-w-[95%]" : "max-w-[520px]"
         } mx-auto px-2 md:px-0`}
       >
-        {/* Header */}
         <div className="flex justify-between items-center px-4 py-3 border-b bg-gradient-to-r from-red-600 to-red-700 text-white rounded-t-xl shadow-sm">
           <div className="flex items-center gap-2">
             <Globe className="h-5 w-5" />
@@ -419,8 +422,7 @@ const ContactSidebar: React.FC<ContactSidebarProps> = ({ isOpen, onClose }) => {
           )}
         </div>
 
-        {/* Content area */}
-        <ScrollArea className="h-[calc(100vh-10rem)] md:h-[calc(100vh-8rem)] bg-white rounded-b-xl shadow-md">
+        <ScrollArea className="custom-scroll h-[calc(100vh-10rem)] md:h-[calc(100vh-8rem)] bg-white rounded-b-xl shadow-md">
           <div className="p-4">
             <div className="mt-4 space-y-3">
               <Accordion
@@ -461,7 +463,6 @@ const ContactSidebar: React.FC<ContactSidebarProps> = ({ isOpen, onClose }) => {
 
                       <AccordionContent className="bg-gradient-to-b from-red-50/30 to-white px-3 py-2">
                         <div className="space-y-2">
-                          {/* All cities displayed as buttons */}
                           <div className="space-y-2">
                             {country.cities.map((city: any, index: number) => (
                               <div key={index} className="w-full">
@@ -493,7 +494,6 @@ const ContactSidebar: React.FC<ContactSidebarProps> = ({ isOpen, onClose }) => {
                                   <ChevronRight className="w-4 h-4 ml-auto text-red-300" />
                                 </Button>
 
-                                {/* Show address details for selected city */}
                                 {isSelectedCity(country.name, index) &&
                                   city.address && (
                                     <div className="mt-2 p-3 bg-gradient-to-br from-red-50 to-white rounded-lg border border-red-200 shadow text-sm animate-in fade-in duration-300 w-full">
@@ -559,6 +559,23 @@ const ContactSidebar: React.FC<ContactSidebarProps> = ({ isOpen, onClose }) => {
           </div>
         </ScrollArea>
       </div>
+
+      {/* LOCAL SCROLLBAR STYLE */}
+      <style>{`
+        .custom-scroll::-webkit-scrollbar {
+          width: 8px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+          background: #ffe5e5;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+          background: #bc0018;
+          border-radius: 8px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb:hover {
+          background: #9b0014;
+        }
+      `}</style>
     </>
   );
 };
