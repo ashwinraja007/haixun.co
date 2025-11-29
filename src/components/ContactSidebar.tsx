@@ -550,51 +550,35 @@ const ContactSidebar: React.FC<ContactSidebarProps> = ({ isOpen, onClose }) => {
       </div>
 
       {/* Scrollbar styling only for this component */}
-      <style>{`
-        /* Native scrollbar (if the browser still shows it) */
-        .custom-scroll,
-        .custom-scroll > div {
-          scrollbar-width: thin;
-          scrollbar-color: #bc0018 #ffe5e5;
-        }
+     <style>
+{`
+  /* Radix ScrollArea scrollbar container */
+  .custom-scroll [data-orientation] {
+    background: transparent !important;
+  }
 
-        .custom-scroll::-webkit-scrollbar,
-        .custom-scroll > div::-webkit-scrollbar {
-          width: 8px;
-        }
+  /* The draggable scrollbar thumb (THIS is the blue one) */
+  .custom-scroll [data-orientation] .ScrollAreaThumb,
+  .custom-scroll [data-orientation] [data-scrollbar-thumb],
+  .custom-scroll [data-orientation] div[style*="background"],
+  .custom-scroll [data-radix-scroll-area-thumb] {
+    background-color: #bc0018 !important;   /* RED always */
+    border-radius: 8px !important;
+  }
 
-        .custom-scroll::-webkit-scrollbar-track,
-        .custom-scroll > div::-webkit-scrollbar-track {
-          background: #ffe5e5;
-        }
+  /* While dragging */
+  .custom-scroll [data-orientation] .ScrollAreaThumb[data-state="visible"],
+  .custom-scroll [data-radix-scroll-area-thumb][data-state="visible"] {
+    background-color: #9b0014 !important;  /* darker red */
+  }
 
-        .custom-scroll::-webkit-scrollbar-thumb,
-        .custom-scroll > div::-webkit-scrollbar-thumb {
-          background: #bc0018;
-          border-radius: 8px;
-        }
+  /* Fallback override for any inline style background injected by Radix */
+  .custom-scroll div[style*="background-color"] {
+    background-color: #bc0018 !important;
+  }
+`}
+</style>
 
-        .custom-scroll::-webkit-scrollbar-thumb:hover,
-        .custom-scroll > div::-webkit-scrollbar-thumb:hover {
-          background: #9b0014;
-        }
-
-        /* Radix / shadcn custom scrollbar thumb */
-        .custom-scroll [data-slot="scroll-area-scrollbar"] {
-          /* optional: background transparent */
-        }
-
-        .custom-scroll [data-slot="scroll-area-thumb"] {
-          background-color: #bc0018 !important;
-          border-radius: 9999px;
-          transition: background-color 0.15s ease;
-        }
-
-        .custom-scroll [data-slot="scroll-area-thumb"]:hover,
-        .custom-scroll [data-slot="scroll-area-thumb"][data-state="visible"] {
-          background-color: #9b0014 !important;
-        }
-      `}</style>
     </>
   );
 };
