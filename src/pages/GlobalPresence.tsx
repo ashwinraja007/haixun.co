@@ -38,22 +38,29 @@ const GlobalPresence = () => {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-amber-50/30 to-white">
       <ScrollToTop />
+
+      {/* Header */}
       <Navigation />
 
-      {/* Mobile fixed title */}
+      {/* White blank space BELOW header */}
+      <div className={`${isMobile ? "h-[110px]" : "h-[150px]"}`}></div>
+
+      {/* Mobile Fixed Title */}
       {isMobile && (
         <div className="fixed top-20 left-0 right-0 z-30 bg-gradient-to-r from-amber-500 to-amber-400 p-3 text-white text-center shadow-md">
           <h1 className="text-lg font-bold">Global Presence</h1>
         </div>
       )}
 
+      {/* MAIN CONTENT SECTION */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className={`flex flex-1 relative overflow-hidden mx-0 ${isMobile ? 'pt-[140px] pb-10' : 'pt-[160px] pb-10'}`}
+        className={`flex flex-1 relative overflow-hidden mx-0 
+        ${isMobile ? "pt-[10px] pb-10" : "pt-[20px] pb-10"}`}
       >
-        {/* Map Section */}
+        {/* MAP SECTION BELOW HEADER */}
         {(!isMobile || (isMobile && showMap)) && (
           <motion.main
             initial={isMobile ? { x: '100%' } : { opacity: 0 }}
@@ -64,13 +71,14 @@ const GlobalPresence = () => {
               stiffness: 300,
               damping: 30
             }}
-            className={`transition-all duration-300 ease-in-out ${isMobile ? 'w-full' : 'w-[60%]'}`}
+            className={`transition-all duration-300 ease-in-out 
+            ${isMobile ? 'w-full' : 'w-[60%]'}`}
           >
             <ContactMapContainer />
           </motion.main>
         )}
 
-        {/* Sidebar Section */}
+        {/* SIDEBAR */}
         {(!isMobile || (isMobile && !showMap)) && (
           <motion.div
             initial={isMobile ? { x: '-100%' } : { opacity: 0 }}
@@ -81,9 +89,13 @@ const GlobalPresence = () => {
               stiffness: 300,
               damping: 30
             }}
-            className={`transition-all duration-300 ease-in-out ${isMobile ? 'w-full pt-12' : 'w-[35%]'}`}
+            className={`transition-all duration-300 ease-in-out 
+            ${isMobile ? 'w-full pt-12' : 'w-[35%]'}`}
           >
-            <ContactSidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+            <ContactSidebar 
+              isOpen={isSidebarOpen} 
+              onClose={() => setIsSidebarOpen(false)} 
+            />
           </motion.div>
         )}
       </motion.div>
