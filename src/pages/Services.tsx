@@ -17,7 +17,7 @@ import { useTranslation } from "react-i18next";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
-/* Local Scroll Animation (No Import Errors) */
+/* Local Scroll Animation */
 type ScrollAnimationProps = {
   children: ReactNode;
   className?: string;
@@ -66,35 +66,52 @@ export default function HaixunServicesSection() {
       <Navigation />
 
       <main className="flex-grow">
-        <section className="relative py-20 overflow-hidden min-h-screen bg-white">
-          {/* RIGHT BOTTOM SHAPE DECOR */}
+
+        {/* ================= HERO SECTION ================= */}
+        <section className="relative h-[260px] md:h-[320px] w-full overflow-hidden flex items-center">
           <img
-            src="/shape-03.webp"
-            className="
-              absolute
-              bottom-0
-              right-0
-              w-72
-              md:w-96
-              opacity-100
-              pointer-events-none 
-              select-none
-              z-0
-            "
-            alt="Decorative Shape"
+            src="/servicepagehero.jpg"
+            alt="Services Hero"
+            className="absolute inset-0 w-full h-full object-cover"
           />
 
+          <div className="absolute inset-0 bg-black/20"></div>
+
           <div className="container mx-auto px-4 relative z-10">
-            {/* BREADCRUMB */}
-            <nav className="mb-8 text-sm text-slate-500 flex items-center gap-2">
-              <Link to="/" className="font-medium hover:text-[#BC0018]">
+            
+            {/* Breadcrumb */}
+            <nav className="mb-4 text-sm text-white flex items-center gap-2">
+              <Link to="/" className="font-medium hover:text-yellow-300">
                 Home
               </Link>
-              <span className="text-slate-400">/</span>
-              <span className="text-slate-700 font-semibold">
+              <span>/</span>
+              <span className="text-yellow-300 font-semibold">
                 Services
               </span>
             </nav>
+
+            {/* HERO TITLE */}
+            <h1 className="text-4xl md:text-5xl font-extrabold text-white">
+              Our Services
+            </h1>
+
+            <p className="text-white text-lg mt-3 max-w-xl">
+              Comprehensive end-to-end global logistics solutions tailored to your business needs.
+            </p>
+          </div>
+        </section>
+
+        {/* ================= SERVICES SECTION ================= */}
+        <section className="relative py-20 overflow-hidden bg-white">
+          
+          {/* RIGHT BOTTOM SHAPE */}
+          <img
+            src="/shape-03.webp"
+            className="absolute bottom-0 right-0 w-72 md:w-96 opacity-100 pointer-events-none select-none z-0"
+            alt="Decor Shape"
+          />
+
+          <div className="container mx-auto px-4 relative z-10">
 
             {/* Section Header */}
             <ScrollAnimation className="text-center mb-16">
@@ -125,16 +142,15 @@ export default function HaixunServicesSection() {
                         transition={{ type: "spring", stiffness: 220, damping: 20 }}
                         className="bg-white rounded-[26px] shadow-lg overflow-hidden flex flex-col h-full cursor-pointer"
                       >
-                        {/* Image */}
+                        {/* Service Image */}
                         <div className="relative">
                           <img
                             src={service.image}
                             alt={t(service.titleKey)}
                             className="w-full h-56 object-cover transition-transform duration-500 hover:scale-105"
-                            loading="lazy"
                           />
 
-                          {/* Floating Icon Badge */}
+                          {/* Icon Badge */}
                           <div className="absolute left-6 -bottom-7">
                             <div className="w-12 h-12 bg-white rounded-xl shadow-lg flex items-center justify-center">
                               <Icon className="w-5 h-5 text-[#BC0018]" />
@@ -142,7 +158,7 @@ export default function HaixunServicesSection() {
                           </div>
                         </div>
 
-                        {/* Text */}
+                        {/* Text Content */}
                         <div className="px-8 pt-12 pb-8 flex-1 flex flex-col justify-between">
                           <div>
                             <h3 className="text-lg font-bold text-slate-900 mb-2">
@@ -154,6 +170,7 @@ export default function HaixunServicesSection() {
                             </p>
                           </div>
 
+                          {/* Bottom Row */}
                           <div className="mt-8 flex items-end justify-between">
                             <span className="inline-flex items-center text-sm font-semibold text-slate-900 hover:text-[#BC0018]">
                               {t("services.readMore")}
