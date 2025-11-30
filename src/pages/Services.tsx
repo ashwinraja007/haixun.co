@@ -42,8 +42,7 @@ const Services: React.FC = () => {
       <Navigation />
 
       <main className="flex-grow pt-20">
-
-        {/* ================= HERO SECTION (NO GRADIENT) ================= */}
+        {/* ================= HERO SECTION ================= */}
         <section className="relative h-[220px] md:h-[260px] flex items-center overflow-hidden bg-white">
           <img
             src="/servicepagehero.jpg"
@@ -52,8 +51,7 @@ const Services: React.FC = () => {
           />
 
           <div className="container mx-auto px-4 relative z-10 text-center">
-
-            {/* -------- BREADCRUMB -------- */}
+            {/* Breadcrumb */}
             <div className="flex justify-center items-center gap-2 text-lg font-medium">
               <Link to="/" className="text-black hover:text-[#BC0018] transition">
                 Home
@@ -70,7 +68,7 @@ const Services: React.FC = () => {
 
               <span className="text-[#BC0018]">›</span>
 
-              <span className="font-semibold text-black">LCL Services</span>
+              <span className="font-semibold text-black">Services</span>
             </div>
 
             {/* TITLE */}
@@ -80,74 +78,94 @@ const Services: React.FC = () => {
               transition={{ duration: 0.5 }}
               className="text-3xl md:text-5xl font-bold text-black mt-4"
             >
-              LCL Services
+              Services
             </motion.h1>
           </div>
         </section>
 
-        {/* ================= SERVICES SECTION (NO OVERLAY) ================= */}
-        <section
-          className="relative py-20 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('/service-bg02.jpg')" }}
-        >
-          {/* REMOVED: gradient overlay */}
-          {/* <div className="absolute inset-0 bg-black/50"></div> */}
+        {/* ================= SERVICES SECTION ================= */}
+        <section className="relative py-20 bg-white overflow-hidden">
+          {/* RIGHT-SIDE DECOR IMAGE */}
+          <img
+            src="/shape-03.webp"
+            alt="Decor"
+            className="
+              absolute 
+              right-0 
+              top-1/2 
+              -translate-y-1/2
+              w-60 
+              md:w-80
+              opacity-80
+              pointer-events-none 
+              select-none
+              z-0
+            "
+          />
 
           <div className="relative z-10 max-w-7xl mx-auto px-4 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
-
             {[
               {
                 title: "LCL Services",
                 desc: "HAIXUN operates own consolidation service on major trade routes.",
                 icon: Ship,
+                img: "/service-images/lcl.jpg",
                 link: "/services/lcl",
               },
               {
                 title: "FCL Services",
                 desc: "Fleet of containers including special equipment for flexible FCL solutions.",
                 icon: Ship,
+                img: "/service-images/fcl.jpg",
                 link: "/services/fcl",
               },
               {
                 title: "Warehouse Management",
                 desc: "Facilities for warehousing, cold storage, and special commodities.",
                 icon: Boxes,
+                img: "/service-images/warehouse.jpg",
                 link: "/services/warehousing",
               },
               {
                 title: "Project Logistics",
                 desc: "End-to-end handling of project cargo across critical geographies.",
                 icon: Truck,
+                img: "/service-images/project.jpg",
                 link: "/services/project-cargo",
               },
               {
                 title: "Air Shipments",
                 desc: "Custom sea–air and air–sea solutions for time-critical shipments.",
                 icon: Plane,
+                img: "/service-images/air.jpg",
                 link: "/services/air-freight",
               },
               {
                 title: "Customs Declaration & Insurance",
                 desc: "Complete compliance and documentation support.",
                 icon: FileText,
+                img: "/service-images/customs.jpg",
                 link: "/services/customs-clearance",
               },
               {
                 title: "Import Services",
                 desc: "End-to-end import solutions for smooth cargo movement.",
                 icon: ArrowDownToLine,
+                img: "/service-images/import.jpg",
                 link: "/services/import",
               },
               {
                 title: "OOG Shipments",
                 desc: "Oversized cargo handling including lashing and survey coordination.",
                 icon: Package,
+                img: "/service-images/oog.jpg",
                 link: "/services/oog-shipments",
               },
               {
                 title: "LCL Consolidation",
                 desc: "Efficiently combining multiple small shipments into one container.",
                 icon: ClipboardList,
+                img: "/service-images/consolidation.jpg",
                 link: "/services/consolidation",
               },
             ].map((item, index) => {
@@ -157,23 +175,34 @@ const Services: React.FC = () => {
                 <div
                   key={index}
                   className="group rounded-3xl bg-white border border-slate-200 px-8 py-10 shadow-sm 
-                  transition-all duration-300 flex flex-col justify-between
-                  hover:-translate-y-2 hover:shadow-xl hover:bg-[#BC0018] hover:border-[#BC0018]"
+                    transition-all duration-300 flex flex-col justify-between
+                    hover:-translate-y-2 hover:shadow-xl hover:bg-[#BC0018] hover:border-[#BC0018]"
                 >
                   <div>
+                    {/* ICON */}
                     <div className="w-16 h-16 rounded-full bg-[#F5F5F7] flex items-center justify-center mb-6 group-hover:bg-white transition">
                       <Icon className="w-8 h-8 text-[#BC0018]" />
                     </div>
 
+                    {/* IMAGE */}
+                    <img
+                      src={item.img}
+                      alt={item.title}
+                      className="w-full h-40 object-cover rounded-xl mb-5 shadow-sm"
+                    />
+
+                    {/* TITLE */}
                     <h3 className="text-xl font-semibold text-slate-900 group-hover:text-white">
                       {item.title}
                     </h3>
 
+                    {/* DESCRIPTION */}
                     <p className="text-sm text-slate-600 mt-3 group-hover:text-white">
                       {item.desc}
                     </p>
                   </div>
 
+                  {/* BUTTON */}
                   <Link
                     to={getNavLink(item.link)}
                     className="mt-6 inline-flex items-center"
