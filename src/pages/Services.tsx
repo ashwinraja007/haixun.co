@@ -12,7 +12,9 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import ScrollAnimation from "./ScrollAnimation";
+
+// IMPORTANT: fixed import path here
+import ScrollAnimation from "@/components/home/ScrollAnimation";
 
 type Service = {
   icon: LucideIcon;
@@ -28,63 +30,63 @@ export default function HaixunServicesSection() {
   const services: Service[] = [
     {
       icon: Boxes,
-      image: "/lcl.png",                      // 1
+      image: "/lcl.png",
       titleKey: "services.lcl.title",
       descriptionKey: "services.lcl.description",
       link: "/services/lcl",
     },
     {
       icon: Ship,
-      image: "/fcl.png",                      // 2
+      image: "/fcl.png",
       titleKey: "services.fcl.title",
       descriptionKey: "services.fcl.description",
       link: "/services/fcl",
     },
     {
       icon: WarehouseIcon,
-      image: "/warehouse.png",                // 3
+      image: "/warehouse.png",
       titleKey: "services.warehouse.title",
       descriptionKey: "services.warehouse.description",
       link: "/services/warehousing",
     },
     {
       icon: Package,
-      image: "/projectlogistics.png",         // 4
+      image: "/projectlogistics.png",
       titleKey: "services.project.title",
       descriptionKey: "services.project.description",
       link: "/services/project-cargo",
     },
     {
       icon: Plane,
-      image: "/airfreight.png",               // 5
+      image: "/airfreight.png",
       titleKey: "services.air.title",
       descriptionKey: "services.air.description",
       link: "/services/air-freight",
     },
     {
       icon: FileCheck,
-      image: "/customclearance.png",          // 6
+      image: "/customclearance.png",
       titleKey: "services.customs.title",
       descriptionKey: "services.customs.description",
       link: "/services/customs",
     },
     {
       icon: ArrowDownToLine,
-      image: "/Aircargo.png",                 // 7
+      image: "/Aircargo.png",
       titleKey: "services.import.title",
       descriptionKey: "services.import.description",
       link: "/services/import",
     },
     {
       icon: Boxes,
-      image: "/consoldation.png",             // 8
+      image: "/consoldation.png",
       titleKey: "services.consolidation.title",
       descriptionKey: "services.consolidation.description",
       link: "/services/consolidation",
     },
     {
       icon: Container,
-      image: "/oog.png",                      // 9
+      image: "/oog.png",
       titleKey: "services.oog.title",
       descriptionKey: "services.oog.description",
       link: "/services/oog-shipments",
@@ -99,7 +101,6 @@ export default function HaixunServicesSection() {
       }}
     >
       <div className="container mx-auto px-4">
-        
         {/* Section Header */}
         <ScrollAnimation className="text-center mb-16">
           <p className="text-sm font-semibold tracking-[0.25em] uppercase text-red-300 mb-3">
@@ -115,7 +116,7 @@ export default function HaixunServicesSection() {
           </p>
         </ScrollAnimation>
 
-        {/* Cards */}
+        {/* Service Cards */}
         <div className="grid gap-10 md:grid-cols-2 xl:grid-cols-3">
           {services.map((service, index) => {
             const Icon = service.icon;
@@ -129,7 +130,7 @@ export default function HaixunServicesSection() {
                     transition={{ type: "spring", stiffness: 220, damping: 20 }}
                     className="bg-white rounded-[26px] shadow-[0_18px_50px_rgba(15,23,42,0.35)] overflow-hidden flex flex-col h-full cursor-pointer"
                   >
-                    {/* Image */}
+                    {/* Top Image */}
                     <div className="relative">
                       <img
                         src={service.image}
@@ -138,7 +139,7 @@ export default function HaixunServicesSection() {
                         loading="lazy"
                       />
 
-                      {/* Floating Icon */}
+                      {/* Floating Icon Badge */}
                       <div className="absolute left-6 -bottom-7">
                         <div className="w-12 h-12 bg-white rounded-xl shadow-lg flex items-center justify-center">
                           <Icon className="w-5 h-5 text-[#BC0018]" />
@@ -158,6 +159,7 @@ export default function HaixunServicesSection() {
                         </p>
                       </div>
 
+                      {/* Bottom Row */}
                       <div className="mt-8 flex items-end justify-between">
                         <span className="inline-flex items-center text-sm font-semibold text-slate-900 hover:text-[#BC0018]">
                           {t("services.readMore")}
