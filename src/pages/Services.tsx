@@ -43,29 +43,45 @@ const Services: React.FC = () => {
 
       <main className="flex-grow pt-20">
 
-        {/* ================= HERO SECTION ================= */}
-        <section className="relative overflow-hidden">
+        {/* ================= HERO SECTION (UPDATED WITH BREADCRUMB) ================= */}
+        <section className="relative overflow-hidden h-[220px] md:h-[260px] flex items-center">
           <img
             src="/lovable-uploads/gp.jpg"
             alt="Services"
             className="absolute inset-0 w-full h-full object-cover opacity-25"
           />
 
-          <div className="container mx-auto px-4 py-20 relative z-10 text-center">
+          <div className="container mx-auto px-4 relative z-10 text-center">
+
+            {/* -------- BREADCRUMB (Matches your screenshot) -------- */}
+            <div className="flex justify-center items-center gap-2 text-lg font-medium">
+              <Link to="/" className="text-black hover:text-[#BC0018] transition">
+                Home
+              </Link>
+
+              <span className="text-[#BC0018]">›</span>
+
+              <Link
+                to={getNavLink("/services")}
+                className="text-black hover:text-[#BC0018] transition"
+              >
+                Services
+              </Link>
+
+              <span className="text-[#BC0018]">›</span>
+
+              <span className="font-semibold text-black">LCL Services</span>
+            </div>
+
+            {/* TITLE */}
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-4xl md:text-6xl font-bold text-black"
+              className="text-3xl md:text-5xl font-bold text-black mt-4"
             >
-              Our Logistics Services
+              LCL Services
             </motion.h1>
-
-            <div className="w-20 h-1 bg-[#BC0018] mx-auto mt-4"></div>
-
-            <p className="text-lg md:text-xl text-black mt-6 max-w-3xl mx-auto">
-              Comprehensive end-to-end global logistics solutions tailored to your business needs
-            </p>
           </div>
         </section>
 
@@ -130,7 +146,7 @@ const Services: React.FC = () => {
               },
               {
                 title: "LCL Consolidation",
-                desc: "Combining multiple small shipments efficiently into one container.",
+                desc: "Efficiently combining multiple small shipments into one container.",
                 icon: ClipboardList,
                 link: "/services/consolidation",
               },
