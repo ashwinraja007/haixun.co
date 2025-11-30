@@ -43,17 +43,17 @@ const Services: React.FC = () => {
 
       <main className="flex-grow pt-20">
 
-        {/* ================= HERO SECTION (UPDATED WITH BREADCRUMB) ================= */}
-        <section className="relative overflow-hidden h-[220px] md:h-[260px] flex items-center">
+        {/* ================= HERO SECTION (NO GRADIENT) ================= */}
+        <section className="relative h-[220px] md:h-[260px] flex items-center overflow-hidden bg-white">
           <img
             src="/lovable-uploads/gp.jpg"
             alt="Services"
-            className="absolute inset-0 w-full h-full object-cover opacity-25"
+            className="absolute inset-0 w-full h-full object-cover"
           />
 
           <div className="container mx-auto px-4 relative z-10 text-center">
 
-            {/* -------- BREADCRUMB (Matches your screenshot) -------- */}
+            {/* -------- BREADCRUMB -------- */}
             <div className="flex justify-center items-center gap-2 text-lg font-medium">
               <Link to="/" className="text-black hover:text-[#BC0018] transition">
                 Home
@@ -85,16 +85,16 @@ const Services: React.FC = () => {
           </div>
         </section>
 
-        {/* ================= SERVICES SECTION (ALL 9) ================= */}
+        {/* ================= SERVICES SECTION (NO OVERLAY) ================= */}
         <section
           className="relative py-20 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: "url('/service-bg02.jpg')" }}
         >
-          <div className="absolute inset-0 bg-black/50"></div>
+          {/* REMOVED: gradient overlay */}
+          {/* <div className="absolute inset-0 bg-black/50"></div> */}
 
           <div className="relative z-10 max-w-7xl mx-auto px-4 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
 
-            {/* ----------- SERVICE CARD COMPONENT ----------- */}
             {[
               {
                 title: "LCL Services",
