@@ -65,6 +65,9 @@ export default function HaixunServicesSection() {
     <div className="min-h-screen flex flex-col bg-white relative">
       <Navigation />
 
+      {/* ========== WHITE BLANK SPACE BELOW NAVIGATION ========== */}
+      <div className="h-[90px] w-full bg-white"></div>
+
       <main className="flex-grow">
 
         {/* ================= HERO SECTION ================= */}
