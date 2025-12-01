@@ -5,15 +5,6 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { getCurrentCountryFromPath } from "@/services/countryDetection";
 
-import {
-  Breadcrumb,
-  BreadcrumbList,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-
 const ScrollToTop = () => {
   const { pathname } = useLocation();
   useEffect(() => {
@@ -33,17 +24,18 @@ const Warehousing = () => {
     return `/${currentCountry.name.toLowerCase().replace(/\s+/g, "-")}${basePath}`;
   };
 
+  // MATCHED TO LCL / FCL / SERVICES PAGE
   const servicesNav = [
     { label: "See All Services", path: "/services" },
     { label: "LCL Services", path: "/services/lcl" },
     { label: "FCL Services", path: "/services/fcl" },
-    { label: "Warehouse Management", path: "/services/warehouse-management" },
-    { label: "Project Logistics", path: "/services/project-logistics" },
-    { label: "Air Shipments", path: "/services/air-shipments" },
-    { label: "Customs Declaration & Insurance", path: "/services/customs-declaration" },
+    { label: "Warehousing", path: "/services/warehousing" },
+    { label: "Project Cargo", path: "/services/project-cargo" },
+    { label: "Air Freight", path: "/services/air-freight" },
+    { label: "Customs Clearance", path: "/services/customs" },
+    { label: "Import Services", path: "/services/import" },
+    { label: "Consolidation", path: "/services/consolidation" },
     { label: "OOG Shipments", path: "/services/oog-shipments" },
-    { label: "LCL Consolidation", path: "/services/lcl-consolidation" },
-    { label: "CFS Services", path: "/services/cfs" },
   ];
 
   const pathname = location.pathname;
@@ -53,54 +45,52 @@ const Warehousing = () => {
       <ScrollToTop />
       <Navigation />
 
-      <main className="flex-grow pt-20">
-        {/* BREADCRUMB HERO */}
-        <section
-          className="relative h-56 md:h-64 flex items-center justify-center overflow-hidden border-b border-slate-200"
-          style={{
-            backgroundImage: "url('/counter-bg.webp')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        >
-          <div className="absolute inset-0 bg-white/70 backdrop-blur-[1px] z-0" />
+      {/* WHITE BLANK SPACE BELOW NAV (SAME AS OTHER SERVICE PAGES) */}
+      <div className="h-[90px] w-full bg-white" />
 
-          <div className="relative text-center scale-[1.1] md:scale-[1.25] z-10">
-            <Breadcrumb>
-              <BreadcrumbList className="flex items-center justify-center gap-2 md:gap-3">
-                <BreadcrumbItem>
-                  <BreadcrumbLink
-                    asChild
-                    className="text-[#BC0018] text-lg md:text-xl font-semibold hover:text-black"
-                  >
-                    <Link to={getNavLink("/")}>Home</Link>
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
+      <main className="flex-grow">
+        {/* HERO SECTION – SAME STYLE AS SERVICES / LCL / FCL */}
+        <section className="relative h-[260px] md:h-[320px] w-full overflow-hidden flex items-center">
+          <img
+            src="/servicepagehero.jpg"
+            alt="Warehousing Hero"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
 
-                <BreadcrumbSeparator>
-                  <span className="text-xl md:text-2xl text-slate-600">›</span>
-                </BreadcrumbSeparator>
+          {/* STRONG RIGHT-SIDE GRADIENT */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
 
-                <BreadcrumbItem>
-                  <BreadcrumbLink
-                    asChild
-                    className="text-[#BC0018] text-lg md:text-xl font-semibold hover:text-black"
-                  >
-                    <Link to={getNavLink("/services")}>Services</Link>
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
+          <div className="container mx-auto px-4 relative z-10">
+            {/* BREADCRUMB LIKE SERVICES PAGE */}
+            <nav className="mb-4 text-sm text-white flex items-center gap-2">
+              <Link
+                to={getNavLink("/")}
+                className="font-medium hover:text-red-500"
+              >
+                Home
+              </Link>
+              <span className="text-red-500">/</span>
+              <Link
+                to={getNavLink("/services")}
+                className="font-medium hover:text-red-500"
+              >
+                Services
+              </Link>
+              <span className="text-red-500">/</span>
+              <span className="text-red-500 font-semibold">
+                Warehousing
+              </span>
+            </nav>
 
-                <BreadcrumbSeparator>
-                  <span className="text-xl md:text-2xl text-slate-600">›</span>
-                </BreadcrumbSeparator>
+            {/* HERO TITLE */}
+            <h1 className="text-4xl md:text-5xl font-extrabold text-white">
+              Warehousing
+            </h1>
 
-                <BreadcrumbItem>
-                  <BreadcrumbPage className="text-black font-extrabold text-3xl md:text-4xl">
-                    Warehouse Management
-                  </BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
+            <p className="text-white text-lg mt-3 max-w-xl">
+              End-to-end warehousing and distribution solutions designed to support your
+              regional and global supply chain.
+            </p>
           </div>
         </section>
 
@@ -116,7 +106,7 @@ const Warehousing = () => {
                   </h2>
                   <div className="w-12 h-[2px] bg-[#BC0018] mb-5" />
 
-                  <div className="border border-slate-200 rounded-xl overflow-hidden bg-slate-50">
+                  <div className="border border-slate-200 rounded-md overflow-hidden bg-slate-50">
                     {servicesNav.map((item) => {
                       const to = getNavLink(item.path);
                       const isActive =
@@ -127,12 +117,11 @@ const Warehousing = () => {
                         <Link
                           key={item.path}
                           to={to}
-                          className={`block px-6 py-3 text-sm font-medium transition-colors duration-200
-                            ${
-                              isActive
-                                ? "bg-[#BC0018] text-white"
-                                : "text-slate-700 hover:bg-slate-100"
-                            }`}
+                          className={`block px-6 py-3 text-sm font-medium transition-colors ${
+                            isActive
+                              ? "bg-[#BC0018] text-white"
+                              : "text-slate-600 hover:bg-slate-100"
+                          }`}
                         >
                           {item.label}
                         </Link>
