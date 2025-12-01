@@ -5,15 +5,6 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { getCurrentCountryFromPath } from "@/services/countryDetection";
 
-import {
-  Breadcrumb,
-  BreadcrumbList,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-
 const ScrollToTop = () => {
   const { pathname } = useLocation();
   useEffect(() => {
@@ -33,20 +24,18 @@ const LCL = () => {
     return `/${currentCountry.name.toLowerCase().replace(/\s+/g, "-")}${basePath}`;
   };
 
-  // UPDATED: match paths with Navigation component
+  // PATHS UPDATED TO MATCH SERVICES SECTION
   const servicesNav = [
     { label: "See All Services", path: "/services" },
     { label: "LCL Services", path: "/services/lcl" },
-    { label: "CFS Services", path: "/services/cfs" },
-    { label: "Sea Freight", path: "/services/sea-freight" },
-    { label: "Air Freight", path: "/services/air-freight" },
+    { label: "FCL Services", path: "/services/fcl" },
     { label: "Warehousing", path: "/services/warehousing" },
     { label: "Project Cargo", path: "/services/project-cargo" },
-    { label: "Customs Clearance", path: "/services/customs-clearance" },
+    { label: "Air Freight", path: "/services/air-freight" },
+    { label: "Customs Clearance", path: "/services/customs" },
+    { label: "Import Services", path: "/services/import" },
     { label: "Consolidation", path: "/services/consolidation" },
-    { label: "Liquid Cargo", path: "/services/liquid-cargo" },
-    { label: "Third Party Logistics", path: "/services/third-party-logistics" },
-    { label: "Liner Agency", path: "/services/liner-agency" },
+    { label: "OOG Shipments", path: "/services/oog-shipments" },
   ];
 
   const pathname = location.pathname;
@@ -56,54 +45,51 @@ const LCL = () => {
       <ScrollToTop />
       <Navigation />
 
-      <main className="flex-grow pt-20">
-        {/* BREADCRUMB HERO WITH counter-bg.webp, NO LEFT LOGO, MORE HEIGHT */}
-        <section
-          className="relative h-56 md:h-64 flex items-center justify-center overflow-hidden border-b border-slate-200"
-          style={{
-            backgroundImage: "url('/counter-bg.webp')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        >
-          <div className="absolute inset-0 bg-white/70 backdrop-blur-[1px] z-0" />
+      {/* WHITE BLANK SPACE BELOW NAV (MATCH SERVICES PAGE) */}
+      <div className="h-[90px] w-full bg-white" />
 
-          <div className="relative text-center scale-[1.1] md:scale-[1.25] z-10">
-            <Breadcrumb>
-              <BreadcrumbList className="flex items-center justify-center gap-2 md:gap-3">
-                <BreadcrumbItem>
-                  <BreadcrumbLink
-                    asChild
-                    className="text-[#BC0018] text-lg md:text-xl font-semibold hover:text-black"
-                  >
-                    <Link to={getNavLink("/")}>Home</Link>
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
+      <main className="flex-grow">
+        {/* HERO SECTION MATCHING SERVICES PAGE STYLE */}
+        <section className="relative h-[260px] md:h-[320px] w-full overflow-hidden flex items-center">
+          <img
+            src="/servicepagehero.jpg"
+            alt="LCL Hero"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
 
-                <BreadcrumbSeparator>
-                  <span className="text-xl md:text-2xl text-slate-600">›</span>
-                </BreadcrumbSeparator>
+          {/* STRONG RIGHT-SIDE GRADIENT (SAME STYLE) */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
 
-                <BreadcrumbItem>
-                  <BreadcrumbLink
-                    asChild
-                    className="text-[#BC0018] text-lg md:text-xl font-semibold hover:text-black"
-                  >
-                    <Link to={getNavLink("/services")}>Services</Link>
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
+          <div className="container mx-auto px-4 relative z-10">
+            {/* BREADCRUMB LIKE SERVICES PAGE, WITH LCL LEVEL */}
+            <nav className="mb-4 text-sm text-white flex items-center gap-2">
+              <Link
+                to={getNavLink("/")}
+                className="font-medium hover:text-red-500"
+              >
+                Home
+              </Link>
+              <span className="text-red-500">/</span>
+              <Link
+                to={getNavLink("/services")}
+                className="font-medium hover:text-red-500"
+              >
+                Services
+              </Link>
+              <span className="text-red-500">/</span>
+              <span className="text-red-500 font-semibold">
+                LCL Services
+              </span>
+            </nav>
 
-                <BreadcrumbSeparator>
-                  <span className="text-xl md:text-2xl text-slate-600">›</span>
-                </BreadcrumbSeparator>
+            {/* HERO TITLE + SUBTEXT */}
+            <h1 className="text-4xl md:text-5xl font-extrabold text-white">
+              LCL Services
+            </h1>
 
-                <BreadcrumbItem>
-                  <BreadcrumbPage className="text-black font-extrabold text-3xl md:text-4xl">
-                    LCL Services
-                  </BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
+            <p className="text-white text-lg mt-3 max-w-xl">
+              Flexible Less-Than-Container Load solutions tailored for your partial shipments with global coverage and reliable schedules.
+            </p>
           </div>
         </section>
 
@@ -111,7 +97,7 @@ const LCL = () => {
         <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid gap-12 md:grid-cols-[260px,1fr] items-start">
-              {/* LEFT COLUMN */}
+              {/* LEFT COLUMN – SERVICES NAV */}
               <aside className="space-y-10">
                 <div>
                   <h2 className="text-sm font-semibold tracking-[0.15em] text-gray-900 mb-2 uppercase">
@@ -144,7 +130,7 @@ const LCL = () => {
                 </div>
               </aside>
 
-              {/* RIGHT COLUMN */}
+              {/* RIGHT COLUMN – CONTENT */}
               <div className="space-y-12">
                 {/* TOP IMAGE */}
                 <motion.div
