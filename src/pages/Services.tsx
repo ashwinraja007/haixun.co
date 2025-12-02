@@ -65,17 +65,8 @@ const LCL = () => {
 
             {/* TITLE IN RED */}
             <h1 className="text-4xl md:text-5xl font-extrabold text-[#BC0018]">
-              LCL Services
+              Services
             </h1>
-
-            {/* SUBTEXT IN WHITE */}
-            <p className="text-white text-lg mt-3 max-w-xl">
-              Flexible Less-Than-Container Load solutions tailored for your partial
-              shipments with global coverage and reliable schedules.
-            </p>
-          </div>
-        </section>
-
         {/* MAIN CONTENT */}
         <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
