@@ -17,19 +17,34 @@ const Advantages = () => {
     <div className="bg-white min-h-screen">
       <ScrollToTop />
       <Navigation />
-      <main className="pt-20">
-        <section className="py-16 bg-gradient-to-br from-gray-900 to-red-900">
-          <div className="container mx-auto px-4 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Our Advantages
+
+      {/* WHITE SPACE BELOW NAV */}
+      <div className="h-[90px] w-full bg-white"></div>
+
+      <main className="flex-grow">
+
+        {/* ===== HERO SECTION (MATCHES LCL/SERVICES) ===== */}
+        <section className="relative h-[260px] md:h-[320px] w-full overflow-hidden flex items-center">
+          <img
+            src="/servicepagehero.jpg"
+            alt="Advantages Hero"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+
+          {/* LEFT DARK GRADIENT */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent"></div>
+
+          <div className="container mx-auto px-4 relative z-10">
+            <h1 className="text-4xl md:text-5xl font-extrabold text-[#BC0018]">
+              Advantages
             </h1>
-            <p className="text-xl text-gray-200 max-w-2xl mx-auto">
-              Excellence through capacity, service, and expertise
-            </p>
           </div>
         </section>
+
+        {/* CONTENT */}
         <AdvantagesSection />
       </main>
+
       <Footer />
     </div>
   );
