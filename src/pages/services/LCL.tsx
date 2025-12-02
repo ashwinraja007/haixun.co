@@ -24,7 +24,6 @@ const LCL = () => {
     return `/${currentCountry.name.toLowerCase().replace(/\s+/g, "-")}${basePath}`;
   };
 
-  // PATHS UPDATED TO MATCH SERVICES SECTION
   const servicesNav = [
     { label: "See All Services", path: "/services" },
     { label: "LCL Services", path: "/services/lcl" },
@@ -45,11 +44,10 @@ const LCL = () => {
       <ScrollToTop />
       <Navigation />
 
-      {/* WHITE BLANK SPACE BELOW NAV (MATCH SERVICES / AIR FREIGHT PAGE) */}
       <div className="h-[90px] w-full bg-white" />
 
       <main className="flex-grow">
-        {/* HERO SECTION WITH BREADCRUMB */}
+        {/* HERO SECTION */}
         <section className="relative h-[260px] md:h-[320px] w-full overflow-hidden flex items-center justify-center">
           <img
             src="/servicepagehero.jpg"
@@ -57,7 +55,6 @@ const LCL = () => {
             className="absolute inset-0 w-full h-full object-cover"
           />
 
-          {/* EXTENDED DARK GRADIENT */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/30" />
 
           <div className="container mx-auto px-4 relative z-10 text-center">
@@ -75,7 +72,7 @@ const LCL = () => {
           </div>
         </section>
 
-        {/* DESCRIPTION BELOW HERO */}
+        {/* DESCRIPTION */}
         <section className="py-8 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <p className="text-base md:text-lg leading-relaxed text-gray-700 text-center max-w-4xl mx-auto">
@@ -85,11 +82,11 @@ const LCL = () => {
           </div>
         </section>
 
-        {/* MAIN CONTENT */}
+        {/* CONTENT AREA */}
         <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid gap-12 md:grid-cols-[260px,1fr] items-start">
-              {/* LEFT SIDEBAR – MATCH AIR FREIGHT STYLE */}
+              {/* SIDEBAR */}
               <aside className="space-y-10">
                 <div>
                   <h2 className="text-sm font-semibold tracking-[0.15em] text-gray-900 mb-2 uppercase">
@@ -122,9 +119,9 @@ const LCL = () => {
                 </div>
               </aside>
 
-              {/* RIGHT COLUMN – CONTENT */}
+              {/* MAIN CONTENT */}
               <div className="space-y-12">
-                {/* TOP IMAGE */}
+                {/* IMAGE */}
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -158,38 +155,20 @@ const LCL = () => {
                     <p>
                       Our extensive global consolidation network helps customers move
                       smaller shipments more economically by combining multiple consignments
-                      into one container, reducing freight cost while maintaining service
-                      reliability.
+                      into one container.
                     </p>
                     <p>
                       Our operations team manages receiving, stuffing, documentation, and
-                      delivery at destination, ensuring safety, transparency, and efficiency
-                      at every step of the supply chain.
+                      delivery at destination, ensuring safety and efficiency.
                     </p>
                     <p>
-                      With predictable transit schedules, frequent departures, and
-                      transparent pricing, our LCL solutions provide unmatched flexibility
-                      for businesses of all sizes.
+                      With predictable transit schedules and transparent pricing, our LCL
+                      solutions offer unmatched flexibility for all businesses.
                     </p>
                   </div>
                 </section>
 
-                {/* CTA */}
-                <section className="py-12 bg-white text-center">
-                  <h2 className="text-3xl md:text-4xl font-extrabold text-[#BC0018] mb-4">
-                    Ready to Ship with LCL?
-                  </h2>
-                  <p className="text-lg md:text-xl text-[#BC0018] mb-10">
-                    Contact us today for competitive rates and dependable LCL shipping.
-                  </p>
-
-                  <Link
-                    to={getNavLink("/contact")}
-                    className="inline-block bg-[#BC0018] hover:bg-[#a30014] text-white font-semibold text-lg px-10 py-4 rounded-lg transition-all"
-                  >
-                    Contact Us
-                  </Link>
-                </section>
+                {/* CTA REMOVED */}
               </div>
             </div>
           </div>
