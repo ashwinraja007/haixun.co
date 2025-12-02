@@ -49,28 +49,82 @@ type Service = {
 export default function HaixunServicesSection() {
   const { t } = useTranslation();
 
+  // IMAGE PATHS TAKEN FROM THE HAIXUN SERVICE PAGE COMPONENT
   const services: Service[] = [
-    { icon: Boxes, image: "/lcl.png", titleKey: "services.lcl.title", descriptionKey: "services.lcl.description", link: "/services/lcl" },
-    { icon: Ship, image: "/fcl.png", titleKey: "services.fcl.title", descriptionKey: "services.fcl.description", link: "/services/fcl" },
-    { icon: WarehouseIcon, image: "/warehouse.png", titleKey: "services.warehouse.title", descriptionKey: "services.warehouse.description", link: "/services/warehousing" },
-    { icon: Package, image: "/projectlogistics.png", titleKey: "services.project.title", descriptionKey: "services.project.description", link: "/services/project-cargo" },
-    { icon: Plane, image: "/airfreight.png", titleKey: "services.air.title", descriptionKey: "services.air.description", link: "/services/air-freight" },
-    { icon: FileCheck, image: "/customclearance.png", titleKey: "services.customs.title", descriptionKey: "services.customs.description", link: "/services/customs-clearance" },
-    { icon: ArrowDownToLine, image: "/Aircargo.png", titleKey: "services.import.title", descriptionKey: "services.import.description", link: "/services/import" },
-    { icon: Boxes, image: "/consoldation.png", titleKey: "services.consolidation.title", descriptionKey: "services.consolidation.description", link: "/services/consolidation" },
-    { icon: Container, image: "/oog.png", titleKey: "services.oog.title", descriptionKey: "services.oog.description", link: "/services/oog-shipments" },
+    {
+      icon: Boxes,
+      image: "/lcl-realistic.jpg",
+      titleKey: "services.lcl.title",
+      descriptionKey: "services.lcl.description",
+      link: "/services/lcl",
+    },
+    {
+      icon: Ship,
+      image: "/ocean-freight-realistic.jpg",
+      titleKey: "services.fcl.title",
+      descriptionKey: "services.fcl.description",
+      link: "/services/fcl",
+    },
+    {
+      icon: WarehouseIcon,
+      image: "/warehouse-realistic.jpg",
+      titleKey: "services.warehouse.title",
+      descriptionKey: "services.warehouse.description",
+      link: "/services/warehousing",
+    },
+    {
+      icon: Package,
+      image: "/project-cargo-realistic.jpg",
+      titleKey: "services.project.title",
+      descriptionKey: "services.project.description",
+      link: "/services/project-cargo",
+    },
+    {
+      icon: Plane,
+      image: "/air-freight-realistic.jpg",
+      titleKey: "services.air.title",
+      descriptionKey: "services.air.description",
+      link: "/services/air-freight",
+    },
+    {
+      icon: FileCheck,
+      image: "/cfs-realistic.jpg",
+      titleKey: "services.customs.title",
+      descriptionKey: "services.customs.description",
+      link: "/services/customs-clearance",
+    },
+    {
+      icon: ArrowDownToLine,
+      image: "/cfs-realistic.jpg",
+      titleKey: "services.import.title",
+      descriptionKey: "services.import.description",
+      link: "/services/import",
+    },
+    {
+      icon: Boxes,
+      image: "/lcl-realistic.jpg",
+      titleKey: "services.consolidation.title",
+      descriptionKey: "services.consolidation.description",
+      link: "/services/consolidation",
+    },
+    {
+      icon: Container,
+      image: "/project-cargo-realistic.jpg",
+      titleKey: "services.oog.title",
+      descriptionKey: "services.oog.description",
+      link: "/services/oog-shipments",
+    },
   ];
 
   return (
     <div className="min-h-screen flex flex-col bg-white relative">
       <Navigation />
 
-      {/* WHITE SPACE BELOW NAV */}
+      {/* White space below nav */}
       <div className="h-[90px] w-full bg-white"></div>
 
       <main className="flex-grow">
-
-        {/* ================= HERO SECTION ================= */}
+        {/* =============== HERO SECTION =============== */}
         <section className="relative h-[260px] md:h-[320px] w-full overflow-hidden flex items-center">
           <img
             src="/servicepagehero.jpg"
@@ -78,23 +132,20 @@ export default function HaixunServicesSection() {
             className="absolute inset-0 w-full h-full object-cover"
           />
 
-          {/* LEFT GRADIENT */}
+          {/* Left gradient */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent"></div>
 
           <div className="container mx-auto px-4 relative z-10">
-
-            {/* ============ UPDATED BREADCRUMB LIKE LCL ============ */}
+            {/* Breadcrumb-style heading like LCL page */}
             <h1 className="text-4xl md:text-5xl font-extrabold text-[#BC0018]">
               Services
             </h1>
-
           </div>
         </section>
 
-        {/* ================= SERVICES SECTION ================= */}
+        {/* =============== SERVICES SECTION =============== */}
         <section className="relative py-20 overflow-hidden bg-white">
-
-          {/* RIGHT BOTTOM SHAPE */}
+          {/* Right bottom shape */}
           <img
             src="/shape-03.webp"
             className="absolute bottom-0 right-0 w-72 md:w-96 opacity-100 pointer-events-none select-none z-0"
@@ -102,7 +153,6 @@ export default function HaixunServicesSection() {
           />
 
           <div className="container mx-auto px-4 relative z-10">
-
             {/* Section Header */}
             <ScrollAnimation className="text-center mb-16">
               <p className="text-sm font-semibold tracking-[0.25em] uppercase text-red-600 mb-3">
@@ -135,7 +185,6 @@ export default function HaixunServicesSection() {
                         transition={{ type: "spring", stiffness: 220, damping: 20 }}
                         className="bg-white rounded-[26px] shadow-lg overflow-hidden flex flex-col h-full cursor-pointer"
                       >
-
                         {/* Service Image */}
                         <div className="relative">
                           <img
@@ -164,7 +213,7 @@ export default function HaixunServicesSection() {
                             </p>
                           </div>
 
-                          {/* Bottom */}
+                          {/* Bottom Row */}
                           <div className="mt-8 flex items-end justify-between">
                             <span className="inline-flex items-center text-sm font-semibold text-slate-900 hover:text-[#BC0018]">
                               {t("services.readMore")}
