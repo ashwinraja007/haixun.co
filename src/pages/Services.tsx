@@ -49,7 +49,6 @@ type Service = {
 export default function HaixunServicesSection() {
   const { t } = useTranslation();
 
-  // IMAGE PATHS TAKEN FROM THE HAIXUN SERVICE PAGE COMPONENT
   const services: Service[] = [
     {
       icon: Boxes,
@@ -120,28 +119,10 @@ export default function HaixunServicesSection() {
     <div className="min-h-screen flex flex-col bg-white relative">
       <Navigation />
 
-      {/* White space below nav */}
-      <div className="h-[90px] w-full bg-white"></div>
+      {/* Removed hero spacing */}
+      <div className="h-[40px] w-full bg-white"></div>
 
       <main className="flex-grow">
-        {/* =============== HERO SECTION =============== */}
-        <section className="relative h-[260px] md:h-[320px] w-full overflow-hidden flex items-center">
-          <img
-            src="/servicepagehero.jpg"
-            alt="Services Hero"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-
-          {/* Left gradient */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent"></div>
-
-          <div className="container mx-auto px-4 relative z-10">
-            {/* Breadcrumb-style heading like LCL page */}
-            <h1 className="text-4xl md:text-5xl font-extrabold text-[#BC0018]">
-              Services
-            </h1>
-          </div>
-        </section>
 
         {/* =============== SERVICES SECTION =============== */}
         <section className="relative py-20 overflow-hidden bg-white">
