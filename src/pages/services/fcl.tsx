@@ -48,7 +48,7 @@ const FCL = () => {
       <div className="h-[90px] w-full bg-white" />
 
       <main className="flex-grow">
-        {/* HERO SECTION – ALIGNED TO LCL STYLE */}
+        {/* HERO SECTION – aligned to LCL style */}
         <section className="relative h-[300px] md:h-[360px] w-full overflow-hidden flex items-center justify-center">
           <img
             src="/servicepagehero.jpg"
@@ -56,7 +56,7 @@ const FCL = () => {
             className="absolute inset-0 w-full h-full object-cover"
           />
 
-          {/* LCL-style gradient */}
+          {/* Gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/30" />
 
           <div className="container mx-auto px-4 relative z-10 text-center">
@@ -71,7 +71,7 @@ const FCL = () => {
               </h1>
               <div className="w-24 h-[3px] bg-[#BC0018] mx-auto mt-3" />
 
-              {/* CENTERED TAGLINE UNDER TITLE */}
+              {/* Centered tagline under title */}
               <p className="mt-4 text-base md:text-lg text-gray-200 leading-relaxed">
                 Reliable Full Container Load solutions for time-critical and
                 high-volume cargo across global routes.
@@ -84,8 +84,7 @@ const FCL = () => {
         <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid gap-12 md:grid-cols-[260px,1fr] items-start">
-              
-              {/* SIDEBAR (unchanged) */}
+              {/* SIDEBAR */}
               <aside className="space-y-10">
                 <div>
                   <h2 className="text-sm font-semibold tracking-[0.15em] text-gray-900 mb-2 uppercase">
@@ -120,7 +119,6 @@ const FCL = () => {
 
               {/* MAIN COLUMN */}
               <div className="space-y-12">
-
                 {/* IMAGE */}
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
@@ -137,7 +135,7 @@ const FCL = () => {
                   />
                 </motion.div>
 
-                {/* DESCRIPTION */}
+                {/* DESCRIPTION – replaced with your new content */}
                 <section>
                   <div className="mb-6">
                     <h2 className="text-xl md:text-2xl font-extrabold tracking-wide text-gray-900 uppercase">
@@ -148,28 +146,35 @@ const FCL = () => {
 
                   <div className="space-y-4 text-sm md:text-base leading-relaxed text-gray-700">
                     <p>
-                      Full Container Load (FCL) shipping is ideal for customers who require
-                      a dedicated container exclusively for their cargo.
+                      HAIXUN has own fleet of containers including special equipment’s to
+                      accommodate special requirements of customers and specializes in many
+                      trade lanes. Being sea freight professionals with vast experience in
+                      the field helps to match frequent sailing and flexible service
+                      options.
                     </p>
-
                     <p>
-                      With strong carrier partnerships and optimized global routing, we
-                      offer reliable FCL solutions across major trade lanes.
+                      Multiple carrier options on any trade route with contracted rates
+                      helps to secure the space, allocation, timing, pricing and frequency
+                      of your shipments. FCL is the most optimized container shipping way
+                      regarding cost, volume and weight of the cargo.
                     </p>
-
                     <p>
-                      Our fleet covers all major container types including 20ft, 40ft,
-                      40ft high cube, reefers, flat racks, and open tops.
+                      We take special care at each step of the process which involves
+                      fixing contract pricing with carriers, reserving space, making
+                      booking, picking up empty container at the container depot, loading
+                      at shipper facility, transporting by truck / rail to the port and
+                      vessel loading, and monitoring vessel schedule till final delivery to
+                      consignee.
                     </p>
-
                     <p>
-                      Our experienced team handles stuffing, documentation, customs, and
-                      final delivery to ensure a smooth logistics journey.
+                      For import bookings we engage our overseas partners in the absence of
+                      our own network and monitor each step and keep our customers /
+                      consignees informed at all stages.
                     </p>
                   </div>
                 </section>
 
-                {/* CTA REMOVED — MATCH LCL PAGE */}
+                {/* No CTA – aligned with LCL style */}
               </div>
             </div>
           </div>
