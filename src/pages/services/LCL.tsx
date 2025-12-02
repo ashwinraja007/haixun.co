@@ -48,6 +48,34 @@ const LCL = () => {
       {/* WHITE BLANK SPACE BELOW NAV (MATCH SERVICES / AIR FREIGHT PAGE) */}
       <div className="h-[90px] w-full bg-white" />
 
+      {/* BREADCRUMB WITH DISSOLVE ANIMATION */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="bg-gray-50 border-b border-gray-200"
+      >
+        <div className="container mx-auto px-4 py-3">
+          <nav className="flex items-center space-x-2 text-sm">
+            <Link
+              to={getNavLink("/")}
+              className="text-gray-600 hover:text-[#BC0018] transition-colors"
+            >
+              Home
+            </Link>
+            <span className="text-gray-400">›</span>
+            <Link
+              to={getNavLink("/services")}
+              className="text-gray-600 hover:text-[#BC0018] transition-colors"
+            >
+              Services
+            </Link>
+            <span className="text-gray-400">›</span>
+            <span className="text-[#BC0018] font-medium">LCL Services</span>
+          </nav>
+        </div>
+      </motion.div>
+
       <main className="flex-grow">
         {/* HERO SECTION – STYLE ALIGNED WITH AIR FREIGHT */}
         <section className="relative h-[260px] md:h-[320px] w-full overflow-hidden flex items-center">
