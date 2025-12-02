@@ -61,14 +61,17 @@ const LCL = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/30" />
 
           <div className="container mx-auto px-4 relative z-10 text-center">
-            <motion.h1
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className="text-4xl md:text-5xl font-extrabold text-white"
+              className="inline-block"
             >
-              LCL Services
-            </motion.h1>
+              <h1 className="text-4xl md:text-5xl font-extrabold text-white">
+                LCL Services
+              </h1>
+              <div className="w-24 h-[3px] bg-[#BC0018] mx-auto mt-3" />
+            </motion.div>
           </div>
         </section>
 
