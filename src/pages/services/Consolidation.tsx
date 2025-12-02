@@ -5,7 +5,6 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { getCurrentCountryFromPath } from "@/services/countryDetection";
 import { Cuboid, Package, TrendingDown, Globe } from "lucide-react";
-import { useTranslation } from "react-i18next";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -16,7 +15,6 @@ const ScrollToTop = () => {
 };
 
 const Consolidation = () => {
-  const { t } = useTranslation();
   const location = useLocation();
 
   const detected = getCurrentCountryFromPath(location.pathname);
@@ -154,7 +152,7 @@ const Consolidation = () => {
                   />
                 </motion.div>
 
-                {/* CONSOLIDATION DESCRIPTION */}
+                {/* CONSOLIDATION DESCRIPTION – UPDATED CONTENT */}
                 <section>
                   <div className="mb-6 flex items-center gap-3">
                     <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#BC0018]/10">
@@ -168,19 +166,64 @@ const Consolidation = () => {
                     </div>
                   </div>
 
-                  <div className="space-y-4 text-sm md:text-base leading-relaxed text-gray-700">
-                    <p>{t("services.consolidation.fullDescription")}</p>
-                    <p>
-                      Our consolidation services enable businesses to optimize their
-                      shipping costs while maintaining delivery efficiency. We manage the
-                      entire movement from pickup to final delivery, ensuring cargo is
-                      handled securely and efficiently at every stage.
-                    </p>
-                    <p>
-                      By combining multiple shipments into a single container, we help
-                      businesses benefit from better freight rates, reduced handling, and
-                      more predictable transit schedules.
-                    </p>
+                  <div className="space-y-6 text-sm md:text-base leading-relaxed text-gray-700">
+                    <div>
+                      <h3 className="font-bold text-gray-900 mb-1">
+                        LCL Consolidation
+                      </h3>
+                      <p className="mb-1">
+                        Export - Direct Consol to Nava Sheva Connecting:
+                      </p>
+                      <ul className="list-disc list-inside space-y-1">
+                        <li>ICD PPG</li>
+                        <li>ICD Ludhiana</li>
+                        <li>ICD Garhiharsru</li>
+                        <li>ICD Ahmedabad</li>
+                      </ul>
+                    </div>
+
+                    <div>
+                      <h3 className="font-bold text-gray-900 mb-1">
+                        Export - Direct Consol
+                      </h3>
+                      <ul className="list-disc list-inside space-y-1">
+                        <li>Singapore</li>
+                        <li>Colombo</li>
+                        <li>Karachi</li>
+                      </ul>
+                    </div>
+
+                    <div>
+                      <h3 className="font-bold text-gray-900 mb-1">
+                        Export Consol Via Singapore Hub to
+                      </h3>
+                      <ul className="list-disc list-inside space-y-1">
+                        <li>India, Middle East</li>
+                        <li>Bangladesh, Maldives</li>
+                        <li>Karachi, USA</li>
+                        <li>Europe Ports, Australia</li>
+                      </ul>
+                    </div>
+
+                    <div>
+                      <h3 className="font-bold text-gray-900 mb-1">
+                        Import Consolidation – Via Singapore Hub
+                      </h3>
+                      <ul className="list-disc list-inside space-y-1">
+                        <li>Asia, Middle East</li>
+                        <li>USA, Europe</li>
+                      </ul>
+                    </div>
+
+                    <div>
+                      <h3 className="font-bold text-gray-900 mb-1">
+                        Facilities
+                      </h3>
+                      <ul className="list-disc list-inside space-y-1">
+                        <li>LCL Consolidation / Deconsolidation Warehouse</li>
+                        <li>Packing and Value Added Services</li>
+                      </ul>
+                    </div>
                   </div>
                 </section>
 
