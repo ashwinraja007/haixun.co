@@ -48,7 +48,7 @@ const LCL = () => {
 
       <main className="flex-grow">
         {/* HERO SECTION */}
-        <section className="relative h-[260px] md:h-[320px] w-full overflow-hidden flex items-center justify-center">
+        <section className="relative h-[300px] md:h-[360px] w-full overflow-hidden flex items-center justify-center">
           <img
             src="/servicepagehero.jpg"
             alt="LCL Hero"
@@ -62,27 +62,25 @@ const LCL = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className="inline-block"
+              className="inline-block max-w-3xl"
             >
               <h1 className="text-4xl md:text-5xl font-extrabold text-white">
                 LCL Services
               </h1>
               <div className="w-24 h-[3px] bg-[#BC0018] mx-auto mt-3" />
+
+              {/* MOVED TAGLINE INSIDE HERO */}
+              <p className="mt-4 text-base md:text-lg text-gray-200 leading-relaxed">
+                Flexible Less-Than-Container Load solutions tailored for your partial
+                shipments with global coverage and reliable schedules.
+              </p>
             </motion.div>
           </div>
         </section>
 
-        {/* DESCRIPTION */}
-        <section className="py-8 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <p className="text-base md:text-lg leading-relaxed text-gray-700 text-center max-w-4xl mx-auto">
-              Flexible Less-Than-Container Load solutions tailored for your partial
-              shipments with global coverage and reliable schedules.
-            </p>
-          </div>
-        </section>
+        {/* DESCRIPTION REMOVED FROM HERE */}
 
-        {/* CONTENT AREA */}
+        {/* CONTENT SECTION */}
         <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid gap-12 md:grid-cols-[260px,1fr] items-start">
@@ -121,7 +119,7 @@ const LCL = () => {
 
               {/* MAIN CONTENT */}
               <div className="space-y-12">
-                {/* IMAGE */}
+                {/* TOP IMAGE */}
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -152,18 +150,23 @@ const LCL = () => {
                       designed for customers who do not have enough cargo to fill a full
                       container but require reliable shipping.
                     </p>
+
                     <p>
                       Our extensive global consolidation network helps customers move
                       smaller shipments more economically by combining multiple consignments
                       into one container.
                     </p>
+
                     <p>
                       Our operations team manages receiving, stuffing, documentation, and
-                      delivery at destination, ensuring safety and efficiency.
+                      delivery at destination, ensuring safety, transparency, and
+                      efficiency.
                     </p>
+
                     <p>
-                      With predictable transit schedules and transparent pricing, our LCL
-                      solutions offer unmatched flexibility for all businesses.
+                      With predictable transit schedules, frequent departures, and
+                      transparent pricing, our LCL solutions provide unmatched flexibility
+                      for businesses of all sizes.
                     </p>
                   </div>
                 </section>
