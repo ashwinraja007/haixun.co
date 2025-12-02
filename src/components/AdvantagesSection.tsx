@@ -17,7 +17,7 @@ export default function AdvantagesSection() {
       icon: Ship,
       titleKey: "advantages.logistics.title",
       descriptionKey: "advantages.logistics.description",
-      image: "/advantage-logistics.jpg",
+      image: "/logistics.jpg",
     },
     {
       icon: Users,
