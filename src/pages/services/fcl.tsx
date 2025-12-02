@@ -24,7 +24,7 @@ const FCL = () => {
     return `/${currentCountry.name.toLowerCase().replace(/\s+/g, "-")}${basePath}`;
   };
 
-  // MATCHED TO LCL / AIR FREIGHT / SERVICES PAGE STYLE
+  // SAME NAV AS LCL PAGE
   const servicesNav = [
     { label: "See All Services", path: "/services" },
     { label: "LCL Services", path: "/services/lcl" },
@@ -45,39 +45,47 @@ const FCL = () => {
       <ScrollToTop />
       <Navigation />
 
-      {/* WHITE BLANK SPACE BELOW NAV (MATCH SERVICES / LCL / AIR FREIGHT PAGES) */}
+      {/* WHITE BLANK SPACE BELOW NAV – MATCH LCL */}
       <div className="h-[90px] w-full bg-white" />
 
       <main className="flex-grow">
-        {/* HERO SECTION – SAME STYLE AS LCL / AIR FREIGHT */}
-        <section className="relative h-[260px] md:h-[320px] w-full overflow-hidden flex items-center">
+        {/* HERO SECTION – SAME STYLE AS UPDATED LCL */}
+        <section className="relative h-[300px] md:h-[360px] w-full overflow-hidden flex items-center justify-center">
           <img
             src="/servicepagehero.jpg"
             alt="FCL Hero"
             className="absolute inset-0 w-full h-full object-cover"
           />
 
-          {/* STRONG RIGHT-SIDE GRADIENT */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+          {/* DARK GRADIENT OVERLAY */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/30" />
 
-          <div className="container mx-auto px-4 relative z-10">
-            {/* NO BREADCRUMB – MATCH AIR FREIGHT / UPDATED LCL STYLE */}
-            <h1 className="text-4xl md:text-5xl font-extrabold text-[#BC0018]">
-              FCL Services
-            </h1>
+          <div className="container mx-auto px-4 relative z-10 text-center">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="inline-block max-w-3xl"
+            >
+              <h1 className="text-4xl md:text-5xl font-extrabold text-white">
+                FCL Services
+              </h1>
+              <div className="w-24 h-[3px] bg-[#BC0018] mx-auto mt-3" />
 
-            <p className="text-white text-lg mt-3 max-w-xl">
-              Reliable Full Container Load solutions for time-critical and high-volume
-              cargo across global routes.
-            </p>
+              {/* TAGLINE INSIDE HERO, BELOW TITLE */}
+              <p className="mt-4 text-base md:text-lg text-gray-200 leading-relaxed">
+                Reliable Full Container Load solutions for time-critical and high-volume
+                cargo across global routes.
+              </p>
+            </motion.div>
           </div>
         </section>
 
-        {/* MAIN CONTENT */}
+        {/* MAIN CONTENT – SAME LAYOUT AS LCL */}
         <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid gap-12 md:grid-cols-[260px,1fr] items-start">
-              {/* LEFT SIDEBAR – SAME STYLE AS AIR FREIGHT / UPDATED LCL */}
+              {/* LEFT SIDEBAR */}
               <aside className="space-y-10">
                 <div>
                   <h2 className="text-sm font-semibold tracking-[0.15em] text-gray-900 mb-2 uppercase">
@@ -112,7 +120,7 @@ const FCL = () => {
 
               {/* RIGHT COLUMN – CONTENT */}
               <div className="space-y-12">
-                {/* FCL IMAGE */}
+                {/* TOP IMAGE */}
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -128,14 +136,16 @@ const FCL = () => {
                   />
                 </motion.div>
 
-                {/* DESCRIPTION */}
+                {/* DESCRIPTION BLOCK */}
                 <section>
-                  <h2 className="text-xl md:text-2xl font-extrabold uppercase text-gray-900">
-                    Description
-                  </h2>
-                  <div className="mt-2 w-16 h-[2px] bg-[#BC0018]" />
+                  <div className="mb-6">
+                    <h2 className="text-xl md:text-2xl font-extrabold tracking-wide text-gray-900 uppercase">
+                      Description
+                    </h2>
+                    <div className="mt-2 w-16 h-[2px] bg-[#BC0018]" />
+                  </div>
 
-                  <div className="space-y-4 text-sm md:text-base leading-relaxed text-gray-700 mt-5">
+                  <div className="space-y-4 text-sm md:text-base leading-relaxed text-gray-700">
                     <p>
                       Full Container Load (FCL) shipping is ideal for customers who need an
                       entire container exclusively for their cargo. It offers maximum
@@ -162,24 +172,7 @@ const FCL = () => {
                   </div>
                 </section>
 
-                {/* CTA SECTION */}
-                <section className="py-12 bg-white text-center">
-                  <h2 className="text-3xl md:text-4xl font-extrabold text-[#BC0018] mb-4">
-                    Ready to Ship with FCL?
-                  </h2>
-
-                  <p className="text-lg md:text-xl text-[#BC0018] mb-10">
-                    Contact us today for reliable FCL capacity and competitive global
-                    rates.
-                  </p>
-
-                  <Link
-                    to={getNavLink("/contact")}
-                    className="inline-block bg-[#BC0018] hover:bg-[#a30014] text-white font-semibold text-lg px-10 py-4 rounded-lg transition-all"
-                  >
-                    Contact Us
-                  </Link>
-                </section>
+                {/* CTA REMOVED TO MATCH LCL STYLE */}
               </div>
             </div>
           </div>
