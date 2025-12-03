@@ -173,8 +173,9 @@ const Navigation = () => {
                 <Link to="/services/consolidation">{t("services.consolidation.title")}</Link>
               </DropdownMenuItem>
 
+              {/* ▶️ REPLACED LIQUID CARGO WITH OOG SHIPMENTS */}
               <DropdownMenuItem asChild>
-                <Link to="/services/oog-shipments">{t("services.oog.title")}</Link>
+                <Link to="/services/oog-shipments">OOG Shipments</Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -269,8 +270,9 @@ const Navigation = () => {
                   {t("services.consolidation.title")}
                 </Link>
 
+                {/* ▶️ MOBILE: OOG SHIPMENTS */}
                 <Link to="/services/oog-shipments" onClick={() => setIsMenuOpen(false)}>
-                  {t("services.oog.title")}
+                  OOG Shipments
                 </Link>
               </div>
             )}

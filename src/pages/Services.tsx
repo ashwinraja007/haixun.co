@@ -52,7 +52,7 @@ export default function HaixunServicesSection() {
   const services: Service[] = [
     {
       icon: Boxes,
-      image: "/fcp.jpg",
+      image: "/lcl-realistic.jpg",
       titleKey: "services.lcl.title",
       descriptionKey: "services.lcl.description",
       link: "/services/lcl",
