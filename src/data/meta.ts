@@ -6,104 +6,104 @@ interface MetaInfo {
 
 const meta: Record<string, MetaInfo> = {
   '/': {
-    title: 'Amass Middle East Shipping Services LLC – Neutral LCL Consolidation',
+    title: 'Haixun Global Logistics (Shenzhen) Co., Ltd. – Neutral LCL Consolidation',
     description:
       'Neutral LCL consolidation provider based in Oud Metha, Dubai with CFS in Jebel Ali. Expanded to Saudi Arabia (Dammam, Riyadh, Jeddah) with bonded warehouses in Jeddah & Dammam. Backed by 40+ professionals and the CWN global network.',
     keywords:
-      'Amass Middle East, neutral LCL, consolidation, Jebel Ali CFS, Oud Metha Dubai, bonded warehouse, Dammam, Riyadh, Jeddah, CWN network, logistics UAE KSA',
+      'Haixun Global Logistics, neutral LCL, consolidation, Jebel Ali CFS, Oud Metha Dubai, bonded warehouse, Dammam, Riyadh, Jeddah, CWN network, logistics UAE KSA',
   },
 
   '/contact': {
-    title: 'Contact Amass Middle East',
+    title: 'Contact Haixun Global Logistics (Shenzhen) Co., Ltd.',
     description:
-      'Get in touch with Amass Middle East for neutral LCL consolidation, CFS operations, and regional logistics support across the UAE and Saudi Arabia.',
+      'Get in touch with Haixun Global Logistics (Shenzhen) Co., Ltd. for neutral LCL consolidation, CFS operations, and regional logistics support across the UAE and Saudi Arabia.',
     keywords:
-      'contact Amass, logistics support, UAE logistics, Saudi logistics, LCL, CFS',
+      'contact Haixun, logistics support, UAE logistics, Saudi logistics, LCL, CFS',
   },
 
   '/services': {
-    title: 'Amass Services',
+    title: 'Services – Haixun Global Logistics (Shenzhen) Co., Ltd.',
     description:
-      'Explore Amass Middle East’s core services including neutral LCL consolidation, CFS operations, warehousing, project cargo and more.',
+      'Explore Haixun Global Logistics’ core services including neutral LCL consolidation, CFS operations, warehousing, project cargo and more.',
     keywords:
-      'Amass services, neutral LCL, CFS, warehousing, project cargo, logistics',
+      'Haixun services, neutral LCL, CFS, warehousing, project cargo, logistics',
   },
 
-  // --- Your primary services (added) ---
+  // --- Your primary services ---
   '/services/lcl': {
-    title: 'LCL Consolidation – Amass Middle East',
+    title: 'LCL Consolidation – Haixun Global Logistics (Shenzhen) Co., Ltd.',
     description:
       'Neutral LCL consolidation with reliable sailings, competitive rates, and CWN-backed global reach from Dubai and KSA.',
     keywords:
       'LCL, less than container load, neutral consolidator, Dubai LCL, Jebel Ali LCL, CWN',
   },
   '/services/cfs': {
-    title: 'CFS Operations – Amass Middle East',
+    title: 'CFS Operations – Haixun Global Logistics (Shenzhen) Co., Ltd.',
     description:
       'Modern CFS at Jebel Ali supported by bonded warehouses in Jeddah and Dammam for faster throughput and reliable schedules.',
     keywords:
       'CFS, container freight station, Jebel Ali, bonded warehouse, Jeddah, Dammam',
   },
 
-  // --- Keep existing routes (rebranded text) ---
+  // --- Existing routes rebranded ---
   '/services/sea-freight': {
-    title: 'Sea Freight – Amass Middle East',
+    title: 'Sea Freight – Haixun Global Logistics (Shenzhen) Co., Ltd.',
     description:
       'Cost-effective FCL/LCL sea freight with dependable schedules across major tradelanes.',
     keywords:
       'sea freight, ocean shipping, FCL, LCL, logistics UAE, logistics KSA',
   },
   '/services/air-freight': {
-    title: 'Air Freight – Amass Middle East',
+    title: 'Air Freight – Haixun Global Logistics (Shenzhen) Co., Ltd.',
     description:
       'Fast and reliable air cargo solutions for time-critical shipments, backed by regional expertise.',
     keywords:
       'air freight, air cargo, express shipping, UAE, KSA',
   },
   '/services/customs-clearance': {
-    title: 'Customs Clearance – Amass Middle East',
+    title: 'Customs Clearance – Haixun Global Logistics (Shenzhen) Co., Ltd.',
     description:
       'Efficient customs brokerage and documentation across UAE and Saudi Arabia.',
     keywords:
       'customs clearance, brokerage, import export, GCC compliance',
   },
   '/services/warehousing': {
-    title: 'Warehousing – Amass Middle East',
+    title: 'Warehousing – Haixun Global Logistics (Shenzhen) Co., Ltd.',
     description:
       'Secure storage, inventory control, and value-added services with bonded options in Jeddah and Dammam.',
     keywords:
       'warehousing, bonded warehouse, storage, VAS, Jeddah, Dammam',
   },
   '/services/consolidation': {
-    title: 'Cargo Consolidation – Amass Middle East',
+    title: 'Cargo Consolidation – Haixun Global Logistics (Shenzhen) Co., Ltd.',
     description:
       'Optimize shipments with multi-origin consolidation and hub-and-spoke solutions.',
     keywords:
       'cargo consolidation, multi-origin, hub and spoke, LCL',
   },
   '/services/project-cargo': {
-    title: 'Project Cargo – Amass Middle East',
+    title: 'Project Cargo – Haixun Global Logistics (Shenzhen) Co., Ltd.',
     description:
       'End-to-end handling for oversized and complex moves across the region.',
     keywords:
       'project cargo, heavy lift, OOG, logistics projects',
   },
   '/services/liquid-cargo': {
-    title: 'Liquid Cargo – Amass Middle East',
+    title: 'Liquid Cargo – Haixun Global Logistics (Shenzhen) Co., Ltd.',
     description:
       'Safe and compliant liquid cargo transport with specialized handling.',
     keywords:
       'liquid cargo, ISO tank, bulk liquids, chemical logistics',
   },
   '/services/third-party-logistics': {
-    title: 'Third-Party Logistics (3PL) – Amass Middle East',
+    title: 'Third-Party Logistics (3PL) – Haixun Global Logistics (Shenzhen) Co., Ltd.',
     description:
       'Flexible 3PL solutions integrating warehousing, distribution, and value-added services.',
     keywords:
       '3PL, third party logistics, fulfillment, distribution',
   },
   '/services/liner-agency': {
-    title: 'Liner Agency – Amass Middle East',
+    title: 'Liner Agency – Haixun Global Logistics (Shenzhen) Co., Ltd.',
     description:
       'Professional liner representation and port operations support across key GCC gateways.',
     keywords:
@@ -111,7 +111,7 @@ const meta: Record<string, MetaInfo> = {
   },
 
   '/global-presence': {
-    title: 'Amass Global Presence',
+    title: 'Global Presence – Haixun Global Logistics (Shenzhen) Co., Ltd.',
     description:
       'Our footprint spans the UAE and Saudi Arabia with CWN network coverage worldwide.',
     keywords:
@@ -119,15 +119,15 @@ const meta: Record<string, MetaInfo> = {
   },
 
   '/about-us': {
-    title: 'About Amass Middle East',
+    title: 'About Haixun Global Logistics (Shenzhen) Co., Ltd.',
     description:
       'Neutral LCL specialist headquartered in Oud Metha, Dubai with CFS in Jebel Ali. 40+ professionals and 9 years of growth powered by the CWN network.',
     keywords:
-      'about Amass, neutral LCL, Jebel Ali CFS, CWN network, Dubai logistics',
+      'about Haixun, neutral LCL, Jebel Ali CFS, CWN network, Dubai logistics',
   },
 
   '/gallery': {
-    title: 'Gallery – Amass Middle East',
+    title: 'Gallery – Haixun Global Logistics (Shenzhen) Co., Ltd.',
     description:
       'A look at our consolidation, CFS operations, and project handling in the region.',
     keywords:
@@ -135,31 +135,31 @@ const meta: Record<string, MetaInfo> = {
   },
 
   '/career': {
-    title: 'Careers – Amass Middle East',
+    title: 'Careers – Haixun Global Logistics (Shenzhen) Co., Ltd.',
     description:
-      'Join a growing regional consolidator and build your logistics career with Amass.',
+      'Join a growing regional consolidator and build your logistics career.',
     keywords:
       'careers, logistics jobs, UAE jobs, Saudi jobs',
   },
 
   '/blog': {
-    title: 'Amass Insights',
+    title: 'Insights – Haixun Global Logistics (Shenzhen) Co., Ltd.',
     description:
-      'Logistics insights, updates, and regional trade news from Amass Middle East.',
+      'Logistics insights, updates, and regional trade news.',
     keywords:
       'logistics blog, trade updates, shipping news',
   },
 
   '/news': {
-    title: 'News – Amass Middle East',
+    title: 'News – Haixun Global Logistics (Shenzhen) Co., Ltd.',
     description:
-      'Company announcements and regional logistics updates from Amass.',
+      'Company announcements and regional logistics updates.',
     keywords:
-      'Amass news, logistics news, GCC updates',
+      'logistics news, GCC updates',
   },
 
   '/projects': {
-    title: 'Projects – Amass Middle East',
+    title: 'Projects – Haixun Global Logistics (Shenzhen) Co., Ltd.',
     description:
       'Selected logistics projects and case studies showcasing our regional capabilities.',
     keywords:
@@ -167,74 +167,73 @@ const meta: Record<string, MetaInfo> = {
   },
 
   '/privacy-policy': {
-    title: 'Privacy Policy – Amass Middle East',
-    description:
-      'Read how Amass Middle East protects your data and privacy.',
+    title: 'Privacy Policy – Haixun Global Logistics (Shenzhen) Co., Ltd.',
+    description: 'Read how Haixun Global Logistics protects your data and privacy.',
     keywords:
-      'privacy policy, data protection, Amass Middle East',
+      'privacy policy, data protection, Haixun Global Logistics',
   },
 
   '/terms-and-conditions': {
-    title: 'Terms & Conditions – Amass Middle East',
+    title: 'Terms & Conditions – Haixun Global Logistics (Shenzhen) Co., Ltd.',
     description:
-      'Terms for using Amass Middle East services and this website.',
+      'Terms for using Haixun Global Logistics services and this website.',
     keywords:
-      'terms and conditions, policies, Amass Middle East',
+      'terms and conditions, policies, Haixun Global Logistics',
   },
 
   '/login': {
-    title: 'Login – Amass Middle East',
-    description: 'Access your Amass account and shipment information.',
-    keywords: 'login, account, Amass',
+    title: 'Login – Haixun Global Logistics (Shenzhen) Co., Ltd.',
+    description: 'Access your Haixun account and shipment information.',
+    keywords: 'login, account, Haixun',
   },
   '/signup': {
-    title: 'Sign Up – Amass Middle East',
-    description: 'Create your Amass account to manage bookings and documents.',
-    keywords: 'signup, register, Amass account',
+    title: 'Sign Up – Haixun Global Logistics (Shenzhen) Co., Ltd.',
+    description: 'Create your Haixun account to manage bookings and documents.',
+    keywords: 'signup, register, Haixun account',
   },
   '/forgot-password': {
-    title: 'Forgot Password – Amass Middle East',
-    description: 'Reset your Amass account password.',
-    keywords: 'password reset, account recovery, Amass',
+    title: 'Forgot Password – Haixun Global Logistics (Shenzhen) Co., Ltd.',
+    description: 'Reset your Haixun account password.',
+    keywords: 'password reset, account recovery, Haixun',
   },
 
   '/dashboard': {
-    title: 'Dashboard – Amass Middle East',
-    description: 'Manage shipments, documents, and invoices in your Amass dashboard.',
-    keywords: 'dashboard, shipments, documents, Amass',
+    title: 'Dashboard – Haixun Global Logistics (Shenzhen) Co., Ltd.',
+    description: 'Manage shipments, documents, and invoices in your Haixun dashboard.',
+    keywords: 'dashboard, shipments, documents, Haixun',
   },
 
   '/admin-login': {
-    title: 'Admin Login – Amass Middle East',
-    description: 'Administrative access to Amass Middle East systems.',
-    keywords: 'admin login, Amass admin',
+    title: 'Admin Login – Haixun Global Logistics (Shenzhen) Co., Ltd.',
+    description: 'Administrative access to Haixun systems.',
+    keywords: 'admin login, Haixun admin',
   },
   '/admin-dashboard': {
-    title: 'Admin Dashboard – Amass Middle East',
-    description: 'Administration panel for Amass operations.',
-    keywords: 'admin dashboard, management, Amass',
+    title: 'Admin Dashboard – Haixun Global Logistics (Shenzhen) Co., Ltd.',
+    description: 'Administration panel for Haixun operations.',
+    keywords: 'admin dashboard, management, Haixun',
   },
   '/admin': {
-    title: 'Admin Dashboard – Amass Middle East',
-    description: 'Administration panel for Amass operations.',
-    keywords: 'admin dashboard, management, Amass',
+    title: 'Admin Dashboard – Haixun Global Logistics (Shenzhen) Co., Ltd.',
+    description: 'Administration panel for Haixun operations.',
+    keywords: 'admin dashboard, management, Haixun',
   },
 
   '/blog-editor': {
-    title: 'Blog Editor – Amass Middle East',
-    description: 'Create and edit Amass blog posts.',
-    keywords: 'blog editor, CMS, Amass',
+    title: 'Blog Editor – Haixun Global Logistics (Shenzhen) Co., Ltd.',
+    description: 'Create and edit blog posts.',
+    keywords: 'blog editor, CMS, Haixun',
   },
   '/blog-admin': {
-    title: 'Blog Admin – Amass Middle East',
-    description: 'Administer blog content for Amass Middle East.',
-    keywords: 'blog admin, content management, Amass',
+    title: 'Blog Admin – Haixun Global Logistics (Shenzhen) Co., Ltd.',
+    description: 'Administer blog content.',
+    keywords: 'blog admin, content management, Haixun',
   },
 
   '/not-found': {
-    title: 'Page Not Found – Amass Middle East',
+    title: 'Page Not Found – Haixun Global Logistics (Shenzhen) Co., Ltd.',
     description: 'The page you’re looking for could not be found.',
-    keywords: '404, not found, Amass',
+    keywords: '404, not found, Haixun',
   },
 };
 
