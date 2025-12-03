@@ -1,3 +1,4 @@
+import React, { type ReactNode, useEffect } from "react";
 import { motion } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
 import {
@@ -10,10 +11,49 @@ import {
   ArrowDownToLine,
   Container,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import ScrollAnimation from "./ScrollAnimation";
 
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
+
+/* -----------------------------------------------------------
+   Scroll to top on route change
+------------------------------------------------------------ */
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [pathname]);
+  return null;
+};
+
+/* -----------------------------------------------------------
+   Local Scroll Animation
+------------------------------------------------------------ */
+type ScrollAnimationProps = {
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+};
+
+function ScrollAnimation({ children, className, delay = 0 }: ScrollAnimationProps) {
+  return (
+    <motion.div
+      className={className}
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.6, delay: delay / 1000 }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+/* -----------------------------------------------------------
+   Types
+------------------------------------------------------------ */
 type Service = {
   icon: LucideIcon;
   image: string;
@@ -22,13 +62,16 @@ type Service = {
   link: string;
 };
 
-export default function HaixunServicesSection() {
+/* -----------------------------------------------------------
+   SERVICES PAGE
+------------------------------------------------------------ */
+export default function ServicesPage() {
   const { t } = useTranslation();
 
   const services: Service[] = [
     {
       icon: Boxes,
-      image: "/fcp.jpg", // from service page
+      image: "/fcp.jpg", // LCL (from your service page)
       titleKey: "services.lcl.title",
       descriptionKey: "services.lcl.description",
       link: "/services/lcl",
@@ -56,14 +99,14 @@ export default function HaixunServicesSection() {
     },
     {
       icon: Plane,
-      image: "/Airfrontbannner.png", // from service page
+      image: "/Airfrontbannner.png", // Air Freight (from your service page)
       titleKey: "services.air.title",
       descriptionKey: "services.air.description",
       link: "/services/air-freight",
     },
     {
       icon: FileCheck,
-      image: "/customs.jpg", // from service page
+      image: "/customs.jpg", // Customs (from your service page)
       titleKey: "services.customs.title",
       descriptionKey: "services.customs.description",
       link: "/services/customs-clearance",
@@ -92,90 +135,108 @@ export default function HaixunServicesSection() {
   ];
 
   return (
-    <section
-      className="relative py-20 overflow-hidden min-h-screen bg-cover bg-center bg-no-repeat"
-      style={{
-        backgroundImage: "url('/service-bg02.jpg')",
-      }}
-    >
-      <div className="container mx-auto px-4">
-        {/* Section Header */}
-        <ScrollAnimation className="text-center mb-16">
-          <p className="text-sm font-semibold tracking-[0.25em] uppercase text-red-300 mb-3">
-            {t("services.overline", "What We Do")}
-          </p>
+    <div className="min-h-screen flex flex-col bg-white relative">
+      <ScrollToTop />
+      <Navigation />
 
-          <h2 className="font-extrabold text-white text-4xl md:text-5xl mb-3 leading-tight">
-            {t("services.title")}
-          </h2>
+      {/* White space below nav (adjust height to match your header) */}
+      <div className="h-[40px] w-full bg-white" />
 
-          <p className="text-lg text-slate-200 max-w-2xl mx-auto">
-            {t("services.subtitle")}
-          </p>
-        </ScrollAnimation>
+      <main className="flex-grow">
+        {/* =============== SERVICES SECTION =============== */}
+        <section className="relative py-20 overflow-hidden bg-white">
+          {/* Right bottom decorative shape */}
+          <img
+            src="/shape-03.webp"
+            className="absolute bottom-0 right-0 w-72 md:w-96 opacity-100 pointer-events-none select-none z-0"
+            alt="Decor Shape"
+          />
 
-        {/* Service Cards */}
-        <div className="grid gap-10 md:grid-cols-2 xl:grid-cols-3">
-          {services.map((service, index) => {
-            const Icon = service.icon;
-            const numberLabel = String(index + 1).padStart(2, "0");
+          <div className="container mx-auto px-4 relative z-10">
+            {/* Section Header */}
+            <ScrollAnimation className="text-center mb-16">
+              <p className="text-sm font-semibold tracking-[0.25em] uppercase text-red-600 mb-3">
+                {t("services.overline", "What We Do")}
+              </p>
 
-            return (
-              <ScrollAnimation key={service.titleKey} delay={index * 60}>
-                <Link to={service.link} aria-label={t(service.titleKey)}>
-                  <motion.article
-                    whileHover={{ y: -10 }}
-                    transition={{ type: "spring", stiffness: 220, damping: 20 }}
-                    className="bg-white rounded-[26px] shadow-[0_18px_50px_rgba(15,23,42,0.35)] overflow-hidden flex flex-col h-full cursor-pointer"
-                  >
-                    {/* Top Image */}
-                    <div className="relative">
-                      <img
-                        src={service.image}
-                        alt={t(service.titleKey)}
-                        className="w-full h-56 object-cover transition-transform duration-500 hover:scale-105"
-                        loading="lazy"
-                      />
+              <h2 className="font-extrabold text-slate-900 text-4xl md:text-5xl mb-3 leading-tight">
+                {t("services.title")}
+              </h2>
 
-                      {/* Floating Icon Badge */}
-                      <div className="absolute left-6 -bottom-7">
-                        <div className="w-12 h-12 bg-white rounded-xl shadow-lg flex items-center justify-center">
-                          <Icon className="w-5 h-5 text-[#BC0018]" />
+              <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+                {t(
+                  "services.subtitle",
+                  "Comprehensive end-to-end global logistics solutions tailored to your business needs."
+                )}
+              </p>
+            </ScrollAnimation>
+
+            {/* Service Cards */}
+            <div className="grid gap-10 md:grid-cols-2 xl:grid-cols-3">
+              {services.map((service, index) => {
+                const Icon = service.icon;
+                const numberLabel = String(index + 1).padStart(2, "0");
+
+                return (
+                  <ScrollAnimation key={service.titleKey} delay={index * 60}>
+                    <Link to={service.link} aria-label={t(service.titleKey)}>
+                      <motion.article
+                        whileHover={{ y: -10 }}
+                        transition={{ type: "spring", stiffness: 220, damping: 20 }}
+                        className="bg-white rounded-[26px] shadow-lg overflow-hidden flex flex-col h-full cursor-pointer"
+                      >
+                        {/* Service Image */}
+                        <div className="relative">
+                          <img
+                            src={service.image}
+                            alt={t(service.titleKey)}
+                            className="w-full h-56 object-cover transition-transform duration-500 hover:scale-105"
+                            loading="lazy"
+                          />
+
+                          {/* Icon Badge */}
+                          <div className="absolute left-6 -bottom-7">
+                            <div className="w-12 h-12 bg-white rounded-xl shadow-lg flex items-center justify-center">
+                              <Icon className="w-5 h-5 text-[#BC0018]" />
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
 
-                    {/* Content */}
-                    <div className="px-8 pt-12 pb-8 flex-1 flex flex-col justify-between">
-                      <div>
-                        <h3 className="text-lg font-bold text-slate-900 mb-2">
-                          {t(service.titleKey)}
-                        </h3>
+                        {/* Text Content */}
+                        <div className="px-8 pt-12 pb-8 flex-1 flex flex-col justify-between">
+                          <div>
+                            <h3 className="text-lg font-bold text-slate-900 mb-2">
+                              {t(service.titleKey)}
+                            </h3>
 
-                        <p className="text-sm text-slate-600 leading-relaxed">
-                          {t(service.descriptionKey)}
-                        </p>
-                      </div>
+                            <p className="text-sm text-slate-600 leading-relaxed">
+                              {t(service.descriptionKey)}
+                            </p>
+                          </div>
 
-                      {/* Bottom Row */}
-                      <div className="mt-8 flex items-end justify-between">
-                        <span className="inline-flex items-center text-sm font-semibold text-slate-900 hover:text-[#BC0018]">
-                          {t("services.readMore")}
-                          <ArrowDownToLine className="w-4 h-4 ml-2" />
-                        </span>
+                          {/* Bottom Row */}
+                          <div className="mt-8 flex items-end justify-between">
+                            <span className="inline-flex items-center text-sm font-semibold text-slate-900 hover:text-[#BC0018]">
+                              {t("services.readMore")}
+                              <ArrowDownToLine className="w-4 h-4 ml-2" />
+                            </span>
 
-                        <span className="text-4xl font-semibold text-slate-200">
-                          {numberLabel}
-                        </span>
-                      </div>
-                    </div>
-                  </motion.article>
-                </Link>
-              </ScrollAnimation>
-            );
-          })}
-        </div>
-      </div>
-    </section>
+                            <span className="text-4xl font-semibold text-slate-300">
+                              {numberLabel}
+                            </span>
+                          </div>
+                        </div>
+                      </motion.article>
+                    </Link>
+                  </ScrollAnimation>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
   );
 }
