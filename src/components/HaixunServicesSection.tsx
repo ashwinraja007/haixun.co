@@ -28,7 +28,7 @@ export default function HaixunServicesSection() {
   const services: Service[] = [
     {
       icon: Boxes,
-      image: "/lcl-realistic.jpg",
+      image: "/fcp.jpg", // Updated
       titleKey: "services.lcl.title",
       descriptionKey: "services.lcl.description",
       link: "/services/lcl",
@@ -56,14 +56,14 @@ export default function HaixunServicesSection() {
     },
     {
       icon: Plane,
-      image: "/air-freight-realistic.jpg",
+      image: "/Airfrontbannner.png", // Updated
       titleKey: "services.air.title",
       descriptionKey: "services.air.description",
       link: "/services/air-freight",
     },
     {
       icon: FileCheck,
-      image: "/cfs-realistic.jpg",
+      image: "/customs.jpg", // Updated
       titleKey: "services.customs.title",
       descriptionKey: "services.customs.description",
       link: "/services/customs-clearance",
@@ -87,7 +87,6 @@ export default function HaixunServicesSection() {
       image: "/project-cargo-realistic.jpg",
       titleKey: "services.oog.title",
       descriptionKey: "services.oog.description",
-      // UPDATED LINK TO MATCH NEW OOG SHIPMENTS PAGE
       link: "/services/oog-shipments",
     },
   ];
@@ -100,7 +99,8 @@ export default function HaixunServicesSection() {
       }}
     >
       <div className="container mx-auto px-4">
-        {/* Section Header */}
+        
+        {/* HEADER */}
         <ScrollAnimation className="text-center mb-16">
           <p className="text-sm font-semibold tracking-[0.25em] uppercase text-red-300 mb-3">
             {t("services.overline", "What We Do")}
@@ -115,7 +115,7 @@ export default function HaixunServicesSection() {
           </p>
         </ScrollAnimation>
 
-        {/* Service Cards */}
+        {/* SERVICE CARDS */}
         <div className="grid gap-10 md:grid-cols-2 xl:grid-cols-3">
           {services.map((service, index) => {
             const Icon = service.icon;
@@ -129,7 +129,7 @@ export default function HaixunServicesSection() {
                     transition={{ type: "spring", stiffness: 220, damping: 20 }}
                     className="bg-white rounded-[26px] shadow-[0_18px_50px_rgba(15,23,42,0.35)] overflow-hidden flex flex-col h-full cursor-pointer"
                   >
-                    {/* Top Image */}
+                    {/* IMAGE */}
                     <div className="relative">
                       <img
                         src={service.image}
@@ -138,7 +138,7 @@ export default function HaixunServicesSection() {
                         loading="lazy"
                       />
 
-                      {/* Floating Icon Badge */}
+                      {/* FLOATING ICON */}
                       <div className="absolute left-6 -bottom-7">
                         <div className="w-12 h-12 bg-white rounded-xl shadow-lg flex items-center justify-center">
                           <Icon className="w-5 h-5 text-[#BC0018]" />
@@ -146,19 +146,18 @@ export default function HaixunServicesSection() {
                       </div>
                     </div>
 
-                    {/* Content */}
+                    {/* TEXT */}
                     <div className="px-8 pt-12 pb-8 flex-1 flex flex-col justify-between">
                       <div>
                         <h3 className="text-lg font-bold text-slate-900 mb-2">
                           {t(service.titleKey)}
                         </h3>
-
                         <p className="text-sm text-slate-600 leading-relaxed">
                           {t(service.descriptionKey)}
                         </p>
                       </div>
 
-                      {/* Bottom Row */}
+                      {/* FOOTER ROW */}
                       <div className="mt-8 flex items-end justify-between">
                         <span className="inline-flex items-center text-sm font-semibold text-slate-900 hover:text-[#BC0018]">
                           {t("services.readMore")}
@@ -170,6 +169,7 @@ export default function HaixunServicesSection() {
                         </span>
                       </div>
                     </div>
+
                   </motion.article>
                 </Link>
               </ScrollAnimation>
