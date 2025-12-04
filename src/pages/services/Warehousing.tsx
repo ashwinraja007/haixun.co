@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { getCurrentCountryFromPath } from "@/services/countryDetection";
@@ -14,6 +15,7 @@ const ScrollToTop = () => {
 };
 
 const Warehousing = () => {
+  const { t } = useTranslation();
   const location = useLocation();
 
   const detected = getCurrentCountryFromPath(location.pathname);
@@ -24,18 +26,17 @@ const Warehousing = () => {
     return `/${currentCountry.name.toLowerCase().replace(/\s+/g, "-")}${basePath}`;
   };
 
-  // MATCHED TO OTHER SERVICE PAGES
   const servicesNav = [
-    { label: "See All Services", path: "/services" },
-    { label: "LCL Services", path: "/services/lcl" },
-    { label: "FCL Services", path: "/services/fcl" },
-    { label: "Warehousing", path: "/services/warehousing" },
-    { label: "Project Cargo", path: "/services/project-cargo" },
-    { label: "Air Freight", path: "/services/air-freight" },
-    { label: "Customs Clearance", path: "/services/customs-clearance" },
-    { label: "Import Services", path: "/services/import" },
-    { label: "Consolidation", path: "/services/consolidation" },
-    { label: "OOG Shipments", path: "/services/oog-shipments" },
+    { label: t("services.seeAllServices"), path: "/services" },
+    { label: t("services.lcl.title"), path: "/services/lcl" },
+    { label: t("services.fcl.title"), path: "/services/fcl" },
+    { label: t("services.warehouse.title"), path: "/services/warehousing" },
+    { label: t("services.projectCargo.title"), path: "/services/project-cargo" },
+    { label: t("services.air.title"), path: "/services/air-freight" },
+    { label: t("services.customs.title"), path: "/services/customs-clearance" },
+    { label: t("services.import.title"), path: "/services/import" },
+    { label: t("services.consolidation.title"), path: "/services/consolidation" },
+    { label: t("services.oog.title"), path: "/services/oog-shipments" },
   ];
 
   const pathname = location.pathname;
@@ -45,19 +46,17 @@ const Warehousing = () => {
       <ScrollToTop />
       <Navigation />
 
-      {/* WHITE SPACE LIKE OTHER PAGES */}
       <div className="h-[90px] w-full bg-white" />
 
       <main className="flex-grow">
-        {/* HERO SECTION – CENTERED LIKE LCL / FCL */}
-        <section className="relative h-[300px] md:h-[360px] w-full overflow-hidden flex items-center justify-center">
+        {/* HERO SECTION */}
+        <section className="relative h-[250px] md:h-[360px] w-full overflow-hidden flex items-center justify-center">
           <img
             src="/warehouse hero.jpg"
             alt="Warehousing Hero"
             className="absolute inset-0 w-full h-full object-cover"
           />
 
-          {/* DARK GRADIENT (MATCH STYLE) */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/30" />
 
           <div className="container mx-auto px-4 relative z-10 text-center">
@@ -67,29 +66,27 @@ const Warehousing = () => {
               transition={{ duration: 0.6, ease: "easeOut" }}
               className="inline-block max-w-3xl"
             >
-              <h1 className="text-4xl md:text-5xl font-extrabold text-white">
-                Warehousing
+              <h1 className="text-3xl md:text-5xl font-extrabold text-white">
+                {t("services.warehouse.title")}
               </h1>
               <div className="w-24 h-[3px] bg-[#BC0018] mx-auto mt-3" />
 
-              {/* TAGLINE BELOW TITLE */}
-              <p className="mt-4 text-base md:text-lg text-gray-200 leading-relaxed">
-                End-to-end warehousing and distribution solutions designed to support your
-                regional and global supply chain.
+              <p className="mt-4 text-sm md:text-lg text-gray-200 leading-relaxed px-4">
+                {t("services.warehouse.heroTagline")}
               </p>
             </motion.div>
           </div>
         </section>
 
         {/* MAIN CONTENT */}
-        <section className="py-16 bg-white">
+        <section className="py-10 md:py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid gap-12 md:grid-cols-[260px,1fr] items-start">
-              {/* LEFT SIDEBAR — SERVICES NAV */}
-              <aside className="space-y-10">
+            <div className="grid gap-8 md:gap-12 md:grid-cols-[260px,1fr] items-start">
+              {/* LEFT SIDEBAR - Hidden on mobile */}
+              <aside className="hidden md:block space-y-10">
                 <div>
                   <h2 className="text-sm font-semibold tracking-[0.15em] text-gray-900 mb-2 uppercase">
-                    OUR SERVICES
+                    {t("services.ourServices")}
                   </h2>
                   <div className="w-12 h-[2px] bg-[#BC0018] mb-5" />
 
@@ -119,7 +116,7 @@ const Warehousing = () => {
               </aside>
 
               {/* RIGHT COLUMN CONTENT */}
-              <div className="space-y-12">
+              <div className="space-y-8 md:space-y-12">
                 {/* TOP IMAGE */}
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
@@ -131,62 +128,27 @@ const Warehousing = () => {
                   <img
                     src="/warehousing.png"
                     alt="Warehousing Services"
-                    className="w-full h-[340px] md:h-[380px] object-cover"
+                    className="w-full h-[240px] md:h-[380px] object-cover"
                     loading="lazy"
                   />
                 </motion.div>
 
-                {/* DESCRIPTION – REPLACED WITH NEW CONTENT */}
+                {/* DESCRIPTION */}
                 <section>
-                  <div className="mb-6">
-                    <h2 className="text-xl md:text-2xl font-extrabold uppercase text-gray-900">
-                      Description
+                  <div className="mb-4 md:mb-6">
+                    <h2 className="text-lg md:text-2xl font-extrabold uppercase text-gray-900">
+                      {t("services.description")}
                     </h2>
                     <div className="mt-2 w-16 h-[2px] bg-[#BC0018]" />
                   </div>
 
-                  <div className="space-y-4 text-sm md:text-base leading-relaxed text-gray-700 mt-5">
-                    <p>
-                      HAIXUN is well equipped to handle the warehousing of various
-                      commodities including cold storage.
-                    </p>
-                    <p>
-                      Warehouse management is a key part of the supply chain and primarily
-                      aims to control the movement and storage of materials within a
-                      warehouse and process the associated transactions including shipping,
-                      receiving, put away and picking. With visibility into processes that
-                      precede and follow the supply chain link, your warehouse will become
-                      an accelerator and not a road block to drive greater profitability and
-                      customer satisfaction.
-                    </p>
-                    <p>
-                      The objective of WM is to handle the receipts of stock and manage
-                      supplies. WM today is part of supply chain management and also demand
-                      management. It also covers container storage, loading and unloading.
-                    </p>
-                    <p>
-                      An efficient WM gives a cutting edge to retail chain distribution.
-                    </p>
-                    <p>
-                      The company identifies the customer needs and assists to handle in the
-                      best possible manner.
-                    </p>
-                    <p>
-                      The company has expertise in handling vanning and devanning of
-                      consolidation cargo and arranges to distribute/deliver to respective
-                      parties from the warehouse which delivers full satisfaction to its
-                      customers.
-                    </p>
-                    <p>
-                      With its network in domestic and global market, HX can identify the
-                      right kind of warehouse depending on customer’s requirement based on
-                      cost effective, storage specific, commodity specific and proximity
-                      specific needs.
-                    </p>
+                  <div className="space-y-4 text-sm md:text-base leading-relaxed text-gray-700">
+                    <p>{t("services.warehouse.content1")}</p>
+                    <p>{t("services.warehouse.content2")}</p>
+                    <p>{t("services.warehouse.content3")}</p>
+                    <p>{t("services.warehouse.content4")}</p>
                   </div>
                 </section>
-
-                {/* CTA REMOVED – TO MATCH LCL / FCL STYLE */}
               </div>
             </div>
           </div>

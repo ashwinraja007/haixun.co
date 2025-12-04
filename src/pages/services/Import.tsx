@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { getCurrentCountryFromPath } from "@/services/countryDetection";
@@ -13,6 +15,7 @@ const ScrollToTop = () => {
 };
 
 const ImportServices = () => {
+  const { t } = useTranslation();
   const location = useLocation();
 
   const detected = getCurrentCountryFromPath(location.pathname);
@@ -23,18 +26,17 @@ const ImportServices = () => {
     return `/${currentCountry.name.toLowerCase().replace(/\s+/g, "-")}${basePath}`;
   };
 
-  // MATCH OTHER SERVICE PAGES
   const servicesNav = [
-    { label: "See All Services", path: "/services" },
-    { label: "LCL Services", path: "/services/lcl" },
-    { label: "FCL Services", path: "/services/fcl" },
-    { label: "Warehousing", path: "/services/warehousing" },
-    { label: "Project Cargo", path: "/services/project-cargo" },
-    { label: "Air Freight", path: "/services/air-freight" },
-    { label: "Customs Clearance", path: "/services/customs-clearance" },
-    { label: "Import Services", path: "/services/import" },
-    { label: "Consolidation", path: "/services/consolidation" },
-    { label: "OOG Shipments", path: "/services/oog-shipments" },
+    { label: t("services.seeAllServices"), path: "/services" },
+    { label: t("services.lcl.title"), path: "/services/lcl" },
+    { label: t("services.fcl.title"), path: "/services/fcl" },
+    { label: t("services.warehouse.title"), path: "/services/warehousing" },
+    { label: t("services.projectCargo.title"), path: "/services/project-cargo" },
+    { label: t("services.air.title"), path: "/services/air-freight" },
+    { label: t("services.customs.title"), path: "/services/customs-clearance" },
+    { label: t("services.import.title"), path: "/services/import" },
+    { label: t("services.consolidation.title"), path: "/services/consolidation" },
+    { label: t("services.oog.title"), path: "/services/oog-shipments" },
   ];
 
   const pathname = location.pathname;
@@ -47,8 +49,8 @@ const ImportServices = () => {
       <div className="h-[90px] w-full bg-white" />
 
       <main className="flex-grow">
-        {/* HERO – CENTERED LIKE OTHER UPDATED PAGES */}
-        <section className="relative h-[300px] md:h-[360px] w-full overflow-hidden flex items-center justify-center">
+        {/* HERO */}
+        <section className="relative h-[250px] md:h-[360px] w-full overflow-hidden flex items-center justify-center">
           <img
             src="/importhero.jpg"
             alt="Import Services Hero"
@@ -58,22 +60,33 @@ const ImportServices = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/30" />
 
           <div className="container mx-auto px-4 relative z-10 text-center">
-            <h1 className="text-4xl md:text-5xl font-extrabold text-white">
-              Import
-            </h1>
-            <div className="w-24 h-[3px] bg-[#BC0018] mx-auto mt-3" />
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="inline-block max-w-3xl"
+            >
+              <h1 className="text-3xl md:text-5xl font-extrabold text-white">
+                {t("services.import.title")}
+              </h1>
+              <div className="w-24 h-[3px] bg-[#BC0018] mx-auto mt-3" />
+
+              <p className="mt-4 text-sm md:text-lg text-gray-200 leading-relaxed px-4">
+                {t("services.import.heroTagline")}
+              </p>
+            </motion.div>
           </div>
         </section>
 
         {/* MAIN CONTENT */}
-        <section className="py-16 bg-white">
+        <section className="py-10 md:py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid gap-12 md:grid-cols-[260px,1fr] items-start">
-              {/* LEFT SIDEBAR */}
-              <aside className="space-y-10">
+            <div className="grid gap-8 md:gap-12 md:grid-cols-[260px,1fr] items-start">
+              {/* LEFT SIDEBAR - Hidden on mobile */}
+              <aside className="hidden md:block space-y-10">
                 <div>
                   <h2 className="text-sm font-semibold tracking-[0.15em] text-gray-900 mb-2 uppercase">
-                    OUR SERVICES
+                    {t("services.ourServices")}
                   </h2>
                   <div className="w-12 h-[2px] bg-[#BC0018] mb-5" />
 
@@ -102,36 +115,37 @@ const ImportServices = () => {
                 </div>
               </aside>
 
-              {/* RIGHT SIDE – CHINESE CONTENT ONLY */}
-              <div className="space-y-12">
+              {/* RIGHT SIDE */}
+              <div className="space-y-8 md:space-y-12">
                 {/* IMAGE */}
-                <div className="rounded-md overflow-hidden shadow-lg">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8 }}
+                  viewport={{ once: true }}
+                  className="rounded-md overflow-hidden shadow-lg"
+                >
                   <img
                     src="/importhero1.jpg"
                     alt="Import Logistics Services"
-                    className="w-full h-[340px] md:h-[380px] object-cover"
+                    className="w-full h-[240px] md:h-[380px] object-cover"
                   />
-                </div>
+                </motion.div>
 
-                {/* CHINESE CONTENT */}
+                {/* CONTENT */}
                 <section>
-                  <h2 className="text-xl md:text-2xl font-extrabold uppercase text-gray-900">
-                    Import
-                  </h2>
-                  <div className="mt-2 w-16 h-[2px] bg-[#BC0018]" />
+                  <div className="mb-4 md:mb-6">
+                    <h2 className="text-lg md:text-2xl font-extrabold uppercase text-gray-900">
+                      {t("services.import.title")}
+                    </h2>
+                    <div className="mt-2 w-16 h-[2px] bg-[#BC0018]" />
+                  </div>
 
-                  <div className="space-y-4 text-sm md:text-base leading-relaxed text-gray-700 mt-5">
-                    <p>总用地面积：5220㎡</p>
-                    <p>总建筑面积：44525㎡</p>
-                    <p>容积率：7.08</p>
-
-                    <p>
-                      该项目位于深圳南头半岛东南部，南临望海路，北靠蛇口老街，
-                      西为海韵路，东为规划道路，向南面向大海，向北近2号线地铁口。
-                      规划建成为商业高级商务写字楼及大型购物中心，
-                      周围交通便利，各类配套设施完善，景观资源丰富，
-                      发展前景广阔。
-                    </p>
+                  <div className="space-y-4 text-sm md:text-base leading-relaxed text-gray-700">
+                    <p>{t("services.import.content1")}</p>
+                    <p>{t("services.import.content2")}</p>
+                    <p>{t("services.import.content3")}</p>
+                    <p>{t("services.import.content4")}</p>
                   </div>
                 </section>
               </div>
