@@ -46,11 +46,20 @@ export default function AdvantagesSection() {
         "
       />
 
-      {/* RIGHT FLOATING DECOR SHAPE */}
+      {/* RIGHT FLOATING DECOR SHAPE — HIDDEN ON MOBILE */}
       <motion.img
         src="/about-shape-1.png"
         alt=""
-        className="absolute right-24 top-0 w-20 md:w-28 opacity-90 pointer-events-none select-none"
+        className="
+          absolute 
+          right-24 
+          top-0 
+          w-20 md:w-28 
+          opacity-90 
+          pointer-events-none 
+          select-none
+          hidden sm:block
+        "
         animate={{ y: [0, -15, 0] }}
         transition={{
           duration: 4,
@@ -111,7 +120,7 @@ export default function AdvantagesSection() {
                   {/* ICON BOX */}
                   <div
                     className="absolute bottom-0 right-0 w-24 h-24 bg-[#9B111E] 
-                      flex items-center justify-center"
+                    flex items-center justify-center"
                   >
                     <Icon className="w-12 h-12 text-white" strokeWidth={1.5} />
                   </div>
