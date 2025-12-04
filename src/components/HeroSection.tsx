@@ -1,5 +1,12 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Users, UserCircle, SearchCode, Ship, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  Users,
+  UserCircle,
+  SearchCode,
+  Ship,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 const HeroSection: React.FC = () => {
@@ -40,7 +47,9 @@ const HeroSection: React.FC = () => {
   const videoPoster = "/hero-poster.jpg";
 
   const [index, setIndex] = useState(0);
-  const [loaded, setLoaded] = useState<boolean[]>(() => heroImages.map(() => false));
+  const [loaded, setLoaded] = useState<boolean[]>(() =>
+    heroImages.map(() => false)
+  );
   const [autoPlay, setAutoPlay] = useState(true);
   const [useVideo, setUseVideo] = useState(true);
 
@@ -149,19 +158,16 @@ const HeroSection: React.FC = () => {
       </div>
 
       {/* OVERLAY */}
-      <div className="absolute inset-0 bg-black/30" />
-
-      {/* UPDATED POSITION: MORE TO THE RIGHT */}
       <div
         className="
-          absolute top-1/2
-          left-20 sm:left-32 md:left-40 lg:left-56 
-          -translate-y-1/2
+          absolute top-1/2 left-1/2
+          -translate-x-1/2 -translate-y-1/2
+          md:left-40 lg:left-56 md:-translate-x-0
           z-20
           w-[calc(100%-2rem)]
           sm:w-auto sm:max-w-md md:max-w-xl
           pr-4 sm:pr-6
-          text-left
+          text-center sm:text-left
         "
       >
         <h1 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-extrabold leading-tight drop-shadow-md text-white">
@@ -172,7 +178,7 @@ const HeroSection: React.FC = () => {
           {t("hero.subtitle")}
         </p>
 
-        <div className="mt-4 sm:mt-7 flex items-start">
+        <div className="mt-4 sm:mt-7 flex justify-center sm:justify-start">
           <a
             href="#about"
             className="
@@ -242,7 +248,9 @@ const HeroSection: React.FC = () => {
               rel="noopener noreferrer"
               className="group flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/10 px-4 py-3 text-white backdrop-blur-md transition hover:bg-white/15"
             >
-              <span className="rounded-full bg-white/20 p-2">{link.icon}</span>
+              <span className="rounded-full bg-white/20 p-2">
+                {link.icon}
+              </span>
               <span className="text-sm font-semibold">{link.title}</span>
             </a>
           ))}
@@ -252,7 +260,10 @@ const HeroSection: React.FC = () => {
       <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10" />
 
       {!useVideo && !loaded[0] && (
-        <div className="absolute inset-0 z-0 animate-pulse bg-neutral-900" aria-hidden />
+        <div
+          className="absolute inset-0 z-0 animate-pulse bg-neutral-900"
+          aria-hidden
+        />
       )}
     </section>
   );
