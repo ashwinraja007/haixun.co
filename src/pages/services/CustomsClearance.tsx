@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { getCurrentCountryFromPath } from "@/services/countryDetection";
-import { UserCheck, FileText, Shield, Globe } from "lucide-react";
+import { UserCheck } from "lucide-react";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -15,6 +16,7 @@ const ScrollToTop = () => {
 };
 
 const CustomsClearance = () => {
+  const { t } = useTranslation();
   const location = useLocation();
 
   const detected = getCurrentCountryFromPath(location.pathname);
@@ -26,16 +28,16 @@ const CustomsClearance = () => {
   };
 
   const servicesNav = [
-    { label: "See All Services", path: "/services" },
-    { label: "LCL Services", path: "/services/lcl" },
-    { label: "FCL Services", path: "/services/fcl" },
-    { label: "Warehousing", path: "/services/warehousing" },
-    { label: "Project Cargo", path: "/services/project-cargo" },
-    { label: "Air Freight", path: "/services/air-freight" },
-    { label: "Customs Clearance", path: "/services/customs-clearance" },
-    { label: "Import Services", path: "/services/import" },
-    { label: "Consolidation", path: "/services/consolidation" },
-    { label: "OOG Shipments", path: "/services/oog-shipments" },
+    { label: t("services.seeAllServices"), path: "/services" },
+    { label: t("services.lcl.title"), path: "/services/lcl" },
+    { label: t("services.fcl.title"), path: "/services/fcl" },
+    { label: t("services.warehouse.title"), path: "/services/warehousing" },
+    { label: t("services.projectCargo.title"), path: "/services/project-cargo" },
+    { label: t("services.air.title"), path: "/services/air-freight" },
+    { label: t("services.customs.title"), path: "/services/customs-clearance" },
+    { label: t("services.import.title"), path: "/services/import" },
+    { label: t("services.consolidation.title"), path: "/services/consolidation" },
+    { label: t("services.oog.title"), path: "/services/oog-shipments" },
   ];
 
   const pathname = location.pathname;
@@ -49,7 +51,7 @@ const CustomsClearance = () => {
 
       <main className="flex-grow">
         {/* HERO */}
-        <section className="relative h-[300px] md:h-[360px] w-full overflow-hidden flex items-center justify-center">
+        <section className="relative h-[250px] md:h-[360px] w-full overflow-hidden flex items-center justify-center">
           <img
             src="/servicepagehero.jpg"
             alt="Customs Clearance Hero"
@@ -65,29 +67,28 @@ const CustomsClearance = () => {
               transition={{ duration: 0.6 }}
               className="inline-block max-w-3xl"
             >
-              <h1 className="text-4xl md:text-5xl font-extrabold text-white">
-                Customs Clearance
+              <h1 className="text-3xl md:text-5xl font-extrabold text-white">
+                {t("services.customs.title")}
               </h1>
               <div className="w-24 h-[3px] bg-[#BC0018] mx-auto mt-3" />
 
-              <p className="mt-4 text-base md:text-lg text-gray-200 leading-relaxed">
-                Fast, compliant, and reliable customs brokerage for smooth import and export
-                movements across global gateways.
+              <p className="mt-4 text-sm md:text-lg text-gray-200 leading-relaxed px-4">
+                {t("services.customs.heroTagline")}
               </p>
             </motion.div>
           </div>
         </section>
 
         {/* MAIN CONTENT */}
-        <section className="py-16 bg-white">
+        <section className="py-10 md:py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid gap-12 md:grid-cols-[260px,1fr]">
+            <div className="grid gap-8 md:gap-12 md:grid-cols-[260px,1fr]">
               
-              {/* SIDEBAR */}
-              <aside className="space-y-10">
+              {/* SIDEBAR - Hidden on mobile */}
+              <aside className="hidden md:block space-y-10">
                 <div>
                   <h2 className="text-sm font-semibold tracking-[0.15em] uppercase text-gray-900 mb-2">
-                    OUR SERVICES
+                    {t("services.ourServices")}
                   </h2>
                   <div className="w-12 h-[2px] bg-[#BC0018] mb-5" />
 
@@ -117,7 +118,7 @@ const CustomsClearance = () => {
               </aside>
 
               {/* RIGHT CONTENT */}
-              <div className="space-y-12">
+              <div className="space-y-8 md:space-y-12">
                 
                 {/* TOP IMAGE */}
                 <motion.div
@@ -130,103 +131,32 @@ const CustomsClearance = () => {
                   <img
                     src="/customclearance.png"
                     alt="Customs Clearance Services"
-                    className="w-full h-[340px] md:h-[380px] object-cover"
+                    className="w-full h-[240px] md:h-[380px] object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                 </motion.div>
 
                 {/* DESCRIPTION */}
                 <section>
-                  <div className="mb-6 flex items-center gap-3">
+                  <div className="mb-4 md:mb-6 flex items-center gap-3">
                     <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#BC0018]/10">
                       <UserCheck className="w-5 h-5 text-[#BC0018]" />
                     </div>
                     <div>
-                      <h2 className="text-xl md:text-2xl font-extrabold uppercase text-gray-900">
-                        Customs Clearance
+                      <h2 className="text-lg md:text-2xl font-extrabold uppercase text-gray-900">
+                        {t("services.customs.title")}
                       </h2>
                       <div className="mt-1 w-16 h-[2px] bg-[#BC0018]" />
                     </div>
                   </div>
 
-                  {/* UPDATED CONTENT WITH NEW PARAGRAPH */}
                   <div className="space-y-4 text-sm md:text-base leading-relaxed text-gray-700">
-                    
-                    {/* NEW PARAGRAPH */}
-                    <p>
-                      As one of the leading custom clearing agents, we ensure that all clearance
-                      formalities are done in a smooth and easy manner so that all our customers
-                      receive their goods on time. Our customs brokers help ease import and export
-                      regulations and all paperwork related to trade compliances and procedures to
-                      ensure that your consignments via sea, land and air leave on time.
-                    </p>
-
-                    <p>
-                      With more than a decade of experience, we have cleared all types of
-                      shipments of every size and a wide variety of cargo from across the world,
-                      managing each movement with precision. Our experienced team studies local
-                      rules and regulations thoroughly to help clients overcome complex trade
-                      compliance challenges.
-                    </p>
-
-                    <p>
-                      Our strength lies in understanding changing business demands and challenges,
-                      allowing us to handle all documentation and compliance seamlessly so that
-                      your operations run without delay. We provide end-to-end import and export
-                      customs clearance solutions.
-                    </p>
+                    <p>{t("services.customs.content1")}</p>
+                    <p>{t("services.customs.content2")}</p>
+                    <p>{t("services.customs.content3")}</p>
+                    <p>{t("services.customs.content4")}</p>
                   </div>
                 </section>
-
-                {/* WHY CHOOSE SECTION */}
-                <section>
-                  <h2 className="text-xl md:text-2xl font-extrabold uppercase text-gray-900 mb-2">
-                    Why Choose Our Customs Service
-                  </h2>
-                  <div className="w-16 h-[2px] bg-[#BC0018] mb-6" />
-
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {[
-                      {
-                        icon: FileText,
-                        title: "Expert Documentation",
-                        description:
-                          "Complete handling of all import and export documentation requirements.",
-                      },
-                      {
-                        icon: Shield,
-                        title: "Compliance Assurance",
-                        description:
-                          "Ensuring full compliance with customs regulations at every stage.",
-                      },
-                      {
-                        icon: Globe,
-                        title: "Global Expertise",
-                        description:
-                          "A strong understanding of customs procedures across major ports worldwide.",
-                      },
-                    ].map((item, index) => (
-                      <motion.div
-                        key={item.title}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: index * 0.15 }}
-                        className="bg-white p-6 rounded-xl shadow-md border border-gray-200"
-                      >
-                        <div className="bg-[#BC0018]/10 p-3 rounded-lg mb-4 w-fit">
-                          <item.icon className="w-6 h-6 text-[#BC0018]" />
-                        </div>
-                        <h3 className="text-lg font-bold text-gray-900 mb-2">{item.title}</h3>
-                        <p className="text-sm text-gray-600 leading-relaxed">
-                          {item.description}
-                        </p>
-                      </motion.div>
-                    ))}
-                  </div>
-                </section>
-
-                {/* CTA REMOVED TO MATCH YOUR NEW DESIGN STYLE */}
-
               </div>
             </div>
           </div>
