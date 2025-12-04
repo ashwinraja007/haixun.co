@@ -76,7 +76,7 @@ const Navigation = () => {
   /* Active link check */
   const isActive = (path: string) => location.pathname === path;
 
-  /* Dynamic country nav link */
+  /* Dynamic country nav link (currently not used in JSX) */
   const getNavLink = (path: string) => {
     if (currentCountry.code === "SG") return path;
     return `/${currentCountry.name.toLowerCase().replace(/\s+/g, "-")}${path}`;
@@ -96,8 +96,8 @@ const Navigation = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white shadow-md" : "bg-transparent"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white ${
+        isScrolled ? "shadow-md" : "shadow-none"
       }`}
     >
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
@@ -204,9 +204,9 @@ const Navigation = () => {
         ------------------------------------------------------------ */}
         <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="lg:hidden">
           {isMenuOpen ? (
-            <X size={28} className={isScrolled ? "text-gray-900" : "text-[#BC0018]"} />
+            <X size={28} className="text-gray-900" />
           ) : (
-            <Menu size={28} className={isScrolled ? "text-gray-900" : "text-[#BC0018]"} />
+            <Menu size={28} className="text-gray-900" />
           )}
         </button>
       </div>
