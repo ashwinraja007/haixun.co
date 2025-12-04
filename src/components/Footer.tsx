@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { MapPin, Phone, Mail, ArrowRight, ChevronRight } from "lucide-react";
+import { MapPin, Phone, Mail, ArrowRight } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 type Office = {
@@ -10,7 +10,6 @@ type Office = {
   phone?: string;
   fax?: string;
   email?: string;
-  map?: string;
   country?: string;
 };
 
@@ -18,7 +17,7 @@ const Footer = () => {
   const { t } = useTranslation();
   const location = useLocation();
 
-  const keyAddresses: { country: string; offices: Office[] }[] = [
+  const keyAddresses = [
     {
       country: "China",
       offices: [
@@ -29,7 +28,6 @@ const Footer = () => {
           phone: "+86 75582222447",
           fax: "+86 75582192854",
           email: "helen@haixun.co",
-          map: "",
         },
       ],
     },
@@ -53,15 +51,11 @@ const Footer = () => {
   const intervalMs = 4000;
   const slideMs = 450;
 
-  useEffect(() => {
-    setIdx(0);
-  }, [location.pathname]);
+  useEffect(() => setIdx(0), [location.pathname]);
 
   useEffect(() => {
     if (paused || offices.length <= 1) return;
-    const t = setInterval(() => {
-      setIdx((i) => (i + 1) % offices.length);
-    }, intervalMs);
+    const t = setInterval(() => setIdx((i) => (i + 1) % offices.length), intervalMs);
     return () => clearInterval(t);
   }, [paused, offices.length]);
 
@@ -78,14 +72,14 @@ const Footer = () => {
 
   return (
     <footer className="pt-16 pb-8 text-white relative overflow-hidden bg-[#9B111E]">
-      {/* Subtle gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-[#6E0C13] via-[#9B111E] to-[#B92D35] opacity-90"></div>
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="h-1 bg-gradient-to-r from-white/50 via-white/30 to-white/50 rounded-full mb-8" />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-6 lg:gap-4">
-          {/* Column 1: Logo & About */}
+
+          {/* Column 1 */}
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -98,21 +92,19 @@ const Footer = () => {
                 <img
                   src="/haixun-logo.svg"
                   alt="Haixun Global"
-                  className="h-16 w-auto object-contain md:h-20"
+                  className="h-16 w-auto md:h-20"
                   loading="lazy"
                 />
               </div>
             </div>
 
-            <h3 className="text-lg font-semibold mb-2 text-white">
-              {t("footer.company")}
-            </h3>
+            <h3 className="text-lg font-semibold mb-2">{t("footer.company")}</h3>
             <p className="text-sm md:text-base max-w-xs text-left leading-relaxed mb-4 text-white/90">
               {t("footer.description")}
             </p>
           </motion.div>
 
-          {/* Column 2: Useful Links */}
+          {/* Column 2 */}
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -121,7 +113,7 @@ const Footer = () => {
             transition={{ delay: 0.2 }}
             className="flex flex-col items-start md:items-end lg:items-start lg:pl-10"
           >
-            <h3 className="font-bold text-xl text-white mb-4">{t("footer.usefulLinks")}</h3>
+            <h3 className="font-bold text-xl mb-4">{t("footer.usefulLinks")}</h3>
             <div className="flex flex-col gap-3">
               {[
                 { name: t("nav.home"), path: "/" },
@@ -134,7 +126,7 @@ const Footer = () => {
                 <Link
                   key={index}
                   to={link.path}
-                  className="text-white/90 hover:text-[#FFDCDC] transition-colors duration-300 flex items-center gap-2"
+                  className="text-white/90 hover:text-[#FFDCDC] transition flex items-center gap-2"
                 >
                   <ArrowRight size={14} className="text-white/70" />
                   {link.name}
@@ -143,7 +135,7 @@ const Footer = () => {
             </div>
           </motion.div>
 
-          {/* Column 3: Contact Info (slider) */}
+          {/* Column 3 — NO ARROWS, NO DOTS */}
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -152,18 +144,7 @@ const Footer = () => {
             transition={{ delay: 0.4 }}
             className="lg:pl-10"
           >
-            <div className="flex items-center justify-between w-full mb-4">
-              <h3 className="font-bold text-xl text-white">{t("footer.contactUs")}</h3>
-              <button
-                onClick={() => setIdx((i) => (i + 1) % offices.length)}
-                onMouseDown={() => setPaused(true)}
-                onMouseUp={() => setPaused(false)}
-                className="bg-white/20 text-white p-1.5 rounded-full hover:bg-white/30 transition-colors"
-                title="Next"
-              >
-                <ChevronRight size={16} />
-              </button>
-            </div>
+            <h3 className="font-bold text-xl mb-4">{t("footer.contactUs")}</h3>
 
             <div
               className="relative h-[168px] overflow-hidden"
@@ -179,7 +160,7 @@ const Footer = () => {
                   transition={{ duration: slideMs / 1000, ease: "easeOut" }}
                   className="space-y-3"
                 >
-                  <p className="font-semibold text-white">
+                  <p className="font-semibold">
                     {current.name} • {current.country}
                   </p>
 
@@ -214,11 +195,13 @@ const Footer = () => {
               </AnimatePresence>
             </div>
 
-            {/* DOTS REMOVED */}
+            {/* REMOVED:
+                - Arrow button
+                - Dot indicators
+            */}
           </motion.div>
         </div>
 
-        {/* Bottom Line */}
         <div className="text-center text-white/80 mt-12 pt-8 border-t border-white/20 text-sm">
           &copy; {new Date().getFullYear()} {t("footer.company")}. {t("footer.rights")}
         </div>
