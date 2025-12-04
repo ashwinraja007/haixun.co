@@ -12,11 +12,12 @@ const AboutSection: React.FC = () => {
     <section
       className="relative py-16 md:py-20 bg-cover bg-center bg-no-repeat overflow-hidden"
     >
-      {/* BOTTOM-RIGHT DECOR SHAPE */}
+      {/* BOTTOM-RIGHT DECOR SHAPE — HIDDEN ON MOBILE */}
       <img
         src="/about-shape-2.png"
         alt="Decor Shape"
         className="
+          hidden md:block     /* Hide on mobile, show on tablet/desktop */
           absolute 
           bottom-0 
           right-4
@@ -30,7 +31,7 @@ const AboutSection: React.FC = () => {
       />
 
       <div className="container mx-auto px-4 md:px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
-        
+
         {/* LEFT — Image Composition */}
         <div className="relative flex justify-center lg:justify-start">
           <div
@@ -145,7 +146,9 @@ const AboutSection: React.FC = () => {
                   <Phone className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">{t("about.needHelp")}</p>
+                  <p className="text-sm text-gray-600">
+                    {t("about.needHelp")}
+                  </p>
                   <p className="text-lg font-bold text-gray-900">
                     +86 75582222447
                   </p>
