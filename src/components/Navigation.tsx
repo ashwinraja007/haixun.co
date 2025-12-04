@@ -47,9 +47,37 @@ const Navigation = () => {
   const location = useLocation();
   const { user } = useAuth();
 
-  // When clicking the language button, always switch to Chinese
+  // track current language locally
+  const [currentLang, setCurrentLang] = useState(i18n.language || "en");
+
+  // Load preferred language from localStorage
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem("preferredLanguage");
+      if (stored && stored !== currentLang) {
+        i18n.changeLanguage(stored);
+        setCurrentLang(stored);
+      }
+    } catch {
+      // ignore storage errors
+    }
+  }, []);
+
+  // Keep state in sync if i18n language changes elsewhere
+  useEffect(() => {
+    setCurrentLang(i18n.language);
+  }, [i18n.language]);
+
+  // Toggle between EN and ZH + persist
   const handleLanguageSwitch = () => {
-    i18n.changeLanguage("zh");
+    const next = currentLang === "zh" ? "en" : "zh";
+    i18n.changeLanguage(next);
+    setCurrentLang(next);
+    try {
+      localStorage.setItem("preferredLanguage", next);
+    } catch {
+      // ignore
+    }
   };
 
   // We use the URL to decide the current country flag
@@ -111,6 +139,8 @@ const Navigation = () => {
 
   const desktopLangButtonClasses =
     "inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-colors";
+
+  const langLabel = currentLang === "zh" ? "EN" : "中文";
 
   return (
     <header
@@ -264,7 +294,7 @@ const Navigation = () => {
               {t("nav.contact")}
             </Link>
 
-            {/* Desktop Chinese language button */}
+            {/* Desktop language button (toggle EN/中文) */}
             <button
               type="button"
               onClick={handleLanguageSwitch}
@@ -274,7 +304,7 @@ const Navigation = () => {
                   : "border-white/40 text-white hover:bg-white hover:text-black"
               }`}
             >
-              中文
+              {langLabel}
             </button>
           </div>
 
@@ -469,7 +499,7 @@ const Navigation = () => {
                 {t("nav.contact")}
               </Link>
 
-              {/* Mobile Chinese language button */}
+              {/* Mobile language button (same toggle) */}
               <button
                 type="button"
                 onClick={() => {
@@ -478,7 +508,7 @@ const Navigation = () => {
                 }}
                 className="mt-2 inline-flex w-fit items-center gap-1.5 rounded-full border border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-900 hover:bg-gray-900 hover:text-white transition-colors"
               >
-                中文
+                {langLabel}
               </button>
             </nav>
           </div>
