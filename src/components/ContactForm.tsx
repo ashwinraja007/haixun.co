@@ -28,12 +28,7 @@ export default function ContactUsSection() {
   };
 
   return (
-    <section
-      className="py-20 bg-cover bg-center bg-no-repeat"
-      style={{
-        backgroundImage: "url('/about-bg.webp')",
-      }}
-    >
+    <section className="py-20 bg-[#F5F5F5]">
       <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
         
         {/* LEFT COLUMN */}
@@ -50,7 +45,9 @@ export default function ContactUsSection() {
 
           <p className="text-gray-900 text-lg max-w-md leading-relaxed">
             {t("contact.subtitle").split("No problem!")[0]}
-            <span className="text-[#9B111E] font-semibold">{t("contact.noProblem")}</span>{" "}
+            <span className="text-[#9B111E] font-semibold">
+              {t("contact.noProblem")}
+            </span>{" "}
             {t("contact.formIntro")}
           </p>
 
@@ -61,7 +58,9 @@ export default function ContactUsSection() {
                 <MapPin className="w-6 h-6 text-[#9B111E]" />
               </div>
               <div>
-                <h4 className="text-lg font-semibold text-gray-900">{t("contact.address")}</h4>
+                <h4 className="text-lg font-semibold text-gray-900">
+                  {t("contact.address")}
+                </h4>
                 <p className="text-gray-700 text-sm leading-relaxed">
                   13C02, Block A, Zhaoxin Huijin Plaza
                   <br />
@@ -76,7 +75,9 @@ export default function ContactUsSection() {
                 <Mail className="w-6 h-6 text-[#9B111E]" />
               </div>
               <div>
-                <h4 className="text-lg font-semibold text-gray-900">{t("contact.emailUs")}</h4>
+                <h4 className="text-lg font-semibold text-gray-900">
+                  {t("contact.emailUs")}
+                </h4>
                 <a
                   href="mailto:helen@haixun.co"
                   className="text-[#9B111E] text-sm hover:underline"
@@ -92,7 +93,9 @@ export default function ContactUsSection() {
                 <Phone className="w-6 h-6 text-[#9B111E]" />
               </div>
               <div>
-                <h4 className="text-lg font-semibold text-gray-900">{t("contact.callUs")}</h4>
+                <h4 className="text-lg font-semibold text-gray-900">
+                  {t("contact.callUs")}
+                </h4>
                 <a
                   href="tel:+8675582222447"
                   className="text-[#9B111E] text-sm hover:underline"
@@ -104,7 +107,7 @@ export default function ContactUsSection() {
           </div>
         </motion.div>
 
-        {/* CENTER FORM */}
+        {/* FORM */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
