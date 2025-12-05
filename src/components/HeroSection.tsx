@@ -130,10 +130,12 @@ const HeroSection: React.FC = () => {
         )}
       </div>
 
-      {/* LEFT SIDE GRADIENT OVERLAY */}
+      {/* LEFT 25% GRADIENT — DISABLED ON MOBILE */}
       <div
         className="
-          absolute inset-y-0 left-0 w-1/2
+          hidden sm:block
+          absolute inset-y-0 left-0
+          w-[25%]
           bg-gradient-to-r
           from-black/70 via-black/40 to-transparent
           pointer-events-none
