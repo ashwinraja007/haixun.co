@@ -47,9 +47,9 @@ const GlobalPresence = () => {
       {/* White blank space BELOW header */}
       <div className={isMobile ? "h-[110px]" : "h-[150px]"}></div>
 
-      {/* Mobile fixed title (changed to red, no blur) */}
+      {/* Mobile title – NOT fixed now, so it scrolls normally and won't sit in the middle */}
       {isMobile && (
-        <div className="fixed top-20 left-0 right-0 z-30 bg-gradient-to-r from-red-600 to-red-500 p-3 text-white text-center shadow-md">
+        <div className="w-full bg-gradient-to-r from-red-600 to-red-500 p-3 text-white text-center shadow-md">
           <h1 className="text-lg font-bold">{t("globalPresence.title")}</h1>
         </div>
       )}
@@ -59,7 +59,7 @@ const GlobalPresence = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className={`flex flex-1 relative overflow-hidden mx-0 ${
+        className={`flex flex-1 relative mx-0 ${
           isMobile ? "pt-[10px] pb-10" : "pt-[20px] pb-10"
         }`}
       >
@@ -94,7 +94,7 @@ const GlobalPresence = () => {
               damping: 30,
             }}
             className={`transition-all duration-300 ease-in-out ${
-              isMobile ? "w-full pt-12" : "w-[35%]"
+              isMobile ? "w-full pt-4" : "w-[35%]"
             }`}
           >
             <ContactSidebar
