@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ContactMapContainer from "@/components/ContactMapContainer";
-import ContactSidebar from "@/components/ContactSidebar"; // NOTE: updated import
+import ContactSidebar from "@/components/ContactSidebar";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { motion } from "framer-motion";
 
@@ -21,6 +22,7 @@ const ScrollToTop = () => {
 };
 
 const GlobalPresence = () => {
+  const { t } = useTranslation();
   const isMobile = useIsMobile();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [showMap, setShowMap] = useState(true);
@@ -48,7 +50,7 @@ const GlobalPresence = () => {
       {/* Mobile fixed title */}
       {isMobile && (
         <div className="fixed top-20 left-0 right-0 z-30 bg-gradient-to-r from-amber-500 to-amber-400 p-3 text-white text-center shadow-md">
-          <h1 className="text-lg font-bold">Global Presence</h1>
+          <h1 className="text-lg font-bold">{t("globalPresence.title")}</h1>
         </div>
       )}
 

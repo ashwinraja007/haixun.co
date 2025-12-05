@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import {
@@ -327,6 +328,7 @@ const sortedCountries = [...countries].sort((a, b) =>
 );
 
 const ContactSidebar: React.FC<ContactSidebarProps> = ({ isOpen, onClose }) => {
+  const { t } = useTranslation();
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
   const [expandedCountry, setExpandedCountry] = useState<string | null>(null);
   const [selectedLocation, setSelectedLocation] = useState<any | null>(null);
@@ -407,7 +409,7 @@ const ContactSidebar: React.FC<ContactSidebarProps> = ({ isOpen, onClose }) => {
         <div className="flex justify-between items-center px-4 py-3 border-b bg-gradient-to-r from-red-600 to-red-700 text-white rounded-t-xl shadow-sm">
           <div className="flex items-center gap-2">
             <Globe className="h-5 w-5" />
-            <h2 className="font-bold text-lg">Global Locations</h2>
+            <h2 className="font-bold text-lg">{t("globalPresence.globalLocations")}</h2>
           </div>
           {isMobile && (
             <Button
@@ -493,7 +495,7 @@ const ContactSidebar: React.FC<ContactSidebarProps> = ({ isOpen, onClose }) => {
                                   <div className="mt-2 p-3 bg-gradient-to-br from-red-50 to-white rounded-lg border border-red-200 shadow text-sm animate-in fade-in duration-300 w-full">
                                     <h4 className="font-semibold text-red-700 mb-2 pb-1 border-b border-red-100 flex items-center">
                                       <span className="bg-gradient-to-r from-red-600 to-red-400 bg-clip-text text-transparent">
-                                        {city.name} Office
+                                        {city.name} {t("globalPresence.office")}
                                       </span>
                                     </h4>
 

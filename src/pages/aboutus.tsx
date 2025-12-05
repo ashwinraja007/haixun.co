@@ -75,8 +75,8 @@ const AboutUs: React.FC = () => {
                       className="px-7 py-3 rounded-2xl text-white shadow-2xl text-center"
                       style={{ backgroundColor: RUBY_RED }}
                     >
-                      <span className="text-2xl font-bold leading-none block">9+</span>
-                      <span className="text-sm opacity-90 block mt-1">Years of Growth</span>
+                      <span className="text-2xl font-bold leading-none block">{t("about.yearsNumber")}</span>
+                      <span className="text-sm opacity-90 block mt-1">{t("about.yearsOfGrowth")}</span>
                     </div>
                   </div>
 
@@ -103,38 +103,30 @@ const AboutUs: React.FC = () => {
                   className="text-sm font-semibold tracking-[0.22em] uppercase"
                   style={{ color: RUBY_RED }}
                 >
-                  Who We Are
+                  {t("about.whoWeAre")}
                 </p>
 
                 <h1
                   className="text-4xl md:text-5xl font-extrabold tracking-tight"
                   style={{ color: RUBY_RED }}
                 >
-                  About Haixun Global
+                  {t("about.title")}
                 </h1>
 
                 <h2 className="text-xl md:text-2xl font-semibold text-gray-900">
-                  30+ Years of Logistics Excellence
+                  {t("about.subtitle")}
                 </h2>
 
                 <p className="text-lg leading-relaxed text-gray-700">
-                  Haixun Global Logistics (Shenzhen) Co., Ltd., headquartered in Shenzhen, China,
-                  provides global freight forwarding services for LCL, FCL, general cargo, and bulk
-                  cargo via sea, land, and air. Our solutions include booking, customs clearance,
-                  inspection, warehousing, distribution, door-to-door delivery, and logistics
-                  planning.
+                  {t("about.pageParagraph1")}
                 </p>
 
                 <p className="text-lg leading-relaxed text-gray-700">
-                  Guided by integrity, honesty, service, and speed, we follow a corporate spirit of
-                  pragmatism, hard work, and responsibility. Our business model is built on
-                  innovation, win-win cooperation, and a strong commitment to customer satisfaction.
+                  {t("about.pageParagraph2")}
                 </p>
 
                 <p className="text-lg leading-relaxed text-gray-700">
-                  With a modern management approach, advanced technology, and attentive customer
-                  care, we consistently adhere to the principle of putting customers first. We aim
-                  to impress clients with reliable, efficient, and seamless logistics solutions.
+                  {t("about.pageParagraph3")}
                 </p>
 
                 <div className="pt-4">
