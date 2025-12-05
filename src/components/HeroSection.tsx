@@ -14,42 +14,20 @@ const HeroSection: React.FC = () => {
 
   const portalLinks = useMemo(
     () => [
-      {
-        icon: <Users className="w-5 h-5" />,
-        title: "Consolmate",
-        url: "https://consolmate.com/auth/login/10",
-      },
-      {
-        icon: <UserCircle className="w-5 h-5" />,
-        title: "Partner Portal",
-        url: "https://pp.onlinetracking.co/auth/login/10",
-      },
-      {
-        icon: <SearchCode className="w-5 h-5" />,
-        title: "Tracking",
-        url: "http://ec2-13-229-38-56.ap-southeast-1.compute.amazonaws.com:8081/ords/f?p=107:102:::::P0_GROUP_RID:195",
-      },
-      {
-        icon: <Ship className="w-5 h-5" />,
-        title: "Sailing Schedule",
-        url: "http://ec2-13-229-38-56.ap-southeast-1.compute.amazonaws.com:8081/ords/f?p=107:104:::::P0_GROUP_RID:195",
-      },
+      { icon: <Users className="w-5 h-5" />, title: "Consolmate", url: "https://consolmate.com/auth/login/10" },
+      { icon: <UserCircle className="w-5 h-5" />, title: "Partner Portal", url: "https://pp.onlinetracking.co/auth/login/10" },
+      { icon: <SearchCode className="w-5 h-5" />, title: "Tracking", url: "http://ec2-13-229-38-56.ap-southeast-1.compute.amazonaws.com:8081/ords/f?p=107:102:::::P0_GROUP_RID:195" },
+      { icon: <Ship className="w-5 h-5" />, title: "Sailing Schedule", url: "http://ec2-13-229-38-56.ap-southeast-1.compute.amazonaws.com:8081/ords/f?p=107:104:::::P0_GROUP_RID:195" },
     ],
     []
   );
 
-  const heroImages = useMemo(
-    () => ["/oceanfreight.png", "/airfreight.png", "/truck.png"],
-    []
-  );
-
+  const heroImages = useMemo(() => ["/oceanfreight.png", "/airfreight.png", "/truck.png"], []);
   const videoSrc = "/Hero01.mp4";
   const videoPoster = "/hero-poster.jpg";
 
   const [index, setIndex] = useState(0);
-  const [loaded, setLoaded] = useState<boolean[]>(() =>
-    heroImages.map(() => false)
-  );
+  const [loaded, setLoaded] = useState<boolean[]>(() => heroImages.map(() => false));
   const [autoPlay, setAutoPlay] = useState(true);
   const [useVideo, setUseVideo] = useState(true);
 
@@ -102,11 +80,8 @@ const HeroSection: React.FC = () => {
 
     const onVis = () => {
       if (!videoRef.current) return;
-      if (document.hidden) {
-        videoRef.current.pause();
-      } else {
-        videoRef.current.play().catch(() => setUseVideo(false));
-      }
+      if (document.hidden) videoRef.current.pause();
+      else videoRef.current.play().catch(() => setUseVideo(false));
     };
 
     document.addEventListener("visibilitychange", onVis);
@@ -125,7 +100,8 @@ const HeroSection: React.FC = () => {
 
   return (
     <section className="relative h-[100svh] w-full overflow-hidden">
-      {/* BACKGROUND MEDIA */}
+
+      {/* BACKGROUND */}
       <div className="absolute inset-0">
         {useVideo ? (
           <video
@@ -145,19 +121,16 @@ const HeroSection: React.FC = () => {
             <img
               key={src}
               src={src}
-              alt={`Hero background ${i + 1}`}
-              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-out ${
+              alt=""
+              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
                 i === index ? "opacity-100" : "opacity-0"
               }`}
-              aria-hidden={i !== index}
-              draggable={false}
-              loading={i === 0 ? "eager" : "lazy"}
             />
           ))
         )}
       </div>
 
-      {/* OVERLAY */}
+      {/* OVERLAY CONTENT WITH STRONG BLACK OUTLINE */}
       <div
         className="
           absolute top-1/2 left-1/2
@@ -172,15 +145,15 @@ const HeroSection: React.FC = () => {
       >
         <h1
           className="
-            text-3xl
-            sm:text-3xl
-            md:text-4xl
-            lg:text-5xl
+            text-3xl sm:text-3xl md:text-4xl lg:text-5xl
             font-extrabold
             leading-tight
-            drop-shadow-md
             text-white
           "
+          style={{
+            textShadow:
+              "-3px -3px 4px #000, 3px -3px 4px #000, -3px 3px 4px #000, 3px 3px 4px #000",
+          }}
         >
           {t("hero.title")}
         </h1>
@@ -188,12 +161,14 @@ const HeroSection: React.FC = () => {
         <p
           className="
             mt-4
-            text-base
-            sm:text-lg
-            md:text-xl
+            text-base sm:text-lg md:text-xl
             leading-relaxed
             text-gray-200
           "
+          style={{
+            textShadow:
+              "-2px -2px 3px #000, 2px -2px 3px #000, -2px 2px 3px #000, 2px 2px 3px #000",
+          }}
         >
           {t("hero.subtitle")}
         </p>
@@ -206,59 +181,39 @@ const HeroSection: React.FC = () => {
               rounded-xl
               bg-[#BC0018]
               px-6 py-3.5
-              text-base
-              sm:text-sm
+              text-base sm:text-sm
               font-semibold
               text-white
-              shadow-lg shadow-black/30
+              shadow-xl
               hover:bg-[#A90015]
-              focus:outline-none
-              focus:ring-2 focus:ring-white/80
             "
+            style={{
+              textShadow:
+                "-2px -2px 3px #000, 2px -2px 3px #000, -2px 2px 3px #000, 2px 2px 3px #000",
+            }}
           >
             {t("hero.contactUs")}
           </a>
         </div>
       </div>
 
-      {/* SLIDER CONTROLS (only when using images) */}
+      {/* SLIDER BUTTONS */}
       {!useVideo && (
         <>
           <button
-            aria-label="Previous slide"
             onClick={goPrev}
-            className="group absolute left-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-black/40 p-3 text-white backdrop-blur hover:bg-black/60"
+            className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-black/60 text-white rounded-full"
           >
-            <ChevronLeft className="h-6 w-6" />
+            <ChevronLeft className="w-6 h-6" />
           </button>
 
           <button
-            aria-label="Next slide"
             onClick={goNext}
-            className="group absolute right-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-black/40 p-3 text-white backdrop-blur hover:bg-black/60"
+            className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-black/60 text-white rounded-full"
           >
-            <ChevronRight className="h-6 w-6" />
+            <ChevronRight className="w-6 h-6" />
           </button>
         </>
-      )}
-
-      {/* SLIDER DOTS (only when using images) */}
-      {!useVideo && (
-        <div className="absolute bottom-28 left-0 right-0 z-20 flex items-center justify-center gap-2">
-          {heroImages.map((_, i) => (
-            <button
-              key={i}
-              aria-label={`Go to slide ${i + 1}`}
-              onClick={() => {
-                setAutoPlay(false);
-                setIndex(i);
-              }}
-              className={`h-2.5 w-2.5 rounded-full border border-white/60 transition ${
-                i === index ? "bg-white" : "bg-white/30 hover:bg-white/50"
-              }`}
-            />
-          ))}
-        </div>
       )}
 
       {/* PORTAL LINKS */}
@@ -270,27 +225,20 @@ const HeroSection: React.FC = () => {
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/10 px-4 py-3 text-white backdrop-blur-md transition hover:bg-white/15"
+              className="group flex items-center justify-center gap-2 rounded-xl border border-white/30 bg-white/10 px-4 py-3 text-white backdrop-blur-sm hover:bg-white/20"
+              style={{
+                textShadow:
+                  "-2px -2px 3px #000, 2px -2px 3px #000, -2px 2px 3px #000, 2px 2px 3px #000",
+              }}
             >
-              <span className="rounded-full bg-white/20 p-2">
-                {link.icon}
-              </span>
-              <span className="text-xs sm:text-sm font-semibold">
-                {link.title}
-              </span>
+              <span className="rounded-full bg-white/20 p-2">{link.icon}</span>
+              <span className="text-xs sm:text-sm font-semibold">{link.title}</span>
             </a>
           ))}
         </div>
       </div>
 
       <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10" />
-
-      {!useVideo && !loaded[0] && (
-        <div
-          className="absolute inset-0 z-0 animate-pulse bg-neutral-900"
-          aria-hidden
-        />
-      )}
     </section>
   );
 };
