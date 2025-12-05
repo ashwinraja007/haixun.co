@@ -29,183 +29,177 @@ export default function ContactUsSection() {
 
   return (
     <section className="py-20 bg-white">
-      <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
-        {/* LEFT COLUMN */}
-        <motion.div
-          initial={{ opacity: 0, x: -40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="space-y-8"
-        >
-          <h2 className="text-4xl font-extrabold text-[#9B111E] mb-4">
-            {t("contact.title")}
-          </h2>
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          {/* LEFT: FORM COLUMN */}
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <p className="text-xs md:text-sm font-semibold text-[#9B111E] tracking-[0.2em] uppercase mb-2">
+              Send Us Mail
+            </p>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3">
+              Feel Free To Write
+            </h2>
 
-          <p className="text-gray-900 text-lg max-w-md leading-relaxed">
-            {t("contact.subtitle").split("No problem!")[0]}
-            <span className="text-[#9B111E] font-semibold">
-              {t("contact.noProblem")}
-            </span>{" "}
-            {t("contact.formIntro")}
-          </p>
+            <p className="text-gray-700 text-sm md:text-base max-w-xl mb-8 leading-relaxed">
+              Logistics involves efficient planning and coordination of goods
+              movement.
+            </p>
 
-          <div className="space-y-6">
-            {/* Office */}
-            <div className="flex items-start gap-4 bg-white p-5 rounded-xl shadow-sm border border-[#9B111E]/10">
-              <div className="w-12 h-12 rounded-full bg-[#9B111E]/10 flex items-center justify-center">
-                <MapPin className="w-6 h-6 text-[#9B111E]" />
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* First / Last Name */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Input
+                    name="FirstName"
+                    placeholder="First Name"
+                    required
+                    className="h-12 rounded-none border-0 bg-[#FBF5EE] text-sm focus-visible:ring-0 focus-visible:ring-offset-0"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Input
+                    name="LastName"
+                    placeholder="Last Name"
+                    required
+                    className="h-12 rounded-none border-0 bg-[#FBF5EE] text-sm focus-visible:ring-0 focus-visible:ring-offset-0"
+                  />
+                </div>
               </div>
-              <div>
-                <h4 className="text-lg font-semibold text-gray-900">
-                  {t("contact.address")}
-                </h4>
-                <p className="text-gray-700 text-sm leading-relaxed">
-                  13C02, Block A, Zhaoxin Huijin Plaza
-                  <br />
-                  3085 Shennan East Road, Luohu, Shenzhen.
+
+              {/* Email / Phone */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Input
+                    name="Email"
+                    type="email"
+                    placeholder="Your Email"
+                    required
+                    className="h-12 rounded-none border-0 bg-[#FBF5EE] text-sm focus-visible:ring-0 focus-visible:ring-offset-0"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Input
+                    name="Phone"
+                    placeholder="Phone Number"
+                    className="h-12 rounded-none border-0 bg-[#FBF5EE] text-sm focus-visible:ring-0 focus-visible:ring-offset-0"
+                  />
+                </div>
+              </div>
+
+              {/* Message */}
+              <div className="space-y-2">
+                <Textarea
+                  name="Message"
+                  placeholder="Message"
+                  rows={5}
+                  required
+                  className="rounded-none border-0 bg-[#FBF5EE] text-sm focus-visible:ring-0 focus-visible:ring-offset-0"
+                />
+              </div>
+
+              <Button
+                type="submit"
+                disabled={formStatus === "loading"}
+                className="mt-2 inline-flex items-center gap-2 rounded-none bg-[#9B111E] px-10 py-6 text-sm font-semibold uppercase tracking-wide hover:bg-[#7F0E18] w-auto"
+              >
+                <Send className="w-4 h-4" />
+                {t("contact.form.send")}
+              </Button>
+
+              {formStatus === "success" && (
+                <p className="text-green-600 text-sm mt-3">
+                  ✅ {t("contact.success")}
                 </p>
+              )}
+              {formStatus === "error" && (
+                <p className="text-red-600 text-sm mt-3">
+                  ❌ {t("contact.error")}
+                </p>
+              )}
+            </form>
+          </motion.div>
+
+          {/* RIGHT: CONTACT INFO COLUMN */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="space-y-8"
+          >
+            <p className="text-xs md:text-sm font-semibold text-[#9B111E] tracking-[0.2em] uppercase mb-2">
+              Need Any Help?
+            </p>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3">
+              Get In Touch With Us!
+            </h2>
+
+            <p className="text-gray-700 text-sm md:text-base max-w-xl leading-relaxed">
+              Logistics involves efficient planning and coordination of goods
+              movement.
+            </p>
+
+            <div className="space-y-6 mt-4">
+              {/* PHONE CARD */}
+              <div className="flex items-center gap-4 bg-white rounded-xl shadow-md border border-gray-100 p-5">
+                <div className="w-14 h-14 rounded-md bg-[#9B111E] flex items-center justify-center">
+                  <Phone className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
+                    Have any question?
+                  </p>
+                  <a
+                    href="tel:+8675582222447"
+                    className="mt-1 block text-gray-900 font-semibold text-sm"
+                  >
+                    +86 75582222447
+                  </a>
+                </div>
+              </div>
+
+              {/* EMAIL CARD */}
+              <div className="flex items-center gap-4 bg-white rounded-xl shadow-md border border-gray-100 p-5">
+                <div className="w-14 h-14 rounded-md bg-[#9B111E] flex items-center justify-center">
+                  <Mail className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
+                    Write us email
+                  </p>
+                  <a
+                    href="mailto:helen@haixun.co"
+                    className="mt-1 block text-gray-900 font-semibold text-sm"
+                  >
+                    helen@haixun.co
+                  </a>
+                </div>
+              </div>
+
+              {/* ADDRESS CARD */}
+              <div className="flex items-center gap-4 bg-white rounded-xl shadow-md border border-gray-100 p-5">
+                <div className="w-14 h-14 rounded-md bg-[#9B111E] flex items-center justify-center">
+                  <MapPin className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
+                    Headquarters
+                  </p>
+                  <p className="mt-1 text-gray-900 text-sm leading-relaxed">
+                    13C02, Block A, Zhaoxin Huijin Plaza 3085 Shennan East Road,
+                    <br />
+                    Luohu, Shenzhen.
+                  </p>
+                </div>
               </div>
             </div>
-
-            {/* Email */}
-            <div className="flex items-start gap-4 bg-white p-5 rounded-xl shadow-sm border border-[#9B111E]/10">
-              <div className="w-12 h-12 rounded-full bg-[#9B111E]/10 flex items-center justify-center">
-                <Mail className="w-6 h-6 text-[#9B111E]" />
-              </div>
-              <div>
-                <h4 className="text-lg font-semibold text-gray-900">
-                  {t("contact.emailUs")}
-                </h4>
-                <a
-                  href="mailto:helen@haixun.co"
-                  className="text-[#9B111E] text-sm hover:underline"
-                >
-                  helen@haixun.co
-                </a>
-              </div>
-            </div>
-
-            {/* Phone */}
-            <div className="flex items-start gap-4 bg-white p-5 rounded-xl shadow-sm border border-[#9B111E]/10">
-              <div className="w-12 h-12 rounded-full bg-[#9B111E]/10 flex items-center justify-center">
-                <Phone className="w-6 h-6 text-[#9B111E]" />
-              </div>
-              <div>
-                <h4 className="text-lg font-semibold text-gray-900">
-                  {t("contact.callUs")}
-                </h4>
-                <a
-                  href="tel:+8675582222447"
-                  className="text-[#9B111E] text-sm hover:underline"
-                >
-                  +86 75582222447
-                </a>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* FORM */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="bg-white p-10 rounded-2xl shadow-xl border border-[#9B111E]/20"
-        >
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Name */}
-            <div className="space-y-2">
-              <label className="text-sm font-semibold text-gray-800">
-                {t("contact.form.name")}
-              </label>
-              <Input
-                name="Name"
-                placeholder={t("contact.form.enterName")}
-                required
-                className="border-gray-200 focus-visible:ring-[#9B111E]"
-              />
-            </div>
-
-            {/* Email */}
-            <div className="space-y-2">
-              <label className="text-sm font-semibold text-gray-800">
-                {t("contact.form.yourEmail")}
-              </label>
-              <Input
-                name="Email"
-                type="email"
-                placeholder={t("contact.form.enterEmail")}
-                required
-                className="border-gray-200 focus-visible:ring-[#9B111E]"
-              />
-            </div>
-
-            {/* Subject */}
-            <div className="space-y-2">
-              <label className="text-sm font-semibold text-gray-800">
-                {t("contact.form.subject")}
-              </label>
-              <Input
-                name="Subject"
-                placeholder={t("contact.form.enterSubject")}
-                required
-                className="border-gray-200 focus-visible:ring-[#9B111E]"
-              />
-            </div>
-
-            {/* Message */}
-            <div className="space-y-2">
-              <label className="text-sm font-semibold text-gray-800">
-                {t("contact.form.message")}
-              </label>
-              <Textarea
-                name="Message"
-                placeholder={t("contact.form.writeMessage")}
-                rows={5}
-                required
-                className="border-gray-200 focus-visible:ring-[#9B111E]"
-              />
-            </div>
-
-            <Button
-              type="submit"
-              className="w-full bg-[#9B111E] hover:bg-[#7F0E18] text-white font-semibold text-lg py-6 flex items-center justify-center gap-2"
-            >
-              <Send className="w-5 h-5" />
-              {t("contact.form.send")}
-            </Button>
-
-            {formStatus === "success" && (
-              <p className="text-green-600 text-center mt-4">
-                ✅ {t("contact.success")}
-              </p>
-            )}
-            {formStatus === "error" && (
-              <p className="text-red-600 text-center mt-4">
-                ❌ {t("contact.error")}
-              </p>
-            )}
-          </form>
-        </motion.div>
-
-        {/* RIGHT IMAGE */}
-        <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="flex justify-center items-center"
-        >
-          <div className="w-full max-w-md bg-white p-5 rounded-2xl shadow-lg border border-[#9B111E]/10">
-            <img
-              src="/contact.png"
-              alt="Haixun contact representative"
-              className="object-cover w-full h-full rounded-xl"
-            />
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
