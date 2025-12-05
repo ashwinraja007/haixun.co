@@ -131,8 +131,7 @@ const Contact: React.FC = () => {
                     <span
                       className="underline decoration-[4px] underline-offset-[6px]"
                       style={{ textDecorationColor: BRAND_RED }}
-                    >
-                    </span>
+                    ></span>
                   </h2>
 
                   <p className="max-w-xl text-[15px] leading-relaxed text-slate-600 mb-6 md:mb-8">
@@ -140,7 +139,11 @@ const Contact: React.FC = () => {
                   </p>
 
                   <form onSubmit={handleSubmit} className="space-y-4">
-                    <input type="hidden" name="Location" value={selectedLocation} />
+                    <input
+                      type="hidden"
+                      name="Location"
+                      value={selectedLocation}
+                    />
 
                     <div className="grid gap-4 md:grid-cols-2">
                       {/* First Name */}
@@ -237,7 +240,24 @@ const Contact: React.FC = () => {
                         <p className="text-sm font-semibold text-slate-900">
                           {t("contact.haveAnyQuestion")}
                         </p>
-                        <p className="text-sm text-slate-700">+86 75582222447</p>
+                        <p className="text-sm text-slate-700">
+                          +86 75582222447
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* fax */}
+                    <div className="flex items-center gap-4">
+                      <div className="flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-sm bg-[#E0001B]">
+                        <Phone className="h-5 w-5 md:h-6 md:w-6 text-white rotate-90" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-slate-900">
+                          Fax
+                        </p>
+                        <p className="text-sm text-slate-700">
+                          +86 75582192854
+                        </p>
                       </div>
                     </div>
 
@@ -250,7 +270,9 @@ const Contact: React.FC = () => {
                         <p className="text-sm font-semibold text-slate-900">
                           {t("contact.writeUsEmail")}
                         </p>
-                        <p className="text-sm text-slate-700">helen@haixun.co</p>
+                        <p className="text-sm text-slate-700">
+                          helen@haixun.co
+                        </p>
                       </div>
                     </div>
 
