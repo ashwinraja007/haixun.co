@@ -182,13 +182,13 @@ const Navigation = () => {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link to="/services/cfs" className="w-full cursor-pointer hover:bg-gray-100">
-                    {t("services.cfs.title")}
+                  <Link to="/services/fcl" className="w-full cursor-pointer hover:bg-gray-100">
+                    {t("services.fcl.title")}
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/services/sea-freight" className="w-full cursor-pointer hover:bg-gray-100">
-                    {t("services.oceanFreight.title")}
+                  <DropdownMenuItem asChild>
+                  <Link to="/services/warehousing" className="w-full cursor-pointer hover:bg-gray-100">
+                    {t("services.warehouse.title")}
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
@@ -196,9 +196,9 @@ const Navigation = () => {
                     {t("services.air.title")}
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/services/warehousing" className="w-full cursor-pointer hover:bg-gray-100">
-                    {t("services.warehouse.title")}
+                  <DropdownMenuItem asChild>
+                  <Link to="/services/customs-clearance" className="w-full cursor-pointer hover:bg-gray-100">
+                    {t("services.customs clearance.title")}
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
@@ -217,21 +217,8 @@ const Navigation = () => {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link to="/services/liquid-cargo" className="w-full cursor-pointer hover:bg-gray-100">
-                    {t("services.liquidCargo.title")}
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link
-                    to="/services/third-party-logistics"
-                    className="w-full cursor-pointer hover:bg-gray-100"
-                  >
-                    {t("services.thirdPartyLogistics.title")}
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/services/liner-agency" className="w-full cursor-pointer hover:bg-gray-100">
-                    {t("services.linerAgency.title")}
+                  <Link to="/services/oog-shipments" className="w-full cursor-pointer hover:bg-gray-100">
+                    {t("services.oog shipments.title")}
                   </Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
