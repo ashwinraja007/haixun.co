@@ -166,27 +166,48 @@ const HeroSection: React.FC = () => {
           z-20
           w-[calc(100%-2rem)]
           sm:w-auto sm:max-w-md md:max-w-xl
-          pr-4 sm:pr-6
+          px-4
           text-center sm:text-left
         "
       >
-        <h1 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-extrabold leading-tight drop-shadow-md text-white">
+        <h1
+          className="
+            text-3xl
+            sm:text-3xl
+            md:text-4xl
+            lg:text-5xl
+            font-extrabold
+            leading-tight
+            drop-shadow-md
+            text-white
+          "
+        >
           {t("hero.title")}
         </h1>
 
-        <p className="mt-2 sm:mt-4 md:mt-5 text-xs sm:text-sm md:text-lg leading-relaxed text-gray-200">
+        <p
+          className="
+            mt-4
+            text-base
+            sm:text-lg
+            md:text-xl
+            leading-relaxed
+            text-gray-200
+          "
+        >
           {t("hero.subtitle")}
         </p>
 
-        <div className="mt-4 sm:mt-7 flex justify-center sm:justify-start">
+        <div className="mt-6 flex justify-center sm:justify-start">
           <a
             href="#about"
             className="
               inline-flex items-center justify-center
               rounded-xl
               bg-[#BC0018]
-              px-5 sm:px-7 py-3
-              text-xs sm:text-sm
+              px-6 py-3.5
+              text-base
+              sm:text-sm
               font-semibold
               text-white
               shadow-lg shadow-black/30
@@ -200,6 +221,7 @@ const HeroSection: React.FC = () => {
         </div>
       </div>
 
+      {/* SLIDER CONTROLS (only when using images) */}
       {!useVideo && (
         <>
           <button
@@ -220,6 +242,7 @@ const HeroSection: React.FC = () => {
         </>
       )}
 
+      {/* SLIDER DOTS (only when using images) */}
       {!useVideo && (
         <div className="absolute bottom-28 left-0 right-0 z-20 flex items-center justify-center gap-2">
           {heroImages.map((_, i) => (
@@ -238,6 +261,7 @@ const HeroSection: React.FC = () => {
         </div>
       )}
 
+      {/* PORTAL LINKS */}
       <div className="absolute bottom-8 left-0 right-0 z-20">
         <div className="mx-auto grid max-w-6xl grid-cols-2 gap-3 px-4 sm:grid-cols-4">
           {portalLinks.map((link, i) => (
@@ -251,7 +275,9 @@ const HeroSection: React.FC = () => {
               <span className="rounded-full bg-white/20 p-2">
                 {link.icon}
               </span>
-              <span className="text-sm font-semibold">{link.title}</span>
+              <span className="text-xs sm:text-sm font-semibold">
+                {link.title}
+              </span>
             </a>
           ))}
         </div>
