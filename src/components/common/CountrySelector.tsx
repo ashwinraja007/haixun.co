@@ -1,12 +1,10 @@
 
-
 import React, { useState, useRef, useEffect } from 'react';
 import { ChevronDown, Globe } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -27,7 +25,6 @@ const countries: CountryData[] = [
   { country: "INDONESIA", company: "OECL", website: "https://www.oecl.sg/indonesia/home", priority: 6, flag: "/id.svg" },
   { country: "THAILAND", company: "OECL", website: "https://www.oecl.sg/thailand/home", priority: 4, flag: "/th.svg" },
   { country: "MYANMAR", company: "GC", website: "https://www.globalconsol.com", priority: 5, flag: "/mm.svg" },
- { country: "INDIA", company: "GGL", website: "https://www.gglindia.com", priority: 7, flag: "/in.svg" },
   { country: "AUSTRALIA", company: "GGL Aus", website: "https://www.gglaustralia.com", priority: 7, flag: "/au.svg" },
   { country: "BANGLADESH", company: "GC", website: "https://www.globalconsol.com", priority: 9, flag: "/bd.svg" },
   { country: "SRI LANKA", company: "GC", website: "https://www.globalconsol.com", priority: 10, flag: "/lk.svg" },
@@ -46,10 +43,8 @@ const findAustraliaCountry = () => {
 
 const CountrySelector = () => {
   const [isOpen, setIsOpen] = useState(false);
-  // This state is only used for tracking the selected country for redirection
-  const [selectedRedirectCountry, setSelectedRedirectCountry] = useState<CountryData>(findAustraliaCountry());
   const dropdownRef = useRef<HTMLDivElement>(null);
-  
+
   // Sort countries by priority, with Australia first
   const sortedCountries = [...countries].sort((a, b) => {
     if (a.country === "AUSTRALIA") return -1;
@@ -57,11 +52,63 @@ const CountrySelector = () => {
     return a.priority - b.priority;
   });
 
-  // Handle redirect
+  // Improved and more reliable redirect function with multiple fallbacks
   const handleCountrySelect = (country: CountryData) => {
-    setSelectedRedirectCountry(country);
-    window.open(country.website, '_blank', 'noopener,noreferrer');
+    // Format URL properly
+    let url = country.website;
+    if (url && !url.startsWith('http://') && !url.startsWith('https://')) {
+      url = 'https://' + url;
+    }
+    
+    console.log("Redirecting to:", url);
+    
+    // Close dropdown first to improve user experience
     setIsOpen(false);
+    
+    // Wait a moment after closing dropdown to ensure UI updates before redirect
+    setTimeout(() => {
+      // Method 1: Try window.open first (most reliable for new tabs)
+      try {
+        const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
+        // If window.open succeeded and wasn't blocked, we're done
+        if (newWindow && !newWindow.closed) {
+          return;
+        }
+      } catch (e) {
+        console.log("window.open failed, trying alternative method");
+      }
+      
+      // Method 2: Create a hidden link and programmatically click it
+      try {
+        const link = document.createElement('a');
+        link.href = url;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        
+        // Use a MouseEvent to simulate a more natural click
+        const clickEvent = new MouseEvent('click', {
+          bubbles: true,
+          cancelable: true,
+          view: window
+        });
+        link.dispatchEvent(clickEvent);
+        
+        // Cleanup the DOM
+        setTimeout(() => {
+          if (document.body.contains(link)) {
+            document.body.removeChild(link);
+          }
+        }, 100);
+      } catch (e) {
+        console.log("Link click simulation failed, using location as last resort");
+        
+        // Method 3: Last resort - direct location change
+        // This is less ideal as it navigates away from the current page
+        window.location.href = url;
+      }
+    }, 50); // Small delay to ensure the dropdown closes first
   };
 
   // Close dropdown when clicking outside
@@ -86,7 +133,7 @@ const CountrySelector = () => {
             variant="outline" 
             className="border-[#F6B100] bg-white text-gray-800 hover:bg-[#F6B100]/10 px-4 py-2 rounded-full flex items-center gap-2"
           >
-              {/* Show globe icon instead of Australia flag */}
+            {/* Show globe icon instead of Australia flag */}
             <Globe className="w-6 h-6 text-[#F6B100]" />
             <span className="flex items-center gap-1">
               Switch Country <ChevronDown className="h-3 w-3 ml-1 text-gray-500" />
@@ -96,18 +143,18 @@ const CountrySelector = () => {
         <DropdownMenuContent 
           align="center" 
           className="w-[280px] border border-amber-100 bg-white p-2 rounded-lg shadow-lg"
-          onPointerDownOutside={(e) => e.preventDefault()}
         >
           <ScrollArea className="h-[300px] w-full pr-2">
             <div className="grid grid-cols-1 gap-1 p-1">
               {sortedCountries.map((country) => (
-                <DropdownMenuItem
-                  key={country.country}
-                  onSelect={(e) => {
-                    e.preventDefault(); // Prevent closing on select
+                <div
+                  key={country.country + country.company}
+                  className="cursor-pointer hover:bg-amber-50 p-2 rounded-md flex items-center gap-2 transition-colors"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
                     handleCountrySelect(country);
                   }}
-                  className="cursor-pointer hover:bg-amber-50 p-2 rounded-md flex items-center gap-2 transition-colors"
                 >
                   <motion.div
                     whileHover={{ scale: 1.05 }}
@@ -122,7 +169,7 @@ const CountrySelector = () => {
                         />
                       ) : (
                         <div className="w-6 h-6 bg-gray-200 rounded-sm flex items-center justify-center">
-                         <Globe className="w-6 h-6 text-[#F6B100]" />
+                        <Globe className="w-6 h-6 text-[#F6B100]" />
                         </div>
                       )}
                     </div>
@@ -131,7 +178,7 @@ const CountrySelector = () => {
                       <div className="text-xs text-gray-500">{country.company}</div>
                     </div>
                   </motion.div>
-                </DropdownMenuItem>
+                </div>
               ))}
             </div>
           </ScrollArea>
