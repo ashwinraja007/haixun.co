@@ -163,7 +163,7 @@ const HeroSection: React.FC = () => {
 
         <div className="mt-6 flex justify-center sm:justify-start">
           <a
-            href="#about"
+            href="/contact"
             className="
               inline-flex items-center justify-center
               rounded-xl
