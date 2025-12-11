@@ -26,115 +26,106 @@ interface ContactSidebarProps {
   onClose: () => void;
 }
 
-const countries = [
+// Country data with translation keys
+const getCountryData = () => [
   {
     code: "in",
-    name: "India",
+    nameKey: "globalPresence.countries.india",
     lat: 9.9323,
     lng: 76.2996,
     cities: [
       {
-        name: "Kerala",
+        nameKey: "globalPresence.cities.kerala",
+        addressKey: "globalPresence.addresses.kerala",
         lat: 9.9323,
         lng: 76.2996,
-        address:
-          "CC 59/801A Elizabeth Memorial Building, Thevara Ferry Jn, Cochin 682013 , Kerala.",
         contacts: ["+91 484 4019192 / 93"],
       },
       {
-        name: "Mumbai",
+        nameKey: "globalPresence.cities.mumbai",
+        addressKey: "globalPresence.addresses.mumbai",
         lat: 19.01123,
         lng: 73.03715,
-        address:
-          "803 / 804, Shelton Cubix, Plot No. 87, Sector-15,CBD Belapur, Navi Mumbai, Maharastra - 400614.",
         contacts: ["022-35131688 / 35113475 / 35082586"],
       },
       {
-        name: "Mumbai-Andheri",
+        nameKey: "globalPresence.cities.mumbaiAndheri",
+        addressKey: "globalPresence.addresses.mumbaiAndheri",
         lat: 19.11303,
         lng: 72.86848,
-        address:
-          "503, Midas, Sahar Plaza Complex,Sir M.V Road,Andheri East, Mumbai 400059",
         contacts: ["+91 8879756838"],
       },
       {
-        name: "Delhi",
+        nameKey: "globalPresence.cities.delhi",
+        addressKey: "globalPresence.addresses.delhi",
         lat: 28.62748,
         lng: 77.2221,
-        address:
-          "903, Surya Kiran Building K.G Marg,Connaught Place New Delhi - 110001",
         contacts: ["+91 11 493224477 / 48 /49"],
       },
       {
-        name: "Bangalore",
+        nameKey: "globalPresence.cities.bangalore",
+        addressKey: "globalPresence.addresses.bangalore",
         lat: 13.01855,
         lng: 77.64191,
-        address:
-          "3C-964 IIIrd Cross Street,HRBR LAYOUT 1st Block,Kalayan Nagar Bannaswadi,Bengaluru - 560043.",
         contacts: ["+91 9841676259"],
       },
       {
-        name: "Kolkata",
+        nameKey: "globalPresence.cities.kolkata",
+        addressKey: "globalPresence.addresses.kolkata",
         lat: 22.5769,
         lng: 88.4341,
-        address:
-          "Merlin Matrix, 3rd floor, Room No. 303 10,D. N. BLOCK, SECTOR - V SALT LAKE CITY, Kolkata – 700091",
         contacts: ["+91 33 46025458 / 59 / 60/ 61"],
       },
     ],
   },
   {
     code: "my",
-    name: "Malaysia",
+    nameKey: "globalPresence.countries.malaysia",
     lat: 1.4842,
     lng: 103.7629,
     cities: [
       {
-        name: "PASIRGUDANG",
+        nameKey: "globalPresence.cities.pasirgudang",
+        addressKey: "globalPresence.addresses.pasirgudang",
         lat: 1.4842,
         lng: 103.7629,
-        address:
-          "Unit 20-03A, Level 20 Menara Zurich, 15 Jalan Dato Abdullah Tahir, 80300 Johor Bahru",
         contacts: ["+603-3319 2778 / 74 / 75, 79"],
       },
       {
-        name: "PORTKLANG",
+        nameKey: "globalPresence.cities.portklang",
+        addressKey: "globalPresence.addresses.portklang",
         lat: 2.9982,
         lng: 101.3831,
-        address:
-          "MTBBT 2, 3A-5, Jalan Batu Nilam 16, The Landmark (Behind AEON Mall), Bandar Bukit Tinggi 2, 41200, Klang, Selangor D.E",
         contacts: ["+603 - 3319 2778 / 74 / 75"],
       },
     ],
   },
   {
     code: "qa",
-    name: "Qatar",
+    nameKey: "globalPresence.countries.qatar",
     lat: 25.276987,
     lng: 51.520008,
     cities: [
       {
-        name: "Doha",
+        nameKey: "globalPresence.cities.doha",
+        addressKey: "globalPresence.addresses.doha",
         lat: 25.276987,
         lng: 51.520008,
-        address:
-          "Office no: 48, 2nd Floor, Al matar Centre, Old Airport Road Doha",
         contacts: ["0974 33622555"],
       },
     ],
   },
   {
     code: "sg",
-    name: "Singapore",
+    nameKey: "globalPresence.countries.singapore",
     lat: 1.3521,
     lng: 103.8198,
     cities: [
       {
-        name: "Singapore",
+        nameKey: "globalPresence.countries.singapore",
+        addressKey: "globalPresence.addresses.singapore",
         lat: 1.3521,
         lng: 103.8198,
-        address:
-          "Blk 511 Kampong Bahru Road, #03-01 Keppel Distripark, Singapore - 099447",
         contacts: ["+ 65 69080838"],
         email: "info.sg@globalconsol.com",
       },
@@ -142,39 +133,37 @@ const countries = [
   },
   {
     code: "id",
-    name: "Indonesia",
+    nameKey: "globalPresence.countries.indonesia",
     lat: -6.2088,
     lng: 106.8456,
     cities: [
       {
-        name: "Jakarta",
+        nameKey: "globalPresence.cities.jakarta",
+        addressKey: "globalPresence.addresses.jakarta",
         lat: -6.2088,
         lng: 106.8456,
-        address: "408, Lina Building, JL.HR Rasuna Said kav B7, Jakarta",
         contacts: ["+62 21 529 20292, 522 4887"],
       },
       {
-        name: "Surabaya",
+        nameKey: "globalPresence.cities.surabaya",
+        addressKey: "globalPresence.addresses.surabaya",
         lat: -7.2575,
         lng: 112.7521,
-        address:
-          "Japfa Indoland Center, Japfa Tower 1, Lantai 4/401-A JL Jend, Basuki Rahmat 129-137, Surabaya 60271",
         contacts: ["+62 21 529 20292, 522 4887"],
       },
     ],
   },
   {
     code: "lk",
-    name: "Sri Lanka",
+    nameKey: "globalPresence.countries.sriLanka",
     lat: 6.9271,
     lng: 79.8612,
     cities: [
       {
-        name: "Colombo",
+        nameKey: "globalPresence.cities.colombo",
+        addressKey: "globalPresence.addresses.colombo",
         lat: 6.9271,
         lng: 79.8612,
-        address:
-          "Ceylinco House, 9th Floor, No. 69, Janadhipathi Mawatha, Colombo 01, Sri Lanka",
         contacts: ["+94 114477499", "+94 114477494 / 98"],
         email: "thilanka.cmb@globalconsol.com",
       },
@@ -182,32 +171,30 @@ const countries = [
   },
   {
     code: "th",
-    name: "Thailand",
+    nameKey: "globalPresence.countries.thailand",
     lat: 13.72957,
     lng: 100.53095,
     cities: [
       {
-        name: "Bangkok",
+        nameKey: "globalPresence.cities.bangkok",
+        addressKey: "globalPresence.addresses.bangkok",
         lat: 13.72957,
         lng: 100.53095,
-        address:
-          "109 CCT Building, 3rd Floor, Rm.3, Surawong Road, Suriyawongse, Bangrak, Bangkok 10500 109",
         contacts: ["+662-634-3240", "+662-634-3942"],
       },
     ],
   },
   {
     code: "mm",
-    name: "Myanmar",
+    nameKey: "globalPresence.countries.myanmar",
     lat: 16.8409,
     lng: 96.1735,
     cities: [
       {
-        name: "Yangon",
+        nameKey: "globalPresence.cities.yangon",
+        addressKey: "globalPresence.addresses.yangon",
         lat: 16.8409,
         lng: 96.1735,
-        address:
-          "No.608, Room 8B, Bo Soon Pat Tower, Merchant Street, Pabedan Township, Yangon, Myanmar",
         contacts: ["+951 243158", "+951 377985, 243101"],
         email: "info@globalconsol.com",
       },
@@ -215,25 +202,23 @@ const countries = [
   },
   {
     code: "pk",
-    name: "Pakistan",
+    nameKey: "globalPresence.countries.pakistan",
     lat: 24.8608,
     lng: 67.0097,
     cities: [
       {
-        name: "Karachi",
+        nameKey: "globalPresence.cities.karachi",
+        addressKey: "globalPresence.addresses.karachi",
         lat: 24.8608,
         lng: 67.0097,
-        address:
-          "Suite No.301, 3rd Floor, Fortune Center, Shahrah-e-Faisal, Block 6, PECHS, Karachi, Pakistan",
         contacts: ["+92-300-8282511", "+92-21-34302281-5"],
         email: "info.pk@globalconsol.com",
       },
       {
-        name: "Lahore",
+        nameKey: "globalPresence.cities.lahore",
+        addressKey: "globalPresence.addresses.lahore",
         lat: 31.5204,
         lng: 74.3487,
-        address:
-          "Office # 301, 3rd Floor, Gulberg Arcade Main Market, Gulberg 2, Lahore, Pakistan",
         contacts: ["+92 42-35782306/07/08"],
         email: "info.pk@globalconsol.com",
       },
@@ -241,48 +226,46 @@ const countries = [
   },
   {
     code: "cn",
-    name: "China",
+    nameKey: "globalPresence.countries.china",
     lat: 22.54262,
     lng: 114.11696,
     cities: [
       {
-        name: "Shenzhen",
+        nameKey: "globalPresence.cities.shenzhen",
+        addressKey: "globalPresence.addresses.shenzhen",
         lat: 22.54262,
         lng: 114.11696,
-        address:
-          "13C02, Block A, Zhaoxin Huijin Plaza 3085 Shennan East Road, Luohu, Shenzhen.",
         contacts: [],
       },
     ],
   },
   {
     code: "us",
-    name: "United States (USA)",
+    nameKey: "globalPresence.countries.usa",
     lat: 41.8622,
     lng: -87.7209,
     cities: [
       {
-        name: "Chicago",
+        nameKey: "globalPresence.cities.chicago",
+        addressKey: "globalPresence.addresses.chicago",
         lat: 41.8622,
         lng: -87.7209,
-        address: "939 W. North Avenue, Suite 750, Chicago, IL 60642",
         contacts: ["+1 847 254 7320"],
         email: "info@gglusa.us",
       },
       {
-        name: "New York",
+        nameKey: "globalPresence.cities.newYork",
+        addressKey: "globalPresence.addresses.newYork",
         lat: 37.4545,
         lng: -122.1818,
-        address:
-          "New Jersey Branch, 33 Wood Avenue South Suite 600, Iselin, NJ 08830",
         contacts: ["+1 732 456 6780"],
         email: "info@gglusa.us",
       },
       {
-        name: "Los Angeles",
+        nameKey: "globalPresence.cities.losAngeles",
+        addressKey: "globalPresence.addresses.losAngeles",
         lat: 40.533,
         lng: -74.3481,
-        address: "2250 South Central Avenue Compton, CA 90220",
         contacts: ["+1 310 928 3903"],
         email: "info@gglusa.us",
       },
@@ -290,42 +273,36 @@ const countries = [
   },
   {
     code: "gb",
-    name: "United Kingdom (UK)",
+    nameKey: "globalPresence.countries.uk",
     lat: 51.5074,
     lng: -0.1278,
     cities: [
       {
-        name: "London",
+        nameKey: "globalPresence.cities.london",
+        addressKey: "globalPresence.addresses.london",
         lat: 51.5074,
         lng: -0.1278,
-        address:
-          "167-169 Great Portland Street 5th Floor, London W1W 5PF, United Kingdom",
         contacts: ["+44 (0) 203 393 9508"],
       },
     ],
   },
   {
     code: "au",
-    name: "Australia",
+    nameKey: "globalPresence.countries.australia",
     lat: -37.7064,
     lng: 144.8503,
     cities: [
       {
-        name: "Melbourne",
+        nameKey: "globalPresence.cities.melbourne",
+        addressKey: "globalPresence.addresses.melbourne",
         lat: -37.7064,
         lng: 144.8503,
-        address:
-          "Suite 5, 7-9 Mallet Road, Tullamarine, Victoria, 3043",
         contacts: ["Mob: +61 432254969", "Tel: +61 388205157"],
         email: "info@gglaustralia.com",
       },
     ],
   },
 ];
-
-const sortedCountries = [...countries].sort((a, b) =>
-  a.name.localeCompare(b.name)
-);
 
 const ContactSidebar: React.FC<ContactSidebarProps> = ({ isOpen, onClose }) => {
   const { t } = useTranslation();
@@ -337,6 +314,12 @@ const ContactSidebar: React.FC<ContactSidebarProps> = ({ isOpen, onClose }) => {
   }>({});
   const isMobile = useIsMobile();
 
+  // Get countries data and sort by translated name
+  const countriesData = getCountryData();
+  const sortedCountries = [...countriesData].sort((a, b) =>
+    t(a.nameKey).localeCompare(t(b.nameKey))
+  );
+
   useEffect(() => {
     iframeRef.current = document.querySelector("iframe");
   }, []);
@@ -346,17 +329,17 @@ const ContactSidebar: React.FC<ContactSidebarProps> = ({ isOpen, onClose }) => {
       const firstCountry = sortedCountries[0];
       const firstCity = firstCountry.cities[0];
       setSelectedLocation(firstCity);
-      setExpandedCountry(firstCountry.name);
+      setExpandedCountry(t(firstCountry.nameKey));
 
       const initialIndexes: { [countryName: string]: number } = {};
       sortedCountries.forEach((country) => {
-        initialIndexes[country.name] = 0;
+        initialIndexes[t(country.nameKey)] = 0;
       });
       setSelectedCityIndexes(initialIndexes);
 
       navigateToLocation(firstCity.lat, firstCity.lng, firstCity);
     }
-  }, []);
+  }, [t]);
 
   const navigateToLocation = (lat: number, lng: number, city: any = null) => {
     const iframe = document.querySelector(
@@ -379,16 +362,18 @@ const ContactSidebar: React.FC<ContactSidebarProps> = ({ isOpen, onClose }) => {
   };
 
   const handleCitySelection = (country: any, cityIndex: number) => {
+    const countryName = t(country.nameKey);
     setSelectedCityIndexes((prev) => ({
       ...prev,
-      [country.name]: cityIndex,
+      [countryName]: cityIndex,
     }));
 
     const selectedCity = country.cities[cityIndex];
     navigateToLocation(selectedCity.lat, selectedCity.lng, selectedCity);
   };
 
-  const isSelectedCity = (countryName: string, cityIndex: number) => {
+  const isSelectedCity = (countryNameKey: string, cityIndex: number) => {
+    const countryName = t(countryNameKey);
     return selectedCityIndexes[countryName] === cityIndex;
   };
 
@@ -434,14 +419,14 @@ const ContactSidebar: React.FC<ContactSidebarProps> = ({ isOpen, onClose }) => {
               >
                 {sortedCountries.map((country) => (
                   <AccordionItem
-                    key={country.name}
-                    value={country.name}
+                    key={country.nameKey}
+                    value={t(country.nameKey)}
                     className="border border-red-100 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all bg-white"
                   >
                     <AccordionTrigger
                       onClick={() => {
                         setExpandedCountry(
-                          expandedCountry === country.name ? null : country.name
+                          expandedCountry === t(country.nameKey) ? null : t(country.nameKey)
                         );
                         navigateToLocation(country.lat, country.lng);
                       }}
@@ -450,10 +435,10 @@ const ContactSidebar: React.FC<ContactSidebarProps> = ({ isOpen, onClose }) => {
                       <div className="flex items-center gap-3">
                         <img
                           src={`/${country.code}.svg`}
-                          alt={`${country.name} flag`}
+                          alt={`${t(country.nameKey)} flag`}
                           className="w-6 h-6 rounded-sm object-cover shadow-sm"
                         />
-                        <span className="font-medium">{country.name}</span>
+                        <span className="font-medium">{t(country.nameKey)}</span>
                       </div>
                     </AccordionTrigger>
 
@@ -466,7 +451,7 @@ const ContactSidebar: React.FC<ContactSidebarProps> = ({ isOpen, onClose }) => {
                                 variant="ghost"
                                 className={cn(
                                   "w-full justify-start text-sm p-2 h-auto rounded-md border transition-all shadow-sm",
-                                  isSelectedCity(country.name, index)
+                                  isSelectedCity(country.nameKey, index)
                                     ? "bg-red-100 hover:bg-red-150 border-red-300 text-red-800"
                                     : "bg-white hover:bg-red-50 border-gray-100 hover:border-red-200"
                                 )}
@@ -485,24 +470,24 @@ const ContactSidebar: React.FC<ContactSidebarProps> = ({ isOpen, onClose }) => {
                               >
                                 <MapPin className="w-4 h-4 mr-2 text-red-600 flex-shrink-0" />
                                 <span className="font-medium truncate">
-                                  {city.name}
+                                  {t(city.nameKey)}
                                 </span>
                                 <ChevronRight className="w-4 h-4 ml-auto text-red-300" />
                               </Button>
 
-                              {isSelectedCity(country.name, index) &&
-                                city.address && (
+                              {isSelectedCity(country.nameKey, index) &&
+                                city.addressKey && (
                                   <div className="mt-2 p-3 bg-gradient-to-br from-red-50 to-white rounded-lg border border-red-200 shadow text-sm animate-in fade-in duration-300 w-full">
                                     <h4 className="font-semibold text-red-700 mb-2 pb-1 border-b border-red-100 flex items-center">
                                       <span className="bg-gradient-to-r from-red-600 to-red-400 bg-clip-text text-transparent">
-                                        {city.name} {t("globalPresence.office")}
+                                        {t(city.nameKey)} {t("globalPresence.office")}
                                       </span>
                                     </h4>
 
                                     <div className="flex items-start mb-2 group hover:bg-red-50/50 p-2 rounded-md transition-colors w-full">
                                       <Home className="w-4 h-4 mr-2 text-red-500 mt-1 flex-shrink-0 group-hover:text-red-600 transition-colors" />
                                       <p className="text-gray-700 group-hover:text-gray-900 transition-colors text-sm break-words w-full overflow-hidden">
-                                        {city.address}
+                                        {t(city.addressKey)}
                                       </p>
                                     </div>
 
