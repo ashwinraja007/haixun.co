@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 import { getCurrentCountryFromPath, detectCountryByIP } from '@/services/countryDetection';
 // Import useTranslation
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next"; // <-- Added useTranslation
 
 interface CountryData {
   country: string;
@@ -19,7 +19,6 @@ interface CountryData {
   visibilityByCountry?: Record<string, boolean>;
 }
 
-// ... (countries array is the same)
 const countries: CountryData[] = [
   { country: "SINGAPORE", company: "GGL", website: "https://www.ggl.sg", priority: 1, flag: "/sg.svg" },
   { country: "SRI LANKA", company: "GC", website: "https://www.globalconsol.com/sri-lanka/home", priority: 2, flag: "/lk.svg" },
@@ -39,7 +38,7 @@ const countries: CountryData[] = [
 
 const CountrySelector = () => {
   // Use useTranslation hook
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [currentLang, setCurrentLang] = useState(i18n.language || "en");
 
   const [isOpen, setIsOpen] = useState(false);
@@ -62,9 +61,9 @@ const CountrySelector = () => {
     setIsOpen(false);
   };
 
-  const langLabel = currentLang === "zh" ? "EN" : "中文";
+  // The label for the language switch button
+  const langLabel = currentLang === "zh" ? "EN" : t("nav.switchcountry") ? t("nav.switchcountry") : "中文";
   
-  // ... (useEffect for IP detection is the same)
   useEffect(() => {
     const detect = async () => {
       try {
@@ -81,7 +80,7 @@ const CountrySelector = () => {
     };
     detect();
   }, []);
-  // Keep state in sync if i18n language changes globally
+  
   useEffect(() => {
     setCurrentLang(i18n.language);
   }, [i18n.language]);
@@ -140,12 +139,12 @@ const CountrySelector = () => {
         <DropdownMenuTrigger asChild>
           <Button
             variant="outline"
-            // Adjusted button styles for better visibility on both Navigation backgrounds
             className="bg-red-600 text-white border-red-600 hover:bg-red-700 hover:border-red-700 px-4 py-2 rounded-full flex items-center gap-2 focus-visible:ring-red-500"
           >
             <Globe className="w-6 h-6 text-white" />
             <span className="flex items-center gap-1">
-              Switch Country <ChevronDown className="h-3 w-3 ml-1 text-white" />
+              {/* Use translation for "Switch Country" */}
+              {t("nav.switchcountry") || "Switch Country"} <ChevronDown className="h-3 w-3 ml-1 text-white" />
             </span>
           </Button>
         </DropdownMenuTrigger>
@@ -163,7 +162,7 @@ const CountrySelector = () => {
                     e.preventDefault();
                     handleCountrySelect(country);
                   }}
-                  className="cursor-pointer hover:bg-red-50 py-4 px-3 min-h-[60px] rounded-md flex items-center gap-3 transition-all focus:bg-red-100" // Added focus styles
+                  className="cursor-pointer hover:bg-red-50 py-4 px-3 min-h-[60px] rounded-md flex items-center gap-3 transition-all focus:bg-red-100"
                 >
                   <motion.div whileHover={{ scale: 1.02 }} className="flex items-center w-full">
                     <div className="flex-shrink-0">
@@ -189,7 +188,7 @@ const CountrySelector = () => {
             </div>
           </ScrollArea>
 
-          {/* ⭐⭐⭐ Language Switch Button added to the bottom of the dropdown */}
+          {/* Language Switch Button added to the bottom of the dropdown */}
           <div className="p-2 border-t border-gray-100 mt-2">
             <Button
               type="button"
