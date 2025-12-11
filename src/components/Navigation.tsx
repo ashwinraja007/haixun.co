@@ -1,386 +1,207 @@
-import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ChevronDown } from "lucide-react";
-import { useAuth } from "@/contexts/AuthContext";
-import { useTranslation } from "react-i18next";
-import { getCurrentCountryFromPath, detectCountryByIP } from "@/services/countryDetection";
+import React, { useState, useRef, useEffect } from 'react';
+import { ChevronDown, Globe } from 'lucide-react';
+import { Button } from "@/components/ui/button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { motion } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
+import { getCurrentCountryFromPath, detectCountryByIP } from '@/services/countryDetection';
+// Import useTranslation
+import { useTranslation } from "react-i18next"; // <-- Added useTranslation
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+interface CountryData {
+  country: string;
+  company: string;
+  website: string;
+  priority: number;
+  flag?: string;
+  route?: string;
+  visibilityByCountry?: Record<string, boolean>;
+}
 
-// Import the selector we just created
-import CountrySelector from "@/components/common/CountrySelector";
+const countries: CountryData[] = [
+  { country: "SINGAPORE", company: "GGL", website: "https://www.ggl.sg", priority: 1, flag: "/sg.svg" },
+  { country: "SRI LANKA", company: "GC", website: "https://www.globalconsol.com/sri-lanka/home", priority: 2, flag: "/lk.svg" },
+  { country: "MYANMAR", company: "GC", website: "https://www.globalconsol.com/myanmar/home", priority: 3, flag: "/mm.svg" },
+  { country: "BANGLADESH", company: "GC", website: "https://www.globalconsol.com/bangladesh/home", priority: 4, flag: "/bd.svg" },
+  { country: "PAKISTAN", company: "GC", website: "https://www.globalconsol.com/pakistan/home", priority: 5, flag: "/pk.svg" },
+  { country: "MALAYSIA", company: "OECL", website: "https://oecl.sg/malaysia", priority: 6, flag: "/my.svg", visibilityByCountry: { BANGLADESH: false } },
+  { country: "INDONESIA", company: "OECL", website: "https://oecl.sg/indonesia", priority: 7, flag: "/id.svg", visibilityByCountry: { BANGLADESH: false } },
+  { country: "THAILAND", company: "OECL", website: "https://oecl.sg/thailand", priority: 8, flag: "/th.svg", visibilityByCountry: { BANGLADESH: false } },
+  { country: "INDIA", company: "GGL", website: "https://gglindia.com", priority: 8, flag: "/in.svg" },
+  { country: "AUSTRALIA", company: "GGL", website: "https://www.gglaustralia.com/", priority: 10, flag: "/au.svg" },
+  { country: "QATAR", company: "ONE GLOBAL", website: "https://oneglobalqatar.com/", priority: 11, flag: "/qa.svg" },
+  { country: "USA", company: "GGL", website: "https://gglusa.us/", priority: 14, flag: "/us.svg", visibilityByCountry: { MYANMAR: false } },
+  { country: "UK", company: "Moltech", website: "https://moltech.uk/", priority: 15, flag: "/gb.svg" }
+];
 
-const Navigation = () => {
-  const { t, i18n } = useTranslation();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isCompanyDropdownOpen, setIsCompanyDropdownOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const location = useLocation();
-  const { user } = useAuth(); // kept if you use auth logic later
 
-  const [currentLang, setCurrentLang] = useState(i18n.language || "en");
+const CountrySelector = () => {
+  // Use useTranslation hook
+  const { t, i18n } = useTranslation();
+  const [currentLang, setCurrentLang] = useState(i18n.language || "en");
 
-  // Load preferred language from localStorage
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem("preferredLanguage");
-      if (stored && stored !== currentLang) {
-        i18n.changeLanguage(stored);
-        setCurrentLang(stored);
-      }
-    } catch {}
-  }, []);
+  const [isOpen, setIsOpen] = useState(false);
+  const [ipCountry, setIpCountry] = useState<{ code: string; name: string } | null>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
 
-  // Keep state in sync if i18n language changes
-  useEffect(() => {
-    setCurrentLang(i18n.language);
-  }, [i18n.language]);
+  const detected = getCurrentCountryFromPath(location.pathname) ?? { code: "SG", name: "Singapore" };
+  const currentCountryName = detected.name?.toUpperCase() || "SINGAPORE";
 
-  // Toggle language EN <-> ZH and persist
-  const handleLanguageSwitch = () => {
-    const next = currentLang === "zh" ? "en" : "zh";
-    i18n.changeLanguage(next);
-    setCurrentLang(next);
-    try {
-      localStorage.setItem("preferredLanguage", next);
-    } catch {}
-  };
+  // Language logic derived from Navigation component
+  const handleLanguageSwitch = () => {
+    const next = currentLang === "zh" ? "en" : "zh";
+    i18n.changeLanguage(next);
+    setCurrentLang(next);
+    try {
+      localStorage.setItem("preferredLanguage", next);
+    } catch {}
+    // Optionally close the dropdown after switching language
+    setIsOpen(false);
+  };
 
-  // Handle scroll
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  // The label for the language switch button
+  const langLabel = currentLang === "zh" ? "EN" : t("nav.switchcountry") ? t("nav.switchcountry") : "中文";
+  
+  useEffect(() => {
+    const detect = async () => {
+      try {
+        const saved = localStorage.getItem("preferredCountry");
+        if (saved) {
+          setIpCountry(JSON.parse(saved));
+          return;
+        }
+        const c = await detectCountryByIP();
+        setIpCountry(c);
+      } catch {
+        setIpCountry(null);
+      }
+    };
+    detect();
+  }, []);
+  
+  useEffect(() => {
+    setCurrentLang(i18n.language);
+  }, [i18n.language]);
 
-  const isActive = (path: string) => location.pathname === path;
-  const isHomePage = location.pathname === "/";
 
-  // --- Logic for Text Colors ---
-  // If we are scrolled OR not on homepage, we need dark text (white background).
-  // Otherwise, we need white text (transparent background).
-  const isDarkTextMode = isScrolled || !isHomePage;
+  const visibleCountries = countries.filter(c =>
+    !c.visibilityByCountry || c.visibilityByCountry[currentCountryName] !== false
+  );
 
-  const desktopLinkColor = (active: boolean) =>
-    active
-      ? "text-red-600"
-      : isDarkTextMode
-      ? "text-gray-900"
-      : "text-white";
+  const sortedCountries = [...visibleCountries].sort((a, b) => {
+    if (a.priority === b.priority) {
+      return (a.company || "").localeCompare(b.company || "");
+    }
+    return a.priority - b.priority;
+  });
 
-  // Styles for Country Selector based on mode
-  const selectorBtnClass = isDarkTextMode
-    ? "border-gray-900/30 hover:bg-gray-100"
-    : "border-white/40 hover:bg-white/10";
-    
-  const selectorTextClass = isDarkTextMode
-    ? "text-gray-900"
-    : "text-white";
+  const handleCountrySelect = (country: CountryData) => {
+    localStorage.setItem("preferredCountry", JSON.stringify({
+      name: country.country,
+      code: country.flag?.split('/')[1]?.split('.')[0] || ''
+    }));
 
-  const desktopLangButtonClasses =
-    "inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-colors";
+    const currentPath = location.pathname;
+    const slug = country.country.toLowerCase().replace(/\s+/g, '-');
+    let targetRoute = country.route;
 
-  const langLabel = currentLang === "zh" ? "EN" : "中文";
+    if (currentPath.includes('/about-us')) {
+      const prefix = country.country === 'SINGAPORE' ? '' : `/${slug}`;
+      targetRoute = `${prefix}/about-us`;
+    } else if (currentPath.includes('/contact')) {
+      const prefix = country.country === 'SINGAPORE' ? '' : `/${slug}`;
+      targetRoute = `${prefix}/contact`;
+    }
 
-  return (
-    <header
-      className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${
-        isDarkTextMode ? "bg-white shadow-md" : "bg-transparent"
-      }`}
-    >
-      <div className="container mx-auto px-3 sm:px-4 md:px-6 py-2 sm:py-4 lg:py-[18px]">
-        <div className="flex justify-between items-center">
-          {/* Logo */}
-          <div className="flex items-center">
-            <Link to="/">
-              <img
-                src="/haixun-logo.svg"
-                alt="Haixun Global Co., Ltd"
-                className="h-8 sm:h-12 lg:h-14 w-auto object-contain"
-              />
-            </Link>
-          </div>
+    if (targetRoute) {
+      window.location.href = targetRoute;
+    } else {
+      window.open(country.website, '_blank', 'noopener,noreferrer');
+    }
+    setIsOpen(false);
+  };
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-6">
-            <Link
-              to="/"
-              className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${desktopLinkColor(
-                isActive("/")
-              )}`}
-            >
-              {t("nav.home") || "Home"}
-            </Link>
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
-            {/* Services Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger
-                className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors flex items-center gap-1 ${
-                  location.pathname.includes("/services")
-                    ? "text-red-600"
-                    : desktopLinkColor(false)
-                }`}
-              >
-                {t("nav.services") || "Services"} <ChevronDown className="w-4 h-4" />
-              </DropdownMenuTrigger>
+  return (
+    <div ref={dropdownRef} className="relative z-50 flex items-center gap-2">
+      <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+        <DropdownMenuTrigger asChild>
+          <Button
+            variant="outline"
+            className="bg-red-600 text-white border-red-600 hover:bg-red-700 hover:border-red-700 px-4 py-2 rounded-full flex items-center gap-2 focus-visible:ring-red-500"
+          >
+            <Globe className="w-6 h-6 text-white" />
+            <span className="flex items-center gap-1">
+              {/* Use translation for "Switch Country" */}
+              {t("nav.switchcountry") || "Switch Country"} <ChevronDown className="h-3 w-3 ml-1 text-white" />
+            </span>
+          </Button>
+        </DropdownMenuTrigger>
 
-              <DropdownMenuContent className="w-64 bg-white border-gray-200 shadow-lg z-[100]">
-                <DropdownMenuItem asChild>
-                  <Link to="/services/lcl">{t("services.lcl.title") || "LCL"}</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/services/fcl">{t("services.fcl.title") || "FCL"}</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/services/warehousing">{t("services.warehouse.title") || "Warehousing"}</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/services/project-cargo">{t("services.project.title") || "Project Cargo"}</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/services/air-freight">{t("services.air.title") || "Air Freight"}</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/services/customs-clearance">{t("services.customs.title") || "Customs Clearance"}</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/services/import">{t("services.import.title") || "Import Services"}</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/services/consolidation">{t("services.consolidation.title") || "Buyer's Consolidation"}</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/services/oog-shipments">{t("services.oog.title") || "OOG Shipments"}</Link>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+        <DropdownMenuContent
+          align="center"
+          className="w-[280px] h-[400px] border border-gray-200 bg-white p-2 rounded-lg shadow-xl overflow-y-auto flex flex-col"
+        >
+          <ScrollArea className="flex-1 w-full pr-2 custom-scrollbar">
+            <div className="grid grid-cols-1 gap-1 p-1">
+              {sortedCountries.map(country => (
+                <DropdownMenuItem
+                  key={`${country.country}-${country.company}`}
+                  onSelect={(e) => {
+                    e.preventDefault();
+                    handleCountrySelect(country);
+                  }}
+                  className="cursor-pointer hover:bg-red-50 py-4 px-3 min-h-[60px] rounded-md flex items-center gap-3 transition-all focus:bg-red-100"
+                >
+                  <motion.div whileHover={{ scale: 1.02 }} className="flex items-center w-full">
+                    <div className="flex-shrink-0">
+                      {country.flag ? (
+                        <img
+                          src={country.flag}
+                          alt={`${country.country} flag`}
+                          className="w-6 h-6 rounded-sm shadow-sm object-cover"
+                        />
+                      ) : (
+                        <div className="w-6 h-6 bg-gray-200 rounded-sm flex items-center justify-center">
+                          <Globe className="w-6 h-6 text-gray-500" />
+                        </div>
+                      )}
+                    </div>
+                    <div className="ml-3 flex-1">
+                      <div className="font-medium text-sm">{country.country}</div>
+                      <div className="text-xs text-gray-500">{country.company}</div>
+                    </div>
+                  </motion.div>
+                </DropdownMenuItem>
+              ))}
+            </div>
+          </ScrollArea>
 
-            <Link
-              to="/about-us"
-              className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${desktopLinkColor(
-                isActive("/about-us")
-              )}`}
-            >
-              {t("nav.about") || "About Us"}
-            </Link>
-
-            <Link
-              to="/blog"
-              className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${desktopLinkColor(
-                isActive("/blog")
-              )}`}
-            >
-              {t("nav.news") || "News"}
-            </Link>
-
-            <Link
-              to="/advantages"
-              className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${desktopLinkColor(
-                isActive("/advantages")
-              )}`}
-            >
-              {t("nav.advantage") || "Advantage"}
-            </Link>
-
-            <Link
-              to="/global-presence"
-              className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${desktopLinkColor(
-                isActive("/global-presence")
-              )}`}
-            >
-              {t("nav.globalPresence") || "Global Presence"}
-            </Link>
-
-            <Link
-              to="/contact"
-              className={`nav-link font-medium text-base xl:text-lg hover:text-red-600 transition-colors ${desktopLinkColor(
-                isActive("/contact")
-              )}`}
-            >
-              {t("nav.contact") || "Contact"}
-            </Link>
-
-            {/* ⭐⭐⭐ Desktop Country Selector (Adaptive Colors) */}
-            <CountrySelector />
-
-            {/* Desktop language button */}
-            <button
-              type="button"
-              onClick={handleLanguageSwitch}
-              className={`${desktopLangButtonClasses} ${
-                isDarkTextMode
-                  ? "border-red-600 text-red-600 hover:bg-red-600 hover:text-white"
-                  : "border-white/40 text-white hover:bg-white hover:text-black"
-              }`}
-            >
-              {langLabel}
-            </button>
-          </div>
-
-          {/* Mobile Toggle */}
-          <div className="lg:hidden flex items-center gap-2">
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 mr-2"
-              aria-label="Toggle Menu"
-            >
-              {isMenuOpen ? (
-                <X
-                  className={isDarkTextMode ? "text-gray-900" : "text-white"}
-                  size={24}
-                />
-              ) : (
-                <Menu
-                  className={isDarkTextMode ? "text-gray-900" : "text-white"}
-                  size={24}
-                />
-              )}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Navigation */}
-      {isMenuOpen && (
-        <div className="lg:hidden absolute top-full left-0 right-0 bg-white py-4 shadow-md border-t max-h-[calc(100vh-56px)] overflow-y-auto animate-fade-in">
-          <div className="container mx-auto px-4">
-            <nav className="flex flex-col space-y-4">
-              <Link
-                to="/"
-                className={`font-medium py-2 text-lg hover:text-red-600 transition-colors ${
-                  isActive("/") ? "text-red-600" : "text-gray-900"
-                }`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {t("nav.home") || "Home"}
-              </Link>
-
-              {/* Collapsible services */}
-              <div className="flex flex-col">
-                <button
-                  onClick={() => setIsCompanyDropdownOpen(!isCompanyDropdownOpen)}
-                  className="flex items-center justify-between font-medium py-2 text-lg hover:text-red-600 transition-colors text-gray-900"
-                >
-                  {t("nav.services") || "Services"}
-                  <ChevronDown
-                    className={`w-4 h-4 transition-transform ${
-                      isCompanyDropdownOpen ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
-                {isCompanyDropdownOpen && (
-                  <div className="flex flex-col pl-4 space-y-2 mt-2">
-                    <Link to="/services/lcl" onClick={() => setIsMenuOpen(false)}>
-                      {t("services.lcl.title") || "LCL"}
-                    </Link>
-                    <Link to="/services/fcl" onClick={() => setIsMenuOpen(false)}>
-                      {t("services.fcl.title") || "FCL"}
-                    </Link>
-                    <Link to="/services/warehousing" onClick={() => setIsMenuOpen(false)}>
-                      {t("services.warehouse.title") || "Warehousing"}
-                    </Link>
-                    <Link to="/services/project-cargo" onClick={() => setIsMenuOpen(false)}>
-                      {t("services.project.title") || "Project Cargo"}
-                    </Link>
-                    <Link to="/services/air-freight" onClick={() => setIsMenuOpen(false)}>
-                      {t("services.air.title") || "Air Freight"}
-                    </Link>
-                    <Link
-                      to="/services/customs-clearance"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      {t("services.customs.title") || "Customs Clearance"}
-                    </Link>
-                    <Link to="/services/import" onClick={() => setIsMenuOpen(false)}>
-                      {t("services.import.title") || "Import Services"}
-                    </Link>
-                    <Link to="/services/consolidation" onClick={() => setIsMenuOpen(false)}>
-                      {t("services.consolidation.title") || "Consolidation"}
-                    </Link>
-                    <Link to="/services/oog-shipments" onClick={() => setIsMenuOpen(false)}>
-                      {t("services.oog.title") || "OOG Shipments"}
-                    </Link>
-                  </div>
-                )}
-              </div>
-
-              <Link
-                to="/about-us"
-                className={`font-medium py-2 text-lg hover:text-red-600 transition-colors ${
-                  isActive("/about-us") ? "text-red-600" : "text-gray-900"
-                }`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {t("nav.about") || "About Us"}
-              </Link>
-
-              <Link
-                to="/blog"
-                className={`font-medium py-2 text-lg hover:text-red-600 transition-colors ${
-                  isActive("/blog") ? "text-red-600" : "text-gray-900"
-                }`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {t("nav.news") || "News"}
-              </Link>
-
-              <Link
-                to="/advantages"
-                className={`font-medium py-2 text-lg hover:text-red-600 transition-colors ${
-                  isActive("/advantages") ? "text-red-600" : "text-gray-900"
-                }`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {t("nav.advantage") || "Advantage"}
-              </Link>
-
-              <Link
-                to="/global-presence"
-                className={`font-medium py-2 text-lg hover:text-red-600 transition-colors ${
-                  isActive("/global-presence") ? "text-red-600" : "text-gray-900"
-                }`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {t("nav.globalPresence") || "Global Presence"}
-              </Link>
-
-              <Link
-                to="/contact"
-                className={`font-medium py-2 text-lg hover:text-red-600 transition-colors ${
-                  isActive("/contact") ? "text-red-600" : "text-gray-900"
-                }`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {t("nav.contact") || "Contact"}
-              </Link>
-
-              {/* ⭐⭐⭐ Mobile Country Selector (Always dark text on white bg) */}
-              <div className="py-2">
-                <CountrySelector />
-              </div>
-
-              {/* Mobile language button */}
-              <button
-                type="button"
-                onClick={() => {
-                  handleLanguageSwitch();
-                  setIsMenuOpen(false);
-                }}
-                className="mt-2 inline-flex w-fit items-center gap-1.5 rounded-full border border-red-600 px-3 py-1.5 text-xs font-medium text-red-600 hover:bg-red-600 hover:text-white transition-colors"
-              >
-                {langLabel}
-              </button>
-            </nav>
-          </div>
-        </div>
-      )}
-    </header>
-  );
+          {/* Language Switch Button added to the bottom of the dropdown */}
+          <div className="p-2 border-t border-gray-100 mt-2">
+            <Button
+              type="button"
+              onClick={handleLanguageSwitch}
+              className="w-full inline-flex items-center justify-center gap-1.5 rounded-md border border-red-600 bg-white px-3 py-2 text-sm font-medium text-red-600 hover:bg-red-600 hover:text-white transition-colors"
+            >
+              Switch Language: **{langLabel}**
+            </Button>
+          </div>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
+  );
 };
 
-export default Navigation;
+export default CountrySelector;
