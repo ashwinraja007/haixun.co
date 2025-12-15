@@ -10,16 +10,25 @@
     "switchcountry": "Switch Country"
   },
   "hero": {
-    "title": "Trusted Project Cargo Partner",
-    "subtitle": "At Haixun, we excel in providing customized logistics solutions for project cargo, ensuring client deadlines and requirements are met with precision.",
-    "description": "With expertise in handling oversized and sensitive shipments, we have successfully served clients such as Caterpillar China, electric car exporters, and construction companies.",
-    "ourServices": "Our Services",
-    "contactUs": "Contact Us",
-    "customerPortal": "Customer Portal",
-    "partnerPortal": "Partner Portal",
-    "tracking": "Tracking",
-    "sailingSchedule": "Sailing Schedule"
+  "slide1": {
+    "title": "Welcome to Haixun",
+    "subtitle": "Haixun Global Co., Ltd., headquartered in Shenzhen, China, provides end-to-end logistics solutions across sea, land, and air for global trade."
   },
+  "slide2": {
+    "title": "LCL Services",
+    "subtitle": "HAIXUN operates its own consolidation services across multiple trade routes, offering flexible schedules, competitive pricing, and full cost transparency."
+  },
+  "slide3": {
+    "title": "FCL Services",
+    "subtitle": "With our own fleet of containers and strong carrier partnerships, HAIXUN delivers reliable full container load solutions with optimized cost and efficiency."
+  },
+
+  "contactUs": "Contact Us",
+  "customerPortal": "Customer Portal",
+  "partnerPortal": "Partner Portal",
+  "tracking": "Tracking",
+  "sailingSchedule": "Sailing Schedule"
+},
   "services": {
     "title": "Our Services",
     "subtitle": "Comprehensive logistics solutions tailored to your needs",
