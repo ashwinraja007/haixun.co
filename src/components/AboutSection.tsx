@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Globe2, ShieldCheck, Phone } from "lucide-react";
+import { Phone } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 const AboutSection: React.FC = () => {
@@ -97,31 +97,6 @@ const AboutSection: React.FC = () => {
             {t("about.paragraph2")}
           </p>
 
-          <div className="mt-8 space-y-7">
-            <div className="flex items-start gap-4">
-              <Globe2 className="w-8 h-8" style={{ color: ACCENT }} />
-              <div>
-                <h4 className="font-bold text-gray-900 text-lg">
-                  {t("about.fastDelivery")}
-                </h4>
-                <p className="text-gray-600 text-sm">
-                  {t("about.fastDeliveryDesc")}
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <ShieldCheck className="w-8 h-8" style={{ color: ACCENT }} />
-              <div>
-                <h4 className="font-bold text-gray-900 text-lg">
-                  {t("about.safeDelivery")}
-                </h4>
-                <p className="text-gray-600 text-sm">
-                  {t("about.safeDeliveryDesc")}
-                </p>
-              </div>
-            </div>
-          </div>
 
           <div className="mt-10 flex flex-col sm:flex-row items-center gap-6">
             <Link to="/contact">
