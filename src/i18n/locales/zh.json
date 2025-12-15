@@ -168,7 +168,7 @@
   "yearsOfGrowth": "发展年限",
   "yearsNumber": "9+"
   },
- "advantages": {
+  "advantages": {
   "title": "我们的优势",
   "subtitle": "以运力、服务和专业实力提供卓越价值",
   "transportation": {
@@ -182,8 +182,8 @@
   "team": {
     "title": "团队人员",
     "description": "公司拥有一支高效且富有竞争力的运营团队，多年从事国内货物运输服务，具备严谨完善的运输组织能力。"
-  }
-}
+    }
+  },
   "contact": {
     "title": "联系我们",
     "subtitle": "需要联系我们吗？",
