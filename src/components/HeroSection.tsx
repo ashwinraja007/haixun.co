@@ -108,22 +108,22 @@ const HeroSection: React.FC = () => {
     return () => document.removeEventListener("visibilitychange", onVis);
   }, [prefersReducedMotion]);
 
-  /* ---------------- BACKGROUND IMAGE AUTOPLAY ---------------- */
+  /* ---------------- BACKGROUND IMAGE AUTOPLAY (SLOWER) ---------------- */
   useEffect(() => {
     if (prefersReducedMotion || !autoPlay || useVideo) return;
 
     const id = setInterval(() => {
       setBgIndex((prev) => (prev + 1) % heroImages.length);
-    }, 5000);
+    }, 9000); // ⏳ slower background slide
 
     return () => clearInterval(id);
   }, [heroImages.length, prefersReducedMotion, autoPlay, useVideo]);
 
-  /* ---------------- HERO TEXT AUTOSCROLL ---------------- */
+  /* ---------------- HERO TEXT AUTOSCROLL (SLOWER) ---------------- */
   useEffect(() => {
     const id = setInterval(() => {
       setContentIndex((prev) => (prev + 1) % heroContents.length);
-    }, 4000);
+    }, 10000); // ⏳ slower text slide
 
     return () => clearInterval(id);
   }, [heroContents.length]);
@@ -171,12 +171,11 @@ const HeroSection: React.FC = () => {
         )}
       </div>
 
-      {/* ---------- GRADIENT OVERLAY (DESKTOP) ---------- */}
+      {/* ---------- GRADIENT OVERLAY ---------- */}
       <div className="hidden sm:block absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent z-[5]" />
 
       {/* ---------- CONTENT ---------- */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:left-40 lg:left-56 md:-translate-x-0 z-20 w-[calc(100%-2rem)] sm:max-w-md md:max-w-xl px-4 text-center sm:text-left">
-        {/* AUTO SCROLLING TEXT */}
         <div className="relative h-[150px] overflow-hidden">
           {heroContents.map((item, i) => (
             <div
@@ -198,7 +197,6 @@ const HeroSection: React.FC = () => {
           ))}
         </div>
 
-        {/* CTA */}
         <div className="mt-6 flex justify-center sm:justify-start">
           <a
             href="/contact"
