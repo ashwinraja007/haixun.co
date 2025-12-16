@@ -17,7 +17,6 @@ const Footer = () => {
   const { t, i18n } = useTranslation();
   const location = useLocation();
 
-  // Move keyAddresses inside useMemo to react to language changes
   const offices = useMemo(() => {
     const keyAddresses = [
       {
@@ -37,7 +36,9 @@ const Footer = () => {
     const all = keyAddresses.flatMap((c) =>
       c.offices.map((o) => ({ ...o, country: c.country }))
     );
+
     const current = t("globalPresence.countries.china");
+
     return [
       ...all.filter((o) => o.country === current),
       ...all.filter((o) => o.country !== current),
@@ -53,7 +54,10 @@ const Footer = () => {
 
   useEffect(() => {
     if (paused || offices.length <= 1) return;
-    const timer = setInterval(() => setIdx((i) => (i + 1) % offices.length), intervalMs);
+    const timer = setInterval(
+      () => setIdx((i) => (i + 1) % offices.length),
+      intervalMs
+    );
     return () => clearInterval(timer);
   }, [paused, offices.length]);
 
@@ -70,14 +74,14 @@ const Footer = () => {
 
   return (
     <footer className="pt-16 pb-8 text-white relative overflow-hidden bg-[#9B111E]">
-      <div className="absolute inset-0 bg-gradient-to-t from-[#6E0C13] via-[#9B111E] to-[#B92D35] opacity-90"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#6E0C13] via-[#9B111E] to-[#B92D35] opacity-90" />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="h-1 bg-gradient-to-r from-white/50 via-white/30 to-white/50 rounded-full mb-8" />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-6 lg:gap-4">
 
-          {/* Column 1 */}
+          {/* COLUMN 1 */}
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -96,13 +100,16 @@ const Footer = () => {
               </div>
             </div>
 
-            <h3 className="text-lg font-semibold mb-2">{t("footer.company")}</h3>
-            <p className="text-sm md:text-base max-w-xs text-left leading-relaxed mb-4 text-white/90">
+            <h3 className="text-lg font-semibold mb-2">
+              {t("footer.company")}
+            </h3>
+
+            <p className="text-sm md:text-base max-w-xs leading-relaxed text-white/90">
               {t("footer.description")}
             </p>
           </motion.div>
 
-          {/* Column 2 */}
+          {/* COLUMN 2 */}
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -111,7 +118,10 @@ const Footer = () => {
             transition={{ delay: 0.2 }}
             className="flex flex-col items-start md:items-end lg:items-start lg:pl-10"
           >
-            <h3 className="font-bold text-xl mb-4">{t("footer.usefulLinks")}</h3>
+            <h3 className="font-bold text-xl mb-4">
+              {t("footer.usefulLinks")}
+            </h3>
+
             <div className="flex flex-col gap-3">
               {[
                 { name: t("nav.home"), path: "/" },
@@ -133,7 +143,7 @@ const Footer = () => {
             </div>
           </motion.div>
 
-          {/* Column 3 — NO ARROWS, NO DOTS */}
+          {/* COLUMN 3 — CONTACT */}
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -142,10 +152,12 @@ const Footer = () => {
             transition={{ delay: 0.4 }}
             className="lg:pl-10"
           >
-            <h3 className="font-bold text-xl mb-4">{t("footer.contactUs")}</h3>
+            <h3 className="font-bold text-xl mb-4">
+              {t("footer.contactUs")}
+            </h3>
 
             <div
-              className="relative min-h-[220px] overflow-visible"
+              className="relative min-h-[240px]"
               onMouseEnter={() => setPaused(true)}
               onMouseLeave={() => setPaused(false)}
             >
@@ -155,15 +167,15 @@ const Footer = () => {
                   initial={{ y: 24, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   exit={{ y: -24, opacity: 0 }}
-                  transition={{ duration: slideMs / 1000, ease: "easeOut" }}
-                  className="space-y-3"
+                  transition={{ duration: slideMs / 1000 }}
+                  className="space-y-3 min-w-0"
                 >
                   <p className="font-semibold">
                     {current.name} • {current.country}
                   </p>
 
                   <div className="flex items-start gap-2">
-                    <MapPin size={16} className="text-white/80 mt-1" />
+                    <MapPin size={16} className="text-white/80 mt-1 flex-shrink-0" />
                     <p className="whitespace-pre-line text-sm leading-relaxed text-white/90">
                       {current.address}
                     </p>
@@ -171,22 +183,28 @@ const Footer = () => {
 
                   {current.phone && (
                     <div className="flex items-center gap-2 text-white/90 text-sm">
-                      <Phone size={16} className="text-white/80" />
+                      <Phone size={16} className="text-white/80 flex-shrink-0" />
                       <span>{current.phone}</span>
                     </div>
                   )}
 
                   {current.fax && (
                     <div className="flex items-center gap-2 text-white/90 text-sm">
-                      <Phone size={16} className="text-white/80" />
+                      <Phone size={16} className="text-white/80 flex-shrink-0" />
                       <span>{t("footer.fax")}: {current.fax}</span>
                     </div>
                   )}
 
+                  {/* ✅ EMAIL — FIXED */}
                   {current.email && (
-                    <div className="flex items-center gap-2 text-white text-sm">
-                      <Mail size={16} className="text-white flex-shrink-0" />
-                      <a href={`mailto:${current.email}`} className="hover:underline break-all">{current.email}</a>
+                    <div className="flex items-start gap-2 min-w-0">
+                      <Mail size={16} className="text-white flex-shrink-0 mt-1" />
+                      <a
+                        href={`mailto:${current.email}`}
+                        className="text-sm text-white break-all leading-relaxed hover:underline"
+                      >
+                        {current.email}
+                      </a>
                     </div>
                   )}
                 </motion.div>
