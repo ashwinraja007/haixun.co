@@ -6,7 +6,9 @@
     "news": "News",
     "advantage": "Advantage",
     "globalPresence": "Global Presence",
-    "contact": "Contact Us",
+    "contact": "Contact",
+    "contactUs": "Contact Us",
+    "joinUs": "Join Us",
     "switchcountry": "Switch Country"
   },
   "hero": {
