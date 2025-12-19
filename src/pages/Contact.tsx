@@ -23,7 +23,9 @@ const BRAND_RED = "#BC0018";
 const Contact: React.FC = () => {
   const { t } = useTranslation();
   const [selectedLocation, setSelectedLocation] = useState("");
-  const [showNotification, setShowNotification] = useState(false);
+  const [formStatus, setFormStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -31,44 +33,36 @@ const Contact: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setFormStatus("loading");
+
     const form = e.currentTarget;
     const formData = new FormData(form);
 
-    const urls = [
-      "https://formsubmit.co/ajax/karthikjungleemara@gmail.com",
-      "https://formsubmit.co/ajax/karthiktrendsandtactics@gmail.com",
-    ];
-
     try {
-      const responses = await Promise.all(
-        urls.map((url) =>
-          fetch(url, {
-            method: "POST",
-            body: formData,
-          })
-        )
+      const res = await fetch(
+        "https://formsubmit.co/ajax/helen@haixun.co",
+        {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: formData,
+        }
       );
 
-      const allSuccessful = responses.every((res) => res.ok);
+      if (!res.ok) throw new Error("Failed");
 
-      if (allSuccessful) {
-        setShowNotification(true);
-        form.reset();
-        setSelectedLocation("");
-        setTimeout(() => setShowNotification(false), 3000);
-      } else {
-        alert(t("contact.error"));
-      }
-    } catch (err) {
-      alert(t("contact.error"));
+      setFormStatus("success");
+      form.reset();
+      setSelectedLocation("");
+
+      setTimeout(() => setFormStatus("idle"), 4000);
+    } catch {
+      setFormStatus("error");
     }
   };
 
   return (
     <div className="min-h-screen flex flex-col bg-white relative">
       <Navigation />
-
-      {/* header-height white space */}
       <div className="h-20 md:h-24 bg-white" />
 
       {/* MAP */}
@@ -79,223 +73,111 @@ const Contact: React.FC = () => {
           className="absolute inset-0 h-full w-full border-0"
           loading="lazy"
           allowFullScreen
-          referrerPolicy="no-referrer-when-downgrade"
         />
       </section>
 
-      {/* success toast */}
+      {/* SUCCESS / ERROR TOAST */}
       <AnimatePresence>
-        {showNotification && (
+        {formStatus === "success" && (
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed top-24 right-4 z-50 flex items-center gap-3 rounded-xl bg-emerald-500 px-4 py-3 text-white shadow-xl"
+            className="fixed top-24 right-4 z-50 flex items-center gap-3 rounded-xl bg-emerald-600 px-4 py-3 text-white shadow-xl"
           >
             <Send className="h-4 w-4" />
             <span>{t("contact.messageSent")}</span>
-            <button
-              type="button"
-              onClick={() => setShowNotification(false)}
-              className="ml-2"
-            >
+            <button onClick={() => setFormStatus("idle")}>
               <XCircle className="h-4 w-4" />
             </button>
+          </motion.div>
+        )}
+
+        {formStatus === "error" && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed top-24 right-4 z-50 flex items-center gap-3 rounded-xl bg-red-600 px-4 py-3 text-white shadow-xl"
+          >
+            <XCircle className="h-4 w-4" />
+            <span>{t("contact.error")}</span>
           </motion.div>
         )}
       </AnimatePresence>
 
       <main className="flex-grow">
-        {/* CONTACT SECTION WITH NEW BACKGROUND */}
         <section
-          className="py-8 md:py-16 bg-cover bg-center bg-no-repeat"
+          className="py-8 md:py-16 bg-cover bg-center"
           style={{ backgroundImage: "url('/about-bg.webp')" }}
         >
           <div className="container mx-auto px-4">
-            <div className="relative overflow-hidden rounded-none md:rounded-2xl bg-white/90 backdrop-blur-sm">
-              {/* subtle world map background */}
-              <div className="pointer-events-none absolute inset-0 opacity-[0.12] bg-[url('/world-map-light.png')] bg-cover bg-center" />
+            <div className="relative bg-white/90 backdrop-blur-sm">
+              <div className="grid lg:grid-cols-2 gap-10">
 
-              <div className="relative grid gap-8 md:gap-12 lg:grid-cols-2">
-                {/* LEFT – FORM SIDE */}
-                <div className="px-4 sm:px-8 pb-6 md:pb-10">
-                  <button className="group inline-flex items-center gap-2 text-[13px] font-semibold text-red-600 mb-2">
-                    <span className="text-[13px] text-red-600 underline decoration-red-600">
-                      {t("contact.sendUsMail")}
-                    </span>
-                    <Truck className="h-4 w-4 text-red-600 group-hover:translate-x-0.5 transition-transform" />
-                  </button>
-
-                  <h2 className="text-[28px] sm:text-[40px] font-bold text-slate-900 leading-tight mb-4">
-                    {t("contact.feelFreeToWrite")}{" "}
-                    <span
-                      className="underline decoration-[4px] underline-offset-[6px]"
-                      style={{ textDecorationColor: BRAND_RED }}
-                    ></span>
+                {/* FORM */}
+                <div className="p-6">
+                  <h2 className="text-3xl font-bold mb-4">
+                    {t("contact.feelFreeToWrite")}
                   </h2>
 
-                  <p className="max-w-xl text-[15px] leading-relaxed text-slate-600 mb-6 md:mb-8">
-                    {t("contact.logisticsDesc")}
-                  </p>
-
                   <form onSubmit={handleSubmit} className="space-y-4">
-                    <input
-                      type="hidden"
-                      name="Location"
-                      value={selectedLocation}
+                    {/* FormSubmit config */}
+                    <input type="hidden" name="_subject" value="New Contact Enquiry - Haixun" />
+                    <input type="hidden" name="_template" value="table" />
+                    <input type="hidden" name="_captcha" value="false" />
+                    <input type="hidden" name="Location" value={selectedLocation} />
+
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <Input name="First Name" required placeholder={t("contact.form.firstName")} />
+                      <Input name="Last Name" placeholder={t("contact.form.lastName")} />
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <Input name="Email" type="email" required placeholder={t("contact.form.email")} />
+                      <Input name="Phone" placeholder={t("contact.form.phone")} />
+                    </div>
+
+                    <Textarea
+                      name="Message"
+                      required
+                      placeholder={t("contact.form.message")}
+                      className="min-h-[120px]"
                     />
-
-                    <div className="grid gap-4 md:grid-cols-2">
-                      {/* First Name */}
-                      <div className="relative">
-                        <User className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-                        <Input
-                          name="First Name"
-                          placeholder={t("contact.form.firstName")}
-                          required
-                          className="h-12 rounded-none border border-transparent bg-[#f8f4ee] text-sm text-slate-800 placeholder:text-slate-400 focus:border-[#f0e6da] focus:ring-0 pl-10"
-                        />
-                      </div>
-
-                      {/* Last Name */}
-                      <div className="relative">
-                        <User className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-                        <Input
-                          name="Last Name"
-                          placeholder={t("contact.form.lastName")}
-                          className="h-12 rounded-none border border-transparent bg-[#f8f4ee] text-sm text-slate-800 placeholder:text-slate-400 focus:border-[#f0e6da] focus:ring-0 pl-10"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid gap-4 md:grid-cols-2">
-                      {/* Email */}
-                      <div className="relative">
-                        <Mail className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-                        <Input
-                          type="email"
-                          name="Email"
-                          placeholder={t("contact.form.email")}
-                          required
-                          className="h-12 rounded-none border border-transparent bg-[#f8f4ee] text-sm text-slate-800 placeholder:text-slate-400 focus:border-[#f0e6da] focus:ring-0 pl-10"
-                        />
-                      </div>
-
-                      {/* Phone */}
-                      <div className="relative">
-                        <Phone className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-                        <Input
-                          name="Phone"
-                          placeholder={t("contact.form.phone")}
-                          className="h-12 rounded-none border border-transparent bg-[#f8f4ee] text-sm text-slate-800 placeholder:text-slate-400 focus:border-[#f0e6da] focus:ring-0 pl-10"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Message */}
-                    <div className="relative">
-                      <MessageCircle className="pointer-events-none absolute left-3 top-4 h-4 w-4 text-slate-400" />
-                      <Textarea
-                        name="Message"
-                        placeholder={t("contact.form.message")}
-                        required
-                        className="min-h-[120px] md:min-h-[150px] rounded-none border border-transparent bg-[#f8f4ee] text-sm text-slate-800 placeholder:text-slate-400 focus:border-[#f0e6da] focus:ring-0 pl-10 pt-3"
-                      />
-                    </div>
 
                     <Button
                       type="submit"
-                      className="mt-2 inline-flex h-11 items-center justify-center rounded-none bg-[#E0001B] px-8 text-sm font-semibold text-white hover:bg-[#c30017]"
+                      disabled={formStatus === "loading"}
+                      className="bg-[#E0001B] hover:bg-[#c30017]"
                     >
                       <Send className="mr-2 h-4 w-4" />
-                      {t("contact.form.send")}
+                      {formStatus === "loading"
+                        ? t("contact.form.sending")
+                        : t("contact.form.send")}
                     </Button>
                   </form>
                 </div>
 
-                {/* RIGHT – CONTACT INFO */}
-                <div className="px-4 sm:px-8 pb-8 md:pb-12">
-                  <button className="group inline-flex items-center gap-2 text-[13px] font-semibold text-red-600 mb-2">
-                    <span className="underline decoration-red-600">
-                      {t("contact.needAnyHelp")}
+                {/* CONTACT INFO */}
+                <div className="p-6 space-y-6">
+                  <div className="flex items-center gap-4">
+                    <Phone className="text-[#E0001B]" />
+                    <span>+86 75582222447</span>
+                  </div>
+
+                  <div className="flex items-center gap-4">
+                    <Mail className="text-[#E0001B]" />
+                    <span>helen@haixun.co</span>
+                  </div>
+
+                  <div className="flex items-center gap-4">
+                    <MapPin className="text-[#E0001B]" />
+                    <span>
+                      13C02, Block A, Zhaoxin Huijin Plaza, Shenzhen
                     </span>
-                    <Headset className="h-4 w-4 text-red-600 group-hover:-translate-y-0.5 transition-transform" />
-                  </button>
-
-                  <h2 className="text-[28px] sm:text-[40px] font-bold text-slate-900 leading-tight mb-4">
-                    {t("contact.getInTouchWithUs")}
-                  </h2>
-
-                  <p className="text-[15px] leading-relaxed text-slate-600 mb-6 md:mb-10 max-w-md">
-                    {t("contact.logisticsDesc")}
-                  </p>
-
-                  <div className="space-y-5 md:space-y-6">
-                    {/* phone */}
-                    <div className="flex items-center gap-4">
-                      <div className="flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-sm bg-[#E0001B]">
-                        <Phone className="h-5 w-5 md:h-6 md:w-6 text-white" />
-                      </div>
-                      <div>
-                        <p className="text-sm font-semibold text-slate-900">
-                          {t("contact.haveAnyQuestion")}
-                        </p>
-                        <p className="text-sm text-slate-700">
-                          +86 75582222447
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* fax */}
-                    <div className="flex items-center gap-4">
-                      <div className="flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-sm bg-[#E0001B]">
-                        <Phone className="h-5 w-5 md:h-6 md:w-6 text-white rotate-90" />
-                      </div>
-                      <div>
-                        <p className="text-sm font-semibold text-slate-900">
-                          Fax
-                        </p>
-                        <p className="text-sm text-slate-700">
-                          +86 75582192854
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* email */}
-                    <div className="flex items-center gap-4">
-                      <div className="flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-sm bg-[#E0001B]">
-                        <Mail className="h-5 w-5 md:h-6 md:w-6 text-white" />
-                      </div>
-                      <div>
-                        <p className="text-sm font-semibold text-slate-900">
-                          {t("contact.writeUsEmail")}
-                        </p>
-                        <p className="text-sm text-slate-700">
-                          helen@haixun.co
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* address */}
-                    <div className="flex items-center gap-4">
-                      <div className="flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-sm bg-[#E0001B]">
-                        <MapPin className="h-5 w-5 md:h-6 md:w-6 text-white" />
-                      </div>
-                      <div>
-                        <p className="text-sm font-semibold text-slate-900">
-                          {t("contact.headquarters")}
-                        </p>
-                        <p className="text-sm text-slate-700">
-                          13C02, Block A, Zhaoxin Huijin Plaza 3085 Shennan East
-                          Road,
-                          <br />
-                          Luohu, Shenzhen.
-                        </p>
-                      </div>
-                    </div>
                   </div>
                 </div>
-                {/* END RIGHT */}
+
               </div>
             </div>
           </div>
