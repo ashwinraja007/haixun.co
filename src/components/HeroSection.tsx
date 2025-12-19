@@ -199,7 +199,7 @@ const HeroSection: React.FC = () => {
 
         <div className="mt-6 flex justify-center sm:justify-start">
           <a
-            href="/contact"
+            href="/pages/aboutus"
             className="inline-flex items-center justify-center rounded-xl bg-[#BC0018] px-6 py-3.5 text-sm font-semibold text-white shadow-xl hover:bg-[#A90015]"
           >
             {t("hero.contactUs")}
