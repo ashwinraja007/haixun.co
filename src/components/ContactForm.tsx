@@ -8,22 +8,28 @@ import { useTranslation } from "react-i18next";
 
 export default function ContactUsSection() {
   const { t } = useTranslation();
-  const [formStatus, setFormStatus] = useState("");
+  const [formStatus, setFormStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormStatus("loading");
-    const formData = new FormData(e.currentTarget);
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
 
     try {
-      await fetch("https://formsubmit.co/ajax/helen@haixun.co", {
+      const res = await fetch("https://formsubmit.co/ajax/helen@haixun.co", {
         method: "POST",
         headers: { Accept: "application/json" },
         body: formData,
       });
 
+      if (!res.ok) throw new Error("Submission failed");
+
       setFormStatus("success");
-      e.currentTarget.reset();
+      form.reset();
     } catch {
       setFormStatus("error");
     }
@@ -32,7 +38,6 @@ export default function ContactUsSection() {
   return (
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-16">
-
         {/* LEFT COLUMN — FORM */}
         <motion.div
           initial={{ opacity: 0, x: -40 }}
@@ -40,41 +45,42 @@ export default function ContactUsSection() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          {/* TOP SMALL TITLE */}
           <p className="text-xs md:text-sm font-semibold text-[#9B111E] tracking-[0.2em] uppercase mb-2">
             {t("contact.sendUsMail")}
           </p>
 
-          {/* MAIN TITLE */}
           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3">
             {t("contact.feelFreeToWrite")}
           </h2>
 
-          {/* SUBTEXT */}
           <p className="text-gray-700 text-sm md:text-base max-w-xl mb-8 leading-relaxed">
             {t("contact.logisticsDesc")}
           </p>
 
           {/* FORM */}
           <form onSubmit={handleSubmit} className="space-y-6">
+            {/* FormSubmit config */}
+            <input type="hidden" name="_subject" value="New Contact Enquiry - Haixun" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="false" />
 
-            {/* TOP ROW — FIRST / LAST NAME */}
+            {/* FIRST / LAST NAME */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Input
-                name="FirstName"
+                name="First Name"
                 placeholder={t("contact.form.firstName")}
                 required
                 className="h-12 rounded-none border-0 bg-[#FBF5EE] text-sm"
               />
               <Input
-                name="LastName"
+                name="Last Name"
                 placeholder={t("contact.form.lastName")}
                 required
                 className="h-12 rounded-none border-0 bg-[#FBF5EE] text-sm"
               />
             </div>
 
-            {/* SECOND ROW — EMAIL / PHONE */}
+            {/* EMAIL / PHONE */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Input
                 name="Email"
@@ -99,23 +105,30 @@ export default function ContactUsSection() {
               className="rounded-none border-0 bg-[#FBF5EE] text-sm"
             />
 
-            {/* BUTTON */}
+            {/* SUBMIT */}
             <Button
               type="submit"
               disabled={formStatus === "loading"}
-              className="mt-2 inline-flex items-center gap-2 rounded-none bg-[#9B111E] px-10 py-6 
-              text-sm font-semibold uppercase tracking-wide hover:bg-[#7F0E18] w-auto"
+              className="inline-flex items-center gap-2 rounded-none bg-[#9B111E] px-10 py-6 
+              text-sm font-semibold uppercase tracking-wide hover:bg-[#7F0E18]"
             >
               <Send className="w-4 h-4" />
-              {t("contact.form.send")}
+              {formStatus === "loading"
+                ? t("contact.form.sending")
+                : t("contact.form.send")}
             </Button>
 
-            {/* FORM STATUS */}
+            {/* INLINE STATUS MESSAGE */}
             {formStatus === "success" && (
-              <p className="text-green-600 text-sm mt-3">✅ {t("contact.success")}</p>
+              <div className="rounded-md bg-green-50 border border-green-200 px-4 py-3 text-sm text-green-700">
+                {t("contact.success")}
+              </div>
             )}
+
             {formStatus === "error" && (
-              <p className="text-red-600 text-sm mt-3">❌ {t("contact.error")}</p>
+              <div className="rounded-md bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
+                {t("contact.error")}
+              </div>
             )}
           </form>
         </motion.div>
@@ -128,25 +141,19 @@ export default function ContactUsSection() {
           viewport={{ once: true }}
           className="space-y-8"
         >
-          {/* TOP SMALL TITLE */}
           <p className="text-xs md:text-sm font-semibold text-[#9B111E] tracking-[0.2em] uppercase">
             {t("contact.needAnyHelp")}
           </p>
 
-          {/* MAIN TITLE */}
           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">
             {t("contact.getInTouchWithUs")}
           </h2>
 
-          {/* SUBTEXT */}
           <p className="text-gray-700 text-sm md:text-base max-w-xl leading-relaxed">
             {t("contact.logisticsDesc")}
           </p>
 
-          {/* CONTACT CARDS */}
           <div className="space-y-6 mt-4">
-
-            {/* PHONE CARD */}
             <div className="flex items-center gap-4 bg-white rounded-xl shadow-md border border-gray-100 p-5">
               <div className="w-14 h-14 rounded-md bg-[#9B111E] flex items-center justify-center">
                 <Phone className="w-6 h-6 text-white" />
@@ -164,10 +171,8 @@ export default function ContactUsSection() {
               </div>
             </div>
 
-            {/* FAX CARD */}
             <div className="flex items-center gap-4 bg-white rounded-xl shadow-md border border-gray-100 p-5">
               <div className="w-14 h-14 rounded-md bg-[#9B111E] flex items-center justify-center">
-                {/* rotate phone icon to look like a fax symbol */}
                 <Phone className="w-6 h-6 text-white rotate-90" />
               </div>
               <div>
@@ -183,7 +188,6 @@ export default function ContactUsSection() {
               </div>
             </div>
 
-            {/* EMAIL CARD */}
             <div className="flex items-center gap-4 bg-white rounded-xl shadow-md border border-gray-100 p-5">
               <div className="w-14 h-14 rounded-md bg-[#9B111E] flex items-center justify-center">
                 <Mail className="w-6 h-6 text-white" />
@@ -201,7 +205,6 @@ export default function ContactUsSection() {
               </div>
             </div>
 
-            {/* ADDRESS CARD */}
             <div className="flex items-center gap-4 bg-white rounded-xl shadow-md border border-gray-100 p-5">
               <div className="w-14 h-14 rounded-md bg-[#9B111E] flex items-center justify-center">
                 <MapPin className="w-6 h-6 text-white" />
@@ -215,7 +218,6 @@ export default function ContactUsSection() {
                 </p>
               </div>
             </div>
-
           </div>
         </motion.div>
       </div>
