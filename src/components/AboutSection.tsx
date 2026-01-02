@@ -99,7 +99,7 @@ const AboutSection: React.FC = () => {
 
 
           <div className="mt-10 flex flex-col sm:flex-row items-center gap-6">
-            <Link to="/contact">
+            <Link to="/about-us">
               <Button
                 className="text-white text-base font-semibold px-6 py-3 rounded-md shadow-lg transition"
                 style={{ backgroundColor: ACCENT }}
