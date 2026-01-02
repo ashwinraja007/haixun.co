@@ -112,7 +112,7 @@ const Navigation = () => {
                 {[
                   ["lcl", "services.lcl.title"],
                   ["fcl", "services.fcl.title"],
-                  ["warehouse", "services.warehouse.title"],
+                  ["warehousing", "services.warehouse.title"],
                   ["project-cargo", "services.projectCargo.title"],
                   ["air-freight", "services.air.title"],
                   ["customs-clearance", "services.customs.title"],
