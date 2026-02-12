@@ -65,7 +65,7 @@ const countries: CountryData[] = [
     flag: "/us.svg",
     visibilityByCountry: { MYANMAR: false }
   },
-  { country: "UK", company: "Moltech", website: "https://moltech.uk/", priority: 15, flag: "/gb.svg" }
+  { country: "UK", company: "GGL", website: "https://www.ggl.sg/uk", priority: 15, flag: "/gb.svg" }
 ];
 
 const CountrySelector = () => {
