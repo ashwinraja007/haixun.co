@@ -17,7 +17,7 @@ const HeroSection: React.FC = () => {
     () => [
       {
         icon: <Users className="w-5 h-5" />,
-        titleKey: "hero.customerPortal",
+        titleKey: "hero.consolmate",
         url: "https://consolmate.com/auth/login/10",
       },
       {
